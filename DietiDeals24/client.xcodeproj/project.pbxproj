@@ -42,14 +42,14 @@
 		2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */; };
 		2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2652882D2B30972C001A4AB9 /* SettingsView.swift */; };
 		265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */; };
-		266BFA602B2275840063C68B /* DietiDeals24XApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA5F2B2275840063C68B /* DietiDeals24XApp.swift */; };
+		266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA5F2B2275840063C68B /* DietiDeals24App.swift */; };
 		266BFA622B2275840063C68B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA612B2275840063C68B /* LoginView.swift */; };
 		266BFA642B2275850063C68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA632B2275850063C68B /* Assets.xcassets */; };
 		266BFA672B2275850063C68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA662B2275850063C68B /* Preview Assets.xcassets */; };
-		266BFA712B2275850063C68B /* DietiDeals24XTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA702B2275850063C68B /* DietiDeals24XTests.swift */; };
+		266BFA712B2275850063C68B /* DietiDeals24Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA702B2275850063C68B /* DietiDeals24Tests.swift */; };
+		26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B65A202B6BF50B00FED1CB /* HomeView.swift */; };
 		26D219872B26164600942747 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D219862B26164600942747 /* MyAuctionsView.swift */; };
 		26DEF6FF2B237B8000700AC1 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DEF6FE2B237B8000700AC1 /* Buttons.swift */; };
-		26EB604A2B24BB920050DAD6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EB60492B24BB920050DAD6 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,17 +104,17 @@
 		2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		2652882D2B30972C001A4AB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedSheetView.swift; sourceTree = "<group>"; };
-		266BFA5C2B2275840063C68B /* DietiDeals24X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24X.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		266BFA5F2B2275840063C68B /* DietiDeals24XApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24XApp.swift; sourceTree = "<group>"; };
+		266BFA5C2B2275840063C68B /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		266BFA5F2B2275840063C68B /* DietiDeals24App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24App.swift; sourceTree = "<group>"; };
 		266BFA612B2275840063C68B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		266BFA632B2275850063C68B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		266BFA662B2275850063C68B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		266BFA6C2B2275850063C68B /* DietiDeals24XTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24XTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		266BFA702B2275850063C68B /* DietiDeals24XTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24XTests.swift; sourceTree = "<group>"; };
-		266BFA762B2275850063C68B /* DietiDeals24XUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24XUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		266BFA6C2B2275850063C68B /* DietiDeals24Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		266BFA702B2275850063C68B /* DietiDeals24Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24Tests.swift; sourceTree = "<group>"; };
+		266BFA762B2275850063C68B /* DietiDeals24UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		26B65A202B6BF50B00FED1CB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		26D219862B26164600942747 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
 		26DEF6FE2B237B8000700AC1 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
-		26EB60492B24BB920050DAD6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = DietiDeals24X/HomeView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,7 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				033825A72B260E23008AFC3D /* TabBarHomeView.swift */,
-				26EB60492B24BB920050DAD6 /* HomeView.swift */,
+				26B65A202B6BF50B00FED1CB /* HomeView.swift */,
 				26D219862B26164600942747 /* MyAuctionsView.swift */,
 				2652882D2B30972C001A4AB9 /* SettingsView.swift */,
 				03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */,
@@ -316,8 +316,8 @@
 		266BFA532B2275830063C68B = {
 			isa = PBXGroup;
 			children = (
-				266BFA5E2B2275840063C68B /* DietiDeals24X */,
-				266BFA6F2B2275850063C68B /* DietiDeals24XTests */,
+				266BFA5E2B2275840063C68B /* DietiDeals24 */,
+				266BFA6F2B2275850063C68B /* DietiDeals24Tests */,
 				266BFA5D2B2275840063C68B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -325,14 +325,14 @@
 		266BFA5D2B2275840063C68B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				266BFA5C2B2275840063C68B /* DietiDeals24X.app */,
-				266BFA6C2B2275850063C68B /* DietiDeals24XTests.xctest */,
-				266BFA762B2275850063C68B /* DietiDeals24XUITests.xctest */,
+				266BFA5C2B2275840063C68B /* DietiDeals24.app */,
+				266BFA6C2B2275850063C68B /* DietiDeals24Tests.xctest */,
+				266BFA762B2275850063C68B /* DietiDeals24UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		266BFA5E2B2275840063C68B /* DietiDeals24X */ = {
+		266BFA5E2B2275840063C68B /* DietiDeals24 */ = {
 			isa = PBXGroup;
 			children = (
 				030315DF2B246D7400D2044A /* Services */,
@@ -340,9 +340,9 @@
 				030315DD2B246D4400D2044A /* ViewModels */,
 				030315DE2B246D5700D2044A /* Models */,
 				266BFA652B2275850063C68B /* Preview Content */,
-				266BFA5F2B2275840063C68B /* DietiDeals24XApp.swift */,
+				266BFA5F2B2275840063C68B /* DietiDeals24App.swift */,
 			);
-			path = DietiDeals24X;
+			path = DietiDeals24;
 			sourceTree = "<group>";
 		};
 		266BFA652B2275850063C68B /* Preview Content */ = {
@@ -354,20 +354,20 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		266BFA6F2B2275850063C68B /* DietiDeals24XTests */ = {
+		266BFA6F2B2275850063C68B /* DietiDeals24Tests */ = {
 			isa = PBXGroup;
 			children = (
-				266BFA702B2275850063C68B /* DietiDeals24XTests.swift */,
+				266BFA702B2275850063C68B /* DietiDeals24Tests.swift */,
 			);
-			path = DietiDeals24XTests;
+			path = DietiDeals24Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		266BFA5B2B2275840063C68B /* DietiDeals24X */ = {
+		266BFA5B2B2275840063C68B /* DietiDeals24 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 266BFA802B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24X" */;
+			buildConfigurationList = 266BFA802B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24" */;
 			buildPhases = (
 				266BFA582B2275840063C68B /* Sources */,
 				266BFA592B2275840063C68B /* Frameworks */,
@@ -377,17 +377,17 @@
 			);
 			dependencies = (
 			);
-			name = DietiDeals24X;
+			name = DietiDeals24;
 			packageProductDependencies = (
 				034606DD2B2F305700BA9295 /* Algorithms */,
 			);
 			productName = DietiDeals24X;
-			productReference = 266BFA5C2B2275840063C68B /* DietiDeals24X.app */;
+			productReference = 266BFA5C2B2275840063C68B /* DietiDeals24.app */;
 			productType = "com.apple.product-type.application";
 		};
-		266BFA6B2B2275850063C68B /* DietiDeals24XTests */ = {
+		266BFA6B2B2275850063C68B /* DietiDeals24Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 266BFA832B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24XTests" */;
+			buildConfigurationList = 266BFA832B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24Tests" */;
 			buildPhases = (
 				266BFA682B2275850063C68B /* Sources */,
 				266BFA692B2275850063C68B /* Frameworks */,
@@ -398,14 +398,14 @@
 			dependencies = (
 				266BFA6E2B2275850063C68B /* PBXTargetDependency */,
 			);
-			name = DietiDeals24XTests;
+			name = DietiDeals24Tests;
 			productName = DietiDeals24XTests;
-			productReference = 266BFA6C2B2275850063C68B /* DietiDeals24XTests.xctest */;
+			productReference = 266BFA6C2B2275850063C68B /* DietiDeals24Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		266BFA752B2275850063C68B /* DietiDeals24XUITests */ = {
+		266BFA752B2275850063C68B /* DietiDeals24UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 266BFA862B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24XUITests" */;
+			buildConfigurationList = 266BFA862B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24UITests" */;
 			buildPhases = (
 				266BFA722B2275850063C68B /* Sources */,
 				266BFA732B2275850063C68B /* Frameworks */,
@@ -416,9 +416,9 @@
 			dependencies = (
 				266BFA782B2275850063C68B /* PBXTargetDependency */,
 			);
-			name = DietiDeals24XUITests;
+			name = DietiDeals24UITests;
 			productName = DietiDeals24XUITests;
-			productReference = 266BFA762B2275850063C68B /* DietiDeals24XUITests.xctest */;
+			productReference = 266BFA762B2275850063C68B /* DietiDeals24UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -460,9 +460,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				266BFA5B2B2275840063C68B /* DietiDeals24X */,
-				266BFA6B2B2275850063C68B /* DietiDeals24XTests */,
-				266BFA752B2275850063C68B /* DietiDeals24XUITests */,
+				266BFA5B2B2275840063C68B /* DietiDeals24 */,
+				266BFA6B2B2275850063C68B /* DietiDeals24Tests */,
+				266BFA752B2275850063C68B /* DietiDeals24UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -511,6 +511,7 @@
 				265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */,
 				266BFA622B2275840063C68B /* LoginView.swift in Sources */,
 				2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */,
+				26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */,
 				03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */,
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
 				035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */,
@@ -526,14 +527,13 @@
 				03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */,
 				032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */,
 				030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */,
-				26EB604A2B24BB920050DAD6 /* HomeView.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
 				030315E52B246E1800D2044A /* connection.swift in Sources */,
 				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
 				030315E12B246DA400D2044A /* Auction.swift in Sources */,
 				035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */,
 				2620C0282B6183B100B9DC44 /* ProfileViewModel.swift in Sources */,
-				266BFA602B2275840063C68B /* DietiDeals24XApp.swift in Sources */,
+				266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */,
 				03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */,
 				035872D92B616D7200C3AEFC /* Bet.swift in Sources */,
 				2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */,
@@ -544,7 +544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				266BFA712B2275850063C68B /* DietiDeals24XTests.swift in Sources */,
+				266BFA712B2275850063C68B /* DietiDeals24Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,12 +560,12 @@
 /* Begin PBXTargetDependency section */
 		266BFA6E2B2275850063C68B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 266BFA5B2B2275840063C68B /* DietiDeals24X */;
+			target = 266BFA5B2B2275840063C68B /* DietiDeals24 */;
 			targetProxy = 266BFA6D2B2275850063C68B /* PBXContainerItemProxy */;
 		};
 		266BFA782B2275850063C68B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 266BFA5B2B2275840063C68B /* DietiDeals24X */;
+			target = 266BFA5B2B2275840063C68B /* DietiDeals24 */;
 			targetProxy = 266BFA772B2275850063C68B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -698,7 +698,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24X/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
 				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -729,7 +729,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24X/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
 				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -840,7 +840,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		266BFA802B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24X" */ = {
+		266BFA802B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				266BFA812B2275850063C68B /* Debug */,
@@ -849,7 +849,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		266BFA832B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24XTests" */ = {
+		266BFA832B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				266BFA842B2275850063C68B /* Debug */,
@@ -858,7 +858,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		266BFA862B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24XUITests" */ = {
+		266BFA862B2275850063C68B /* Build configuration list for PBXNativeTarget "DietiDeals24UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				266BFA872B2275850063C68B /* Debug */,

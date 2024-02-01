@@ -22,7 +22,7 @@ class AppState: ObservableObject {
 
 
 @main
-struct DietiDeals24X: App {
+struct DietiDeals24: App {
     @StateObject private var appState = AppState.shared
 
     var body: some Scene {
