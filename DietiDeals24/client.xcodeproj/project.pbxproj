@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		030315E12B246DA400D2044A /* Auction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E02B246DA400D2044A /* Auction.swift */; };
 		030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E22B246E0300D2044A /* LoginViewModel.swift */; };
-		030315E52B246E1800D2044A /* connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E42B246E1800D2044A /* connection.swift */; };
 		03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */; };
 		032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B752B2C4CBB005566A6 /* ProfileView.swift */; };
 		032B9B7A2B2C7585005566A6 /* EditProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B792B2C7585005566A6 /* EditProfileSheetView.swift */; };
@@ -31,6 +30,14 @@
 		03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A33EE62B2311DD00C5A302 /* SignUpView.swift */; };
 		03A6EE812B235D2500163DB6 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE802B235D2500163DB6 /* TextField.swift */; };
 		03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE822B235DBB00163DB6 /* SocialLogin.swift */; };
+		260882182B6DA08200C67B9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882172B6DA08200C67B9D /* Utils.swift */; };
+		2608821B2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */; };
+		2608821D2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */; };
+		2608821F2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */; };
+		260882212B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */; };
+		260882232B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */; };
+		260882252B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */; };
+		260882272B6DA55900C67B9D /* BetNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */; };
 		2620C0202B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C01F2B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift */; };
 		2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0212B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift */; };
 		2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0232B61832300B9DC44 /* AuctionViewModel.swift */; };
@@ -47,6 +54,7 @@
 		266BFA642B2275850063C68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA632B2275850063C68B /* Assets.xcassets */; };
 		266BFA672B2275850063C68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA662B2275850063C68B /* Preview Assets.xcassets */; };
 		266BFA712B2275850063C68B /* DietiDeals24Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA702B2275850063C68B /* DietiDeals24Tests.swift */; };
+		268F43192B6D49C500F43B24 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 268F43182B6D49C500F43B24 /* Alamofire */; };
 		26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B65A202B6BF50B00FED1CB /* HomeView.swift */; };
 		26D219872B26164600942747 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D219862B26164600942747 /* MyAuctionsView.swift */; };
 		26DEF6FF2B237B8000700AC1 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DEF6FE2B237B8000700AC1 /* Buttons.swift */; };
@@ -72,7 +80,6 @@
 /* Begin PBXFileReference section */
 		030315E02B246DA400D2044A /* Auction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auction.swift; sourceTree = "<group>"; };
 		030315E22B246E0300D2044A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		030315E42B246E1800D2044A /* connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connection.swift; sourceTree = "<group>"; };
 		03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoAuctionsView.swift; sourceTree = "<group>"; };
 		032B9B752B2C4CBB005566A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		032B9B792B2C7585005566A6 /* EditProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSheetView.swift; sourceTree = "<group>"; };
@@ -93,6 +100,14 @@
 		03A33EE62B2311DD00C5A302 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		03A6EE802B235D2500163DB6 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		03A6EE822B235DBB00163DB6 /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
+		260882172B6DA08200C67B9D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalAuctionNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetNetworkingDataFetch.swift; sourceTree = "<group>"; };
 		2620C01F2B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFixedTimeAuctionViewModel.swift; sourceTree = "<group>"; };
 		2620C0212B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncrementalAuctionViewModel.swift; sourceTree = "<group>"; };
 		2620C0232B61832300B9DC44 /* AuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionViewModel.swift; sourceTree = "<group>"; };
@@ -123,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				034606DE2B2F305700BA9295 /* Algorithms in Frameworks */,
+				268F43192B6D49C500F43B24 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +191,8 @@
 		030315DF2B246D7400D2044A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				030315E42B246E1800D2044A /* connection.swift */,
+				260882162B6DA03900C67B9D /* NetworkingDataFetch */,
+				260882172B6DA08200C67B9D /* Utils.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -258,6 +275,20 @@
 				03A6EE7D2B235CD500163DB6 /* AllComponents */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		260882162B6DA03900C67B9D /* NetworkingDataFetch */ = {
+			isa = PBXGroup;
+			children = (
+				2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */,
+				2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */,
+				260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */,
+				260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */,
+				260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */,
+				2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */,
+				260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */,
+			);
+			path = NetworkingDataFetch;
 			sourceTree = "<group>";
 		};
 		2620C01A2B61756400B9DC44 /* Home */ = {
@@ -380,6 +411,7 @@
 			name = DietiDeals24;
 			packageProductDependencies = (
 				034606DD2B2F305700BA9295 /* Algorithms */,
+				268F43182B6D49C500F43B24 /* Alamofire */,
 			);
 			productName = DietiDeals24X;
 			productReference = 266BFA5C2B2275840063C68B /* DietiDeals24.app */;
@@ -455,6 +487,7 @@
 			mainGroup = 266BFA532B2275830063C68B;
 			packageReferences = (
 				034606DC2B2F305700BA9295 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				268F43172B6D49C500F43B24 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 266BFA5D2B2275840063C68B /* Products */;
 			projectDirPath = "";
@@ -507,6 +540,7 @@
 				035872DD2B6170CF00C3AEFC /* SignupViewModel.swift in Sources */,
 				2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */,
 				032B9B7A2B2C7585005566A6 /* EditProfileSheetView.swift in Sources */,
+				2608821F2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift in Sources */,
 				2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */,
 				265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */,
 				266BFA622B2275840063C68B /* LoginView.swift in Sources */,
@@ -516,24 +550,30 @@
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
 				035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */,
 				03A6EE812B235D2500163DB6 /* TextField.swift in Sources */,
+				260882252B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift in Sources */,
 				038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */,
 				2620C0262B61839C00B9DC44 /* NotificationViewModel.swift in Sources */,
+				2608821D2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift in Sources */,
 				035872D12B61603500C3AEFC /* Buyer.swift in Sources */,
+				260882272B6DA55900C67B9D /* BetNetworkingDataFetch.swift in Sources */,
+				260882182B6DA08200C67B9D /* Utils.swift in Sources */,
 				038407732B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift in Sources */,
 				2620C0202B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift in Sources */,
 				2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */,
 				033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */,
 				035872D32B61615400C3AEFC /* Notification.swift in Sources */,
+				260882212B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift in Sources */,
 				03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */,
 				032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */,
 				030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
-				030315E52B246E1800D2044A /* connection.swift in Sources */,
 				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
 				030315E12B246DA400D2044A /* Auction.swift in Sources */,
 				035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */,
 				2620C0282B6183B100B9DC44 /* ProfileViewModel.swift in Sources */,
 				266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */,
+				2608821B2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift in Sources */,
+				260882232B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift in Sources */,
 				03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */,
 				035872D92B616D7200C3AEFC /* Bet.swift in Sources */,
 				2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */,
@@ -878,6 +918,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		268F43172B6D49C500F43B24 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -885,6 +933,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 034606DC2B2F305700BA9295 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
+		};
+		268F43182B6D49C500F43B24 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 268F43172B6D49C500F43B24 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

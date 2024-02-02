@@ -9,7 +9,7 @@ import SwiftUI
 
 // TODO: vai nelle classi del viewmodel
 class AppState: ObservableObject {
-    @Published var isLoggedIn: Bool = true
+    @Published var isLoggedIn: Bool = false
 
     // Singleton instance
     static let shared = AppState()
