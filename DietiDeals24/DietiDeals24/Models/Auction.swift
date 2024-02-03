@@ -5,9 +5,6 @@
 //  Created by Francesco Terrecuso on 09/12/23.
 //
 
-import Foundation
-
-
 protocol Auction {
     
     var creator : Seller {get set}

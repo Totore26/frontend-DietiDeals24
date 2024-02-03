@@ -30,14 +30,23 @@
 		03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A33EE62B2311DD00C5A302 /* SignUpView.swift */; };
 		03A6EE812B235D2500163DB6 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE802B235D2500163DB6 /* TextField.swift */; };
 		03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE822B235DBB00163DB6 /* SocialLogin.swift */; };
-		260882182B6DA08200C67B9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882172B6DA08200C67B9D /* Utils.swift */; };
-		2608821B2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */; };
-		2608821D2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */; };
-		2608821F2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */; };
-		260882212B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */; };
-		260882232B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */; };
-		260882252B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */; };
-		260882272B6DA55900C67B9D /* BetNetworkingDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */; };
+		2608821B2B6DA22500C67B9D /* SellerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821A2B6DA22500C67B9D /* SellerAPI.swift */; };
+		2608821D2B6DA43B00C67B9D /* BuyerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821C2B6DA43B00C67B9D /* BuyerAPI.swift */; };
+		2608821F2B6DA48400C67B9D /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821E2B6DA48400C67B9D /* NotificationAPI.swift */; };
+		260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882202B6DA4D300C67B9D /* SocialLinkAPI.swift */; };
+		260882232B6DA4E900C67B9D /* AuctionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882222B6DA4E900C67B9D /* AuctionAPI.swift */; };
+		260882272B6DA55900C67B9D /* BetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882262B6DA55900C67B9D /* BetAPI.swift */; };
+		260882292B6DAB8F00C67B9D /* ConfigurationForRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */; };
+		2608822B2B6DAD9800C67B9D /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */; };
+		260882362B6DBBBF00C67B9D /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */; };
+		260882372B6DBBBF00C67B9D /* BetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822F2B6DBBBF00C67B9D /* BetRequest.swift */; };
+		260882392B6DBBBF00C67B9D /* NotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882312B6DBBBF00C67B9D /* NotificationRequest.swift */; };
+		2608823A2B6DBBBF00C67B9D /* BuyerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882322B6DBBBF00C67B9D /* BuyerRequest.swift */; };
+		2608823B2B6DBBBF00C67B9D /* SocialLinkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882332B6DBBBF00C67B9D /* SocialLinkRequest.swift */; };
+		2608823C2B6DBBBF00C67B9D /* AuctionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882342B6DBBBF00C67B9D /* AuctionRequest.swift */; };
+		2608823D2B6DBBBF00C67B9D /* SellerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882352B6DBBBF00C67B9D /* SellerRequest.swift */; };
+		260882412B6DD1EC00C67B9D /* AccountAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882402B6DD1EC00C67B9D /* AccountAPI.swift */; };
+		260882432B6DD36600C67B9D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882422B6DD36600C67B9D /* Utils.swift */; };
 		2620C0202B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C01F2B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift */; };
 		2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0212B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift */; };
 		2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0232B61832300B9DC44 /* AuctionViewModel.swift */; };
@@ -100,14 +109,23 @@
 		03A33EE62B2311DD00C5A302 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		03A6EE802B235D2500163DB6 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		03A6EE822B235DBB00163DB6 /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
-		260882172B6DA08200C67B9D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuctionNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalAuctionNetworkingDataFetch.swift; sourceTree = "<group>"; };
-		260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetNetworkingDataFetch.swift; sourceTree = "<group>"; };
+		2608821A2B6DA22500C67B9D /* SellerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerAPI.swift; sourceTree = "<group>"; };
+		2608821C2B6DA43B00C67B9D /* BuyerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerAPI.swift; sourceTree = "<group>"; };
+		2608821E2B6DA48400C67B9D /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		260882202B6DA4D300C67B9D /* SocialLinkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkAPI.swift; sourceTree = "<group>"; };
+		260882222B6DA4E900C67B9D /* AuctionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionAPI.swift; sourceTree = "<group>"; };
+		260882262B6DA55900C67B9D /* BetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetAPI.swift; sourceTree = "<group>"; };
+		260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationForRequest.swift; sourceTree = "<group>"; };
+		2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
+		2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
+		2608822F2B6DBBBF00C67B9D /* BetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetRequest.swift; sourceTree = "<group>"; };
+		260882312B6DBBBF00C67B9D /* NotificationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRequest.swift; sourceTree = "<group>"; };
+		260882322B6DBBBF00C67B9D /* BuyerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuyerRequest.swift; sourceTree = "<group>"; };
+		260882332B6DBBBF00C67B9D /* SocialLinkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialLinkRequest.swift; sourceTree = "<group>"; };
+		260882342B6DBBBF00C67B9D /* AuctionRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuctionRequest.swift; sourceTree = "<group>"; };
+		260882352B6DBBBF00C67B9D /* SellerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SellerRequest.swift; sourceTree = "<group>"; };
+		260882402B6DD1EC00C67B9D /* AccountAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAPI.swift; sourceTree = "<group>"; };
+		260882422B6DD36600C67B9D /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		2620C01F2B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFixedTimeAuctionViewModel.swift; sourceTree = "<group>"; };
 		2620C0212B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncrementalAuctionViewModel.swift; sourceTree = "<group>"; };
 		2620C0232B61832300B9DC44 /* AuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionViewModel.swift; sourceTree = "<group>"; };
@@ -191,8 +209,7 @@
 		030315DF2B246D7400D2044A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				260882162B6DA03900C67B9D /* NetworkingDataFetch */,
-				260882172B6DA08200C67B9D /* Utils.swift */,
+				260882162B6DA03900C67B9D /* Networking */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -235,15 +252,16 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		03A6EE7D2B235CD500163DB6 /* AllComponents */ = {
+		03A6EE7D2B235CD500163DB6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				03A6EE802B235D2500163DB6 /* TextField.swift */,
 				03A6EE822B235DBB00163DB6 /* SocialLogin.swift */,
 				26DEF6FE2B237B8000700AC1 /* Buttons.swift */,
 				265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */,
+				260882422B6DD36600C67B9D /* Utils.swift */,
 			);
-			path = AllComponents;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		03A6EE862B235ECD00163DB6 /* Notifications */ = {
@@ -272,23 +290,48 @@
 				03123C2A2B31864200CD7FB5 /* Auctions */,
 				266ADA3D2B5C25FD0001AC1C /* CreateAuctions */,
 				03A6EE7B2B235A8600163DB6 /* LoginSignup */,
-				03A6EE7D2B235CD500163DB6 /* AllComponents */,
+				03A6EE7D2B235CD500163DB6 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		260882162B6DA03900C67B9D /* NetworkingDataFetch */ = {
+		260882162B6DA03900C67B9D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				2608821A2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift */,
-				2608821C2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift */,
-				260882222B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift */,
-				260882242B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift */,
-				260882202B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift */,
-				2608821E2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift */,
-				260882262B6DA55900C67B9D /* BetNetworkingDataFetch.swift */,
+				2608822C2B6DB88500C67B9D /* Api */,
+				2608822D2B6DB8A400C67B9D /* Request */,
 			);
-			path = NetworkingDataFetch;
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		2608822C2B6DB88500C67B9D /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				260882402B6DD1EC00C67B9D /* AccountAPI.swift */,
+				2608821A2B6DA22500C67B9D /* SellerAPI.swift */,
+				2608821C2B6DA43B00C67B9D /* BuyerAPI.swift */,
+				260882222B6DA4E900C67B9D /* AuctionAPI.swift */,
+				260882202B6DA4D300C67B9D /* SocialLinkAPI.swift */,
+				2608821E2B6DA48400C67B9D /* NotificationAPI.swift */,
+				260882262B6DA55900C67B9D /* BetAPI.swift */,
+				2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		2608822D2B6DB8A400C67B9D /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				260882352B6DBBBF00C67B9D /* SellerRequest.swift */,
+				260882322B6DBBBF00C67B9D /* BuyerRequest.swift */,
+				260882342B6DBBBF00C67B9D /* AuctionRequest.swift */,
+				260882332B6DBBBF00C67B9D /* SocialLinkRequest.swift */,
+				260882312B6DBBBF00C67B9D /* NotificationRequest.swift */,
+				2608822F2B6DBBBF00C67B9D /* BetRequest.swift */,
+				2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */,
+				260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		2620C01A2B61756400B9DC44 /* Home */ = {
@@ -540,9 +583,11 @@
 				035872DD2B6170CF00C3AEFC /* SignupViewModel.swift in Sources */,
 				2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */,
 				032B9B7A2B2C7585005566A6 /* EditProfileSheetView.swift in Sources */,
-				2608821F2B6DA48400C67B9D /* NotificationNetworkingDataFetch.swift in Sources */,
+				2608821F2B6DA48400C67B9D /* NotificationAPI.swift in Sources */,
+				2608823B2B6DBBBF00C67B9D /* SocialLinkRequest.swift in Sources */,
 				2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */,
 				265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */,
+				260882362B6DBBBF00C67B9D /* AuthenticationRequest.swift in Sources */,
 				266BFA622B2275840063C68B /* LoginView.swift in Sources */,
 				2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */,
 				26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */,
@@ -550,30 +595,37 @@
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
 				035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */,
 				03A6EE812B235D2500163DB6 /* TextField.swift in Sources */,
-				260882252B6DA54500C67B9D /* IncrementalAuctionNetworkingDataFetch.swift in Sources */,
 				038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */,
 				2620C0262B61839C00B9DC44 /* NotificationViewModel.swift in Sources */,
-				2608821D2B6DA43B00C67B9D /* BuyerNetworkingDataFetch.swift in Sources */,
+				260882412B6DD1EC00C67B9D /* AccountAPI.swift in Sources */,
+				2608821D2B6DA43B00C67B9D /* BuyerAPI.swift in Sources */,
 				035872D12B61603500C3AEFC /* Buyer.swift in Sources */,
-				260882272B6DA55900C67B9D /* BetNetworkingDataFetch.swift in Sources */,
-				260882182B6DA08200C67B9D /* Utils.swift in Sources */,
+				2608823A2B6DBBBF00C67B9D /* BuyerRequest.swift in Sources */,
+				260882272B6DA55900C67B9D /* BetAPI.swift in Sources */,
 				038407732B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift in Sources */,
+				2608823C2B6DBBBF00C67B9D /* AuctionRequest.swift in Sources */,
 				2620C0202B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift in Sources */,
+				260882392B6DBBBF00C67B9D /* NotificationRequest.swift in Sources */,
 				2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */,
 				033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */,
 				035872D32B61615400C3AEFC /* Notification.swift in Sources */,
-				260882212B6DA4D300C67B9D /* SocialLinkNetworkingDataFetch.swift in Sources */,
+				260882372B6DBBBF00C67B9D /* BetRequest.swift in Sources */,
+				260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */,
 				03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */,
 				032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */,
 				030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */,
+				260882432B6DD36600C67B9D /* Utils.swift in Sources */,
+				2608823D2B6DBBBF00C67B9D /* SellerRequest.swift in Sources */,
+				260882292B6DAB8F00C67B9D /* ConfigurationForRequest.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
 				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
 				030315E12B246DA400D2044A /* Auction.swift in Sources */,
 				035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */,
 				2620C0282B6183B100B9DC44 /* ProfileViewModel.swift in Sources */,
+				2608822B2B6DAD9800C67B9D /* AuthenticationAPI.swift in Sources */,
 				266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */,
-				2608821B2B6DA22500C67B9D /* SellerNetworkingDataFetch.swift in Sources */,
-				260882232B6DA4E900C67B9D /* FixedTimeAuctionNetworkingDataFetch.swift in Sources */,
+				2608821B2B6DA22500C67B9D /* SellerAPI.swift in Sources */,
+				260882232B6DA4E900C67B9D /* AuctionAPI.swift in Sources */,
 				03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */,
 				035872D92B616D7200C3AEFC /* Bet.swift in Sources */,
 				2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SocialLinkNetworkingDataFetch.swift
+//  BetRequest.swift
 //  DietiDeals24
 //
 //  Created by Salvatore Tortora on 02/02/24.

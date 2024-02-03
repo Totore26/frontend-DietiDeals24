@@ -5,13 +5,8 @@
 //  Created by Francesco Terrecuso on 08/12/23.
 //  Questo file contiene tutte le strutture d'appoggio usate per la creazione delle View.
 
-
 import SwiftUI
 import Foundation
-
-
-
-
 
 //------------------------------------------ LOGIN & SIGN UP ---------------------------------------------------------//
 
@@ -77,18 +72,6 @@ struct FormattedSeparator: View {
     }
 }
 
-//sono le enum del tipo che puo essere l'utente
-enum FormattedUserType: String, CaseIterable {
-    case buyer = "Buyer"
-    case seller = "Seller"
-}
-
-//tipi di aste diverse
-enum FormattedAuctionType: String, CaseIterable {
-    case fixed = "fixed time"
-    case incremental = "incremental"
-    case null = ""
-}
 
 
 

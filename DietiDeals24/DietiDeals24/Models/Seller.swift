@@ -5,10 +5,6 @@
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-import Foundation
-
-
-
 class Seller : Account {
     
     var notifications : Array<Notification>?
@@ -40,11 +36,6 @@ class Seller : Account {
         self.description = description
         self.telephoneNumber = telephoneNumber
         self.country = country
-    }
-    
-    
-    func getAllNotification() {
-
     }
     
     

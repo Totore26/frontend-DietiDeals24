@@ -5,9 +5,6 @@
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-import Foundation
-
-
 class SocialLink {
     
     private(set) var accountAssociato: Account

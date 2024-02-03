@@ -5,12 +5,7 @@
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-import Foundation
-
-
-
 protocol Account {
-    
     
     var notifications : Array <Notification>? {get set}
     
@@ -30,11 +25,6 @@ protocol Account {
     
     var country : String? {get set}
     
-    
-    
-    // Funzioni associate all'account
-    func getAllNotification();
-    
-    
+
     
 }

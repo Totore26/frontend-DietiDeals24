@@ -5,9 +5,6 @@
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-import Foundation
-
-
 class Buyer : Account {
     
     var notifications : Array<Notification>?
@@ -41,10 +38,5 @@ class Buyer : Account {
         self.country = country
     }
     
-    
-    func getAllNotification() {
 
-    }
-    
-    
 }

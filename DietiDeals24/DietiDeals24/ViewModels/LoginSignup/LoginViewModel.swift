@@ -39,7 +39,7 @@ class LoginViewModel: ObservableObject {
     }
 }
 
-//SERVIZIO DI AUTENTICAZIONE
+//SERVIZIO DI AUTENTICAZIONE CON API
 class AuthService {
     //ritorna un Publisher, che è un booleano in caso di successo o un errore in caso di fallimento
     func login(credentials: UserCredentials) -> AnyPublisher<Bool, Error> {
