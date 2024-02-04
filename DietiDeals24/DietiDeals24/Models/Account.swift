@@ -5,7 +5,7 @@
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-protocol Account {
+protocol Account: Codable {
     
     var notifications : Array <Notification>? {get set}
     

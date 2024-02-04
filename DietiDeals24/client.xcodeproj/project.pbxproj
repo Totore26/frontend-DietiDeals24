@@ -36,7 +36,7 @@
 		260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882202B6DA4D300C67B9D /* SocialLinkAPI.swift */; };
 		260882232B6DA4E900C67B9D /* AuctionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882222B6DA4E900C67B9D /* AuctionAPI.swift */; };
 		260882272B6DA55900C67B9D /* BetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882262B6DA55900C67B9D /* BetAPI.swift */; };
-		260882292B6DAB8F00C67B9D /* ConfigurationForRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */; };
+		260882292B6DAB8F00C67B9D /* ConfigurationNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 260882282B6DAB8F00C67B9D /* ConfigurationNetworking.swift */; };
 		2608822B2B6DAD9800C67B9D /* AuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */; };
 		260882362B6DBBBF00C67B9D /* AuthenticationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */; };
 		260882372B6DBBBF00C67B9D /* BetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608822F2B6DBBBF00C67B9D /* BetRequest.swift */; };
@@ -56,6 +56,9 @@
 		2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02B2B6183D500B9DC44 /* HomeViewModel.swift */; };
 		2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */; };
 		2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */; };
+		2624AE952B6F329700EBDB88 /* SellerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE942B6F329700EBDB88 /* SellerRepository.swift */; };
+		2624AE972B6F32E000EBDB88 /* BHO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE962B6F32E000EBDB88 /* BHO.swift */; };
+		2624AE992B6F336400EBDB88 /* AlamofireSellerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE982B6F336400EBDB88 /* AlamofireSellerRepository.swift */; };
 		2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2652882D2B30972C001A4AB9 /* SettingsView.swift */; };
 		265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */; };
 		266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA5F2B2275840063C68B /* DietiDeals24App.swift */; };
@@ -115,7 +118,7 @@
 		260882202B6DA4D300C67B9D /* SocialLinkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLinkAPI.swift; sourceTree = "<group>"; };
 		260882222B6DA4E900C67B9D /* AuctionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionAPI.swift; sourceTree = "<group>"; };
 		260882262B6DA55900C67B9D /* BetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetAPI.swift; sourceTree = "<group>"; };
-		260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationForRequest.swift; sourceTree = "<group>"; };
+		260882282B6DAB8F00C67B9D /* ConfigurationNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationNetworking.swift; sourceTree = "<group>"; };
 		2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationAPI.swift; sourceTree = "<group>"; };
 		2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationRequest.swift; sourceTree = "<group>"; };
 		2608822F2B6DBBBF00C67B9D /* BetRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BetRequest.swift; sourceTree = "<group>"; };
@@ -135,6 +138,9 @@
 		2620C02B2B6183D500B9DC44 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsViewModel.swift; sourceTree = "<group>"; };
 		2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		2624AE942B6F329700EBDB88 /* SellerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerRepository.swift; sourceTree = "<group>"; };
+		2624AE962B6F32E000EBDB88 /* BHO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHO.swift; sourceTree = "<group>"; };
+		2624AE982B6F336400EBDB88 /* AlamofireSellerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSellerRepository.swift; sourceTree = "<group>"; };
 		2652882D2B30972C001A4AB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedSheetView.swift; sourceTree = "<group>"; };
 		266BFA5C2B2275840063C68B /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,7 +215,7 @@
 		030315DF2B246D7400D2044A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				260882162B6DA03900C67B9D /* Networking */,
+				2624AE962B6F32E000EBDB88 /* BHO.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -298,13 +304,14 @@
 		260882162B6DA03900C67B9D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				2608822C2B6DB88500C67B9D /* Api */,
-				2608822D2B6DB8A400C67B9D /* Request */,
+				2608822C2B6DB88500C67B9D /* ApiProtocol */,
+				2608822D2B6DB8A400C67B9D /* ApiAlamofireRequest */,
+				260882282B6DAB8F00C67B9D /* ConfigurationNetworking.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		2608822C2B6DB88500C67B9D /* Api */ = {
+		2608822C2B6DB88500C67B9D /* ApiProtocol */ = {
 			isa = PBXGroup;
 			children = (
 				260882402B6DD1EC00C67B9D /* AccountAPI.swift */,
@@ -316,10 +323,10 @@
 				260882262B6DA55900C67B9D /* BetAPI.swift */,
 				2608822A2B6DAD9800C67B9D /* AuthenticationAPI.swift */,
 			);
-			path = Api;
+			path = ApiProtocol;
 			sourceTree = "<group>";
 		};
-		2608822D2B6DB8A400C67B9D /* Request */ = {
+		2608822D2B6DB8A400C67B9D /* ApiAlamofireRequest */ = {
 			isa = PBXGroup;
 			children = (
 				260882352B6DBBBF00C67B9D /* SellerRequest.swift */,
@@ -329,9 +336,8 @@
 				260882312B6DBBBF00C67B9D /* NotificationRequest.swift */,
 				2608822F2B6DBBBF00C67B9D /* BetRequest.swift */,
 				2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */,
-				260882282B6DAB8F00C67B9D /* ConfigurationForRequest.swift */,
 			);
-			path = Request;
+			path = ApiAlamofireRequest;
 			sourceTree = "<group>";
 		};
 		2620C01A2B61756400B9DC44 /* Home */ = {
@@ -378,6 +384,31 @@
 			path = CreateAuctions;
 			sourceTree = "<group>";
 		};
+		2624AE912B6F304000EBDB88 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				2624AE922B6F30A400EBDB88 /* RepositoryProtocol */,
+				2624AE932B6F315500EBDB88 /* RepositoryAlamofire */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		2624AE922B6F30A400EBDB88 /* RepositoryProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				2624AE942B6F329700EBDB88 /* SellerRepository.swift */,
+			);
+			path = RepositoryProtocol;
+			sourceTree = "<group>";
+		};
+		2624AE932B6F315500EBDB88 /* RepositoryAlamofire */ = {
+			isa = PBXGroup;
+			children = (
+				2624AE982B6F336400EBDB88 /* AlamofireSellerRepository.swift */,
+			);
+			path = RepositoryAlamofire;
+			sourceTree = "<group>";
+		};
 		266ADA3D2B5C25FD0001AC1C /* CreateAuctions */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,9 +441,11 @@
 			isa = PBXGroup;
 			children = (
 				030315DF2B246D7400D2044A /* Services */,
-				03EF0F952B227803000D78F0 /* Views */,
-				030315DD2B246D4400D2044A /* ViewModels */,
+				260882162B6DA03900C67B9D /* Networking */,
 				030315DE2B246D5700D2044A /* Models */,
+				2624AE912B6F304000EBDB88 /* Repository */,
+				030315DD2B246D4400D2044A /* ViewModels */,
+				03EF0F952B227803000D78F0 /* Views */,
 				266BFA652B2275850063C68B /* Preview Content */,
 				266BFA5F2B2275840063C68B /* DietiDeals24App.swift */,
 			);
@@ -590,6 +623,8 @@
 				260882362B6DBBBF00C67B9D /* AuthenticationRequest.swift in Sources */,
 				266BFA622B2275840063C68B /* LoginView.swift in Sources */,
 				2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */,
+				2624AE952B6F329700EBDB88 /* SellerRepository.swift in Sources */,
+				2624AE972B6F32E000EBDB88 /* BHO.swift in Sources */,
 				26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */,
 				03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */,
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
@@ -599,6 +634,7 @@
 				2620C0262B61839C00B9DC44 /* NotificationViewModel.swift in Sources */,
 				260882412B6DD1EC00C67B9D /* AccountAPI.swift in Sources */,
 				2608821D2B6DA43B00C67B9D /* BuyerAPI.swift in Sources */,
+				2624AE992B6F336400EBDB88 /* AlamofireSellerRepository.swift in Sources */,
 				035872D12B61603500C3AEFC /* Buyer.swift in Sources */,
 				2608823A2B6DBBBF00C67B9D /* BuyerRequest.swift in Sources */,
 				260882272B6DA55900C67B9D /* BetAPI.swift in Sources */,
@@ -616,7 +652,7 @@
 				030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */,
 				260882432B6DD36600C67B9D /* Utils.swift in Sources */,
 				2608823D2B6DBBBF00C67B9D /* SellerRequest.swift in Sources */,
-				260882292B6DAB8F00C67B9D /* ConfigurationForRequest.swift in Sources */,
+				260882292B6DAB8F00C67B9D /* ConfigurationNetworking.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
 				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
 				030315E12B246DA400D2044A /* Auction.swift in Sources */,

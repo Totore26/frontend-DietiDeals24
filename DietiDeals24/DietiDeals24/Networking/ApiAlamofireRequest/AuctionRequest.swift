@@ -5,6 +5,27 @@
 //  Created by Salvatore Tortora on 02/02/24.
 //
 
+import Alamofire
+
+class AuctionRequest: AuctionAPI {
+    
+    func getAllActiveAuctions() -> [Auction] {
+        return []
+    }
+    
+    func getAuctionById(auctionId: String) -> Auction? {
+        return nil
+    }
+    
+    func createAuction(auction: Auction) {
+        
+    }
+    
+    func updateAuction(auction: Auction) {
+        
+    }
+    
+}
 /*
  GET /api/auctions: Ottiene l'elenco delle aste correntemente attive.
  GET /api/auctions/{auctionId}: Ottiene i dettagli di un'asta specifica.
