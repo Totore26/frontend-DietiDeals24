@@ -307,7 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				2608822C2B6DB88500C67B9D /* ApiProtocol */,
-				2608822D2B6DB8A400C67B9D /* ApiAlamofireRequest */,
+				2608822D2B6DB8A400C67B9D /* Api */,
 				260882282B6DAB8F00C67B9D /* ConfigurationNetworking.swift */,
 			);
 			path = Networking;
@@ -328,7 +328,7 @@
 			path = ApiProtocol;
 			sourceTree = "<group>";
 		};
-		2608822D2B6DB8A400C67B9D /* ApiAlamofireRequest */ = {
+		2608822D2B6DB8A400C67B9D /* Api */ = {
 			isa = PBXGroup;
 			children = (
 				2624AE9B2B6F3DF000EBDB88 /* AccountRequest.swift */,
@@ -340,7 +340,7 @@
 				2608822F2B6DBBBF00C67B9D /* BetRequest.swift */,
 				2608822E2B6DBBBF00C67B9D /* AuthenticationRequest.swift */,
 			);
-			path = ApiAlamofireRequest;
+			path = Api;
 			sourceTree = "<group>";
 		};
 		2620C01A2B61756400B9DC44 /* Home */ = {

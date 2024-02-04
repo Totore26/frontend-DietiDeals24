@@ -10,6 +10,15 @@ import SwiftUI
 struct TabBarHomeView: View {
     var body: some View {
         TabView{
+            
+            /*
+                homeViewModel <--> dipendenza dalle aste
+                MyAuctionViewModel <--> le mie aste
+                notificationViewModel <--> le mie notifiche
+                ProfileViewModel <--> le mie info
+                SettingsViewModel <--> Auth
+            */
+            
             HomeView()
                 .tabItem {
                     Image(systemName: "house.fill" )

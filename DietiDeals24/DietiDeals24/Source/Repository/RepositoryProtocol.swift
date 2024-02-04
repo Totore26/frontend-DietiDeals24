@@ -14,5 +14,3 @@ protocol SellerRepository: SellerAPI {
 protocol BuyerRepository: BuyerAPI {
     var BuyerAPI: BuyerAPI { get }
 }
-
-//.......

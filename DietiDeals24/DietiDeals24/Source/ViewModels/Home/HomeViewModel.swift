@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class HomeViewModel {
+    
+    /*
+        Dipendenza dall'account --> e quindi delle aste
+        Dipendenza da seller/buyerAPI --> per tornare la lista di aste (falla in modo asincrona).
+    */
+
+}
