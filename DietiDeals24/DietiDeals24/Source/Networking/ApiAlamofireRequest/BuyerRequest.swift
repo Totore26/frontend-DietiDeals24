@@ -9,8 +9,8 @@ import Alamofire
 
 class BuyerRequest: BuyerAPI {
  
-    func getAccountById(accountId: String) -> Account? {
-        return nil
+    func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Seller, APIError>) -> Void) {
+        
     }
     
     func addAccount(account: Account) {

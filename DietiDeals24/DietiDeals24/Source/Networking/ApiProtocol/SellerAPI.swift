@@ -5,7 +5,7 @@
 //  Created by Salvatore Tortora on 02/02/24.
 //
 
-protocol SellerAPI: AccountAPI {
+protocol SellerAPI {
     
     func getGeneratedAuctions(accountId: String) -> [Auction]
     

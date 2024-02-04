@@ -1,16 +1,16 @@
 //
-//  SellerRequest.swift
+//  AccountRequest.swift
 //  DietiDeals24
 //
-//  Created by Salvatore Tortora on 02/02/24.
+//  Created by Salvatore Tortora on 04/02/24.
 //
 
 import Alamofire
 
-class SellerRequest: SellerAPI {
+class AccountRequest: AccountAPI {
     
     //@escaping serve per eseguire la closure in modo asincrono (modo piu semplice e veloce di tutti)
-    func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Seller, APIError>) -> Void) {
+    func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Account, APIError>) -> Void) {
         let url = baseURL.append(path: "accounts/\(accountId)")
 
         AF.request(url)
@@ -32,10 +32,6 @@ class SellerRequest: SellerAPI {
     
     func updateAccount(account: Account) {
         
-    }
-    
-    func getGeneratedAuctions(accountId: String) -> [Auction] {
-        return []
     }
     
 }
