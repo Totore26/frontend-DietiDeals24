@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Amplify
 
 // TODO: vai nelle classi del viewmodel
 class AppState: ObservableObject {
@@ -24,6 +25,10 @@ class AppState: ObservableObject {
 @main
 struct DietiDeals24: App {
     @StateObject private var appState = AppState.shared
+    
+    init(){
+        configureAmplify()
+    }
 
     var body: some Scene {
         WindowGroup {
@@ -34,6 +39,16 @@ struct DietiDeals24: App {
                 LoginView()
                     .environmentObject(appState)
             }
+        }
+    }
+    
+    
+    private func configureAmplify() {
+        do{
+            try Amplify.configure()
+            print("Amplify correctly configured!")
+        } catch {
+            print("Coud not configure amplify!", error)
         }
     }
 }
