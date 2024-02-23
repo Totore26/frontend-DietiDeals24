@@ -1,0 +1,4 @@
+# Ignora i file Amplify
+amplify/
+amplifyconfiguration.json
+awsconfiguration.json
