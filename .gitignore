@@ -95,3 +95,11 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Ignora i file Amplify
+amplify/
+amplifyconfiguration.json
+awsconfiguration.json
+
+
+
