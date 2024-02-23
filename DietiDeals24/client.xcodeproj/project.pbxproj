@@ -14,6 +14,7 @@
 		030315E12B246DA400D2044A /* Auction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E02B246DA400D2044A /* Auction.swift */; };
 		030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E22B246E0300D2044A /* LoginViewModel.swift */; };
 		03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */; };
+		0322F2652B863DC800F359CC /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0322F2642B863DC800F359CC /* SessionManager.swift */; };
 		032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B752B2C4CBB005566A6 /* ProfileView.swift */; };
 		032B9B7A2B2C7585005566A6 /* EditProfileSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B792B2C7585005566A6 /* EditProfileSheetView.swift */; };
 		032F929F2B7FAF69002621BD /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 032F929C2B7FAF69002621BD /* amplifyconfiguration.json */; };
@@ -101,6 +102,7 @@
 		030315E02B246DA400D2044A /* Auction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auction.swift; sourceTree = "<group>"; };
 		030315E22B246E0300D2044A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoAuctionsView.swift; sourceTree = "<group>"; };
+		0322F2642B863DC800F359CC /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		032B9B752B2C4CBB005566A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		032B9B792B2C7585005566A6 /* EditProfileSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileSheetView.swift; sourceTree = "<group>"; };
 		032F929C2B7FAF69002621BD /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = "<group>"; };
@@ -428,6 +430,7 @@
 				030315DD2B246D4400D2044A /* ViewModels */,
 				03EF0F952B227803000D78F0 /* Views */,
 				266BFA5F2B2275840063C68B /* DietiDeals24App.swift */,
+				0322F2642B863DC800F359CC /* SessionManager.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */,
 				033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */,
 				035872D32B61615400C3AEFC /* Notification.swift in Sources */,
+				0322F2652B863DC800F359CC /* SessionManager.swift in Sources */,
 				260882372B6DBBBF00C67B9D /* BetRequest.swift in Sources */,
 				260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */,
 				03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */,

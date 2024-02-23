@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel = LoginViewModel()
+    @EnvironmentObject var sessionManager: SessionManager
 
     var body: some View {
         NavigationView {
@@ -30,13 +31,35 @@ struct LoginView: View {
                         .padding(.bottom, 40)
                 }
 
-                LoginButton(
-                    title: "Continue!",
-                    fontSize: 22,
-                    action: {
-                        viewModel.login()
+                
+                Button {
+                    async {
+                        do {
+                            // Chiamata corretta alla funzione di login
+                            try await sessionManager.login(email: viewModel.email, password: viewModel.password)
+                        } catch {
+                            print("Error during login:", error)
+                            // Gestire l'errore in modo appropriato
+                        }
                     }
-                )
+                } label: {
+                    Text("LogIn !")
+                        .font(.custom("SF Pro", size: 22))
+                        .fontWeight(.bold)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 14)
+                        .frame(width: 300, height: 44, alignment: .center)
+                        .background(Color(red: 0.06, green: 0.45, blue: 0.64))
+                        .cornerRadius(14)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 10)
+                }
+                .alert(isPresented: Binding<Bool>(get: { viewModel.error != "" }, set: { _ in viewModel.error = "" })) {
+                    Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
+                }
+                
+                
+                
                 .alert(isPresented: Binding<Bool>(get: { viewModel.error != "" }, set: { _ in viewModel.error = "" })) {
                     Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
                 }

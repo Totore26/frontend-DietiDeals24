@@ -11,5 +11,74 @@
       "StackId": "arn:aws:cloudformation:eu-west-1:767398022913:stack/amplify-dietideals24-dev-154044/5f686230-ccd9-11ee-8b7e-06f7563613cf",
       "AmplifyAppId": "d3oi09pdvntcsr"
     }
+  },
+  "auth": {
+    "dietideals2465286f24": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL",
+          "PHONE_NUMBER"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/dietideals2465286f24-cloudformation-template.json",
+        "logicalId": "authdietideals2465286f24"
+      },
+      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "output": {
+        "UserPoolId": "eu-west-1_98AlluIA8",
+        "AppClientIDWeb": "2cdl5bt2066iuoq6od72s3k10b",
+        "AppClientID": "6cr8gpju35p9quor186spi1ml2",
+        "IdentityPoolId": "eu-west-1:b8d441b8-34e6-4358-b93d-5395fddd676f",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:767398022913:userpool/eu-west-1_98AlluIA8",
+        "IdentityPoolName": "dietideals2465286f24_identitypool_65286f24__dev",
+        "UserPoolName": "dietideals2465286f24_userpool_65286f24"
+      },
+      "lastPushDirHash": "9zAJOIhx2p9ZZ0YkQNLYViBaqKs="
+    },
+    "userPoolGroups": {
+      "service": "Cognito-UserPool-Groups",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "dietideals2465286f24",
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ]
+        }
+      ],
+      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
+        "logicalId": "authuserPoolGroups"
+      },
+      "output": {
+        "dd24GroupRole": "arn:aws:iam::767398022913:role/eu-west-1_98AlluIA8-dd24GroupRole"
+      },
+      "lastPushDirHash": "z59vrA+fAMb5f+WLJ4342lZ14N0="
+    }
   }
 }

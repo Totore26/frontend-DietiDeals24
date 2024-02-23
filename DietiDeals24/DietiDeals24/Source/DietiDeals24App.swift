@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Amplify
+import AWSCognitoAuthPlugin
 
 // TODO: vai nelle classi del viewmodel
 class AppState: ObservableObject {
@@ -25,19 +26,26 @@ class AppState: ObservableObject {
 @main
 struct DietiDeals24: App {
     @StateObject private var appState = AppState.shared
+    @ObservedObject var sessionManager = SessionManager()
     
-    init(){
+    init() {
         configureAmplify()
     }
 
     var body: some Scene {
         WindowGroup {
-            if appState.isLoggedIn {
-                TabBarHomeView()
-                    .environmentObject(appState)
-            } else {
+            
+            //bisogna passare i vari viewmodel nel caso di sessione.
+            switch sessionManager.authState {
+            case .signUp:
+                SignUpView()
+                    .environmentObject(sessionManager)
+            case .login:
                 LoginView()
-                    .environmentObject(appState)
+                    .environmentObject(sessionManager)
+            case .session(let user):
+                TabBarHomeView(user: user)
+                    .environmentObject(sessionManager)
             }
         }
     }
@@ -45,6 +53,7 @@ struct DietiDeals24: App {
     
     private func configureAmplify() {
         do{
+            try Amplify.add(plugin: AWSCognitoAuthPlugin())
             try Amplify.configure()
             print("Amplify correctly configured!")
         } catch {

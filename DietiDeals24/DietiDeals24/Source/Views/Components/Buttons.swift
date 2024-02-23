@@ -32,6 +32,37 @@ struct LoginButton: View {
     }
 }
 
+struct LoginButtonAsync: View {
+    var title: String
+    var fontSize: CGFloat
+    var action: () async throws -> Void // Modifica qui per specificare un'azione asincrona senza un valore di ritorno specifico
+
+    var body: some View {
+        Button {
+            Task {
+                do {
+                    try await action() // Attendi l'esecuzione dell'azione asincrona
+                } catch {
+                    // Gestisci eventuali errori
+                    print("Error:", error)
+                }
+            }
+        } label: {
+            Text(title)
+                .font(.custom("SF Pro", size: fontSize))
+                .bold()
+                .padding(.horizontal, 20)
+                .padding(.vertical, 14)
+                .frame(width: 300, height: 44, alignment: .center)
+                .background(Color(red: 0.06, green: 0.45, blue: 0.64))
+                .cornerRadius(14)
+                .foregroundColor(.white)
+                .padding(.bottom, 10)
+        }
+    }
+}
+
+
 struct OfferMoreButton: View {
     var title: String
     var fontSize: CGFloat
