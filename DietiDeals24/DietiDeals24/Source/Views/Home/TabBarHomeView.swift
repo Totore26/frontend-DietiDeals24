@@ -12,15 +12,16 @@ struct TabBarHomeView: View {
     let user : AuthUser
     @EnvironmentObject var sessionManager: SessionManager
     
+    
+    /* 
+     TODO: la struct AuthUser specifica l'id del client e la sua mail.
+      siccome ci possono essere al piu una mail per due account, cio che dobbiamo tener
+     in considerazione è l'id che genera AWS COGNITO; In altre parole quando vengono fatte le richieste http,
+     per i dati per ognuna view, bisogna mettere all'inizio della richiesta GET user.ID / ... / ... /
+    */
+    
     var body: some View {
         TabView{
-            /*
-                homeViewModel <--> dipendenza dalle aste
-                MyAuctionViewModel <--> le mie aste
-                notificationViewModel <--> le mie notifiche
-                ProfileViewModel <--> le mie info
-                SettingsViewModel <--> Auth
-            */
             
             HomeView()
                 .tabItem {
@@ -51,6 +52,7 @@ struct TabBarHomeView: View {
                     Image(systemName: "gear")
                     Text("SETTINGS")
                 }
+                .environmentObject(sessionManager)
         }
     }
 }
@@ -63,7 +65,7 @@ struct TabBarHomeView_Preview: PreviewProvider {
 
     static var previews: some View {
         TabBarHomeView(user: DummyUser())
-            .environmentObject(SessionManager()) // Assicurati di fornire un oggetto di sessione nell'ambiente
+            .environmentObject(SessionManager())
     }
 }
 

@@ -1,6 +1,13 @@
+
+// ========================================
+// MARK: - Gestione del signupView
+// ========================================
+
 import SwiftUI
 
 struct SignUpView: View {
+    
+    @EnvironmentObject var sessionManager: SessionManager
     
     @State private var fullName = ""
     @State private var email = ""
@@ -9,8 +16,6 @@ struct SignUpView: View {
     @State private var telephoneNumber = ""
     @State private var otp = ""
     @State private var selectedUserType: FormattedUserType = .buyer
-    @EnvironmentObject var sessionManager: SessionManager
-    
     @State private var isConfirmationAlertPresented = false
     @State private var confirmationMessage = ""
     
@@ -69,15 +74,10 @@ struct SignUpView: View {
                 .adaptiveSheet(isPresented: $isConfirmationAlertPresented, detents: [.medium()], smallestUndimmedDetentIdentifier: .large) {
                     //contenuto della sheet con campo per inserimento del codice di verifica e bottone per confermare
                     VStack {
-                        
                         Spacer()
-                        
                         Text("Insert OTP code sended by mail")
-                        
                         FormattedTextField(title: "Enter OTP", text: $otp)
-                        
                         Spacer()
-                        
                         Button(action: continueSignUp ) {
                             Text("Continue")
                                 .font(.custom("SF Pro", size: 22))
@@ -97,46 +97,27 @@ struct SignUpView: View {
     }
     
     private func signUp() {
-        async {
-            do {
-                try await sessionManager.signUp(
-                    username: email,
-                    password: password,
-                    email: email,
-                    fullName: fullName,
-                    phoneNumber: telephoneNumber,
-                    userType: selectedUserType
-                )
-                confirmationMessage = "Confirmation sent to email: \(email)"
-                isConfirmationAlertPresented = true
-            } catch {
-                print("Error during sign up:", error)
-                // Handle error appropriately
-            }
+        Task(priority: .userInitiated) {
+                await sessionManager.signUp(
+                username: email,
+                password: password,
+                email: email,
+                fullName: fullName,
+                phoneNumber: telephoneNumber,
+                userType: selectedUserType
+            )
         }
     }
-    
+
     private func continueSignUp() {
-        async {
-            do {
-                try await sessionManager.confirmSignUp(for: email, with: otp)
-                // La conferma è avvenuta con successo
-                print("Sign up confirmed successfully")
-                
-                // Puoi aggiungere ulteriori azioni dopo la conferma, ad esempio, navigare a un'altra vista
-                // o mostrare un messaggio di conferma all'utente
-            } catch {
-                print("Error during sign up confirmation:", error)
-                // Gestisci l'errore in base alle tue esigenze
-            }
-            
-            // Chiudi la sheet dopo la conferma
-            isConfirmationAlertPresented = false
-            
+        Task(priority: .userInitiated) {
+            await sessionManager.confirmSignUp(for: email, with: otp)
+            print("Sign up confirmed successfully")
+            confirmationMessage = "REGISTRATION COMPLETE"
             sessionManager.showLogin()
+            isConfirmationAlertPresented = true
         }
     }
-    
     
 }
 

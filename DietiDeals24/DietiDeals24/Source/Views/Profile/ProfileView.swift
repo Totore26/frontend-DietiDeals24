@@ -108,7 +108,7 @@ struct FullnamePhotoNazionalityProfile: View {
         }
         .background(Color.white.opacity(0.2))
         .cornerRadius(10)
-        .frame(width: 460, height: .infinity)
+        .frame(width: 460, height: 100)
         .padding(.top, 20)
 
     }

@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
-
 struct SettingsView: View {
     
     @State private var isEditProfileSheetPresented = false
     @State private var isInfoAuctionsSheetPresented = false
+    @EnvironmentObject var sessionManager: SessionManager
     
     var body: some View {
         NavigationView {
@@ -50,9 +49,9 @@ struct SettingsView: View {
                         Section {
                             SettingsItem(systemName: "rectangle.portrait.and.arrow.forward", title: "Logout")
                                 .onTapGesture {
-                                    //TODO: aggiungere la chiamata al viewmodel che cancella dalla memoria i dati dell'utente loggato.
-                                    //appState.isLoggedIn = false
-
+                                    Task {
+                                        await sessionManager.logOutLocally()
+                                    }
                                 }
                         }
                     }
@@ -60,10 +59,8 @@ struct SettingsView: View {
                     .listRowSpacing(5)
                     .listStyle(PlainListStyle())
                     .cornerRadius(10)
-                    
                 }
                 .scrollDisabled(true)
-                .frame(width: .infinity, height: .infinity)
                 .navigationBarTitle("Settings", displayMode: .large)
                 .navigationBarTitleDisplayMode(.inline)
                 .padding(.bottom, 300)
@@ -71,6 +68,7 @@ struct SettingsView: View {
         }
     }
 }
+
 
 struct SettingsItem: View {
     var systemName: String

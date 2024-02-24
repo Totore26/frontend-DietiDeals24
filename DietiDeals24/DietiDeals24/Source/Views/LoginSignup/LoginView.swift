@@ -1,3 +1,11 @@
+
+//
+//  manageHomesViews.swift
+//  DietiDeals24X
+//
+//  Created by Francesco Terrecuso on 10/11/23.
+//
+
 import SwiftUI
 
 struct LoginView: View {
@@ -31,16 +39,9 @@ struct LoginView: View {
                         .padding(.bottom, 40)
                 }
 
-                
                 Button {
-                    async {
-                        do {
-                            // Chiamata corretta alla funzione di login
-                            try await sessionManager.login(email: viewModel.email, password: viewModel.password)
-                        } catch {
-                            print("Error during login:", error)
-                            // Gestire l'errore in modo appropriato
-                        }
+                    Task {
+                            await sessionManager.login(email: viewModel.email, password: viewModel.password)
                     }
                 } label: {
                     Text("LogIn !")
@@ -58,12 +59,9 @@ struct LoginView: View {
                     Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
                 }
                 
-                
-                
                 .alert(isPresented: Binding<Bool>(get: { viewModel.error != "" }, set: { _ in viewModel.error = "" })) {
                     Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
                 }
-
                 FormattedSeparator()
                     .padding(.bottom, 15)
 

@@ -9,23 +9,9 @@ import SwiftUI
 import Amplify
 import AWSCognitoAuthPlugin
 
-// TODO: vai nelle classi del viewmodel
-class AppState: ObservableObject {
-    @Published var isLoggedIn: Bool = false
-
-    // Singleton instance
-    static let shared = AppState()
-
-    // Private initializer to prevent multiple instances
-    private init() {}
-    
-}
-
-
 
 @main
 struct DietiDeals24: App {
-    @StateObject private var appState = AppState.shared
     @ObservedObject var sessionManager = SessionManager()
     
     init() {
@@ -34,7 +20,6 @@ struct DietiDeals24: App {
 
     var body: some Scene {
         WindowGroup {
-            
             //bisogna passare i vari viewmodel nel caso di sessione.
             switch sessionManager.authState {
             case .signUp:
@@ -49,7 +34,6 @@ struct DietiDeals24: App {
             }
         }
     }
-    
     
     private func configureAmplify() {
         do{

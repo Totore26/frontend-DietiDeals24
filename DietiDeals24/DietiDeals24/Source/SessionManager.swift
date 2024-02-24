@@ -6,6 +6,7 @@
 //
 
 import Amplify
+import AWSCognitoAuthPlugin
 import Foundation
 
 
@@ -16,21 +17,29 @@ enum AuthState {
 }
 
 
+// ========================================
+// MARK: Gestione dell'accesso all'utente
+// ========================================
+
 class SessionManager : ObservableObject {
     @Published var authState : AuthState = .login
-    
     
     /*
         La seguente funzione serve a controllare se l'utente attuale è loggato, nel caso in cui lo sui mostra
         la sessione dell'utente, altrimenti se l'utente non è loggato mostra la schermata di login.
+        tutto viene svolto sul thread principale in maniera tale da rendere piu veloce l'interfaccia.
     */
-    public func getCurrentAuthUser() async throws {
-        do{
+    public func getCurrentAuthUser() async {
+        do {
             let user = try await Amplify.Auth.getCurrentUser()
-            authState = .session(user: user)
+            DispatchQueue.main.async {
+                self.authState = .session(user: user)
+            }
         } catch {
-            print("errore durante caricamento ... \(error) ")
-            authState = .login
+            DispatchQueue.main.async {
+                self.authState = .login
+            }
+            print("Errore durante il caricamento dell'utente attuale: \(error)")
         }
     }
     
@@ -82,7 +91,8 @@ class SessionManager : ObservableObject {
                 password: password
                 )
             if signInResult.isSignedIn {
-                print("Sign in succeeded")
+                print("Sign in succeeded ... ")
+                await self.getCurrentAuthUser()
             }
         } catch let error as AuthError {
             print("Sign in failed \(error)")
@@ -105,6 +115,34 @@ class SessionManager : ObservableObject {
             print("Unexpected error: \(error)")
         }
     }
-
     
+    /* MARK:  la seguente funzione permette un logOut locale del dispositivo e non di tutti quelli connessi sullo stesso account */
+    func logOutLocally() async {
+        let result = await Amplify.Auth.signOut()
+        guard let signOutResult = result as? AWSCognitoSignOutResult else {
+            print("Signout failed")
+            return
+        }
+        print("Local signout successful: \(signOutResult.signedOutLocally)")
+        switch signOutResult {
+            case .complete:
+                print("Signed out successfully")
+                // After local logout, reset the authentication state to `.login`
+                DispatchQueue.main.async {
+                    self.authState = .login
+                }
+            case let .partial(revokeTokenError, globalSignOutError, hostedUIError):
+                if let hostedUIError = hostedUIError {
+                    print("HostedUI error: \(hostedUIError)")
+                }
+                if let globalSignOutError = globalSignOutError {
+                    print("GlobalSignOut error: \(globalSignOutError)")
+                }
+                if let revokeTokenError = revokeTokenError {
+                    print("Revoke token error: \(revokeTokenError)")
+                }
+            case .failed(let error):
+                print("SignOut failed with \(error)")
+        }
+    }
 }
