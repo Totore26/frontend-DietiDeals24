@@ -12,7 +12,6 @@
 		0301F8A32B7FAE93008BDC5E /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 0301F8A22B7FAE93008BDC5E /* AWSS3StoragePlugin */; };
 		0301F8A52B7FAE93008BDC5E /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 0301F8A42B7FAE93008BDC5E /* Amplify */; };
 		030315E12B246DA400D2044A /* Auction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E02B246DA400D2044A /* Auction.swift */; };
-		030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E22B246E0300D2044A /* LoginViewModel.swift */; };
 		03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */; };
 		0322F2652B863DC800F359CC /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0322F2642B863DC800F359CC /* SessionManager.swift */; };
 		032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B752B2C4CBB005566A6 /* ProfileView.swift */; };
@@ -31,7 +30,6 @@
 		035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D62B616B4500C3AEFC /* FixedTimeAuction.swift */; };
 		035872D92B616D7200C3AEFC /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D82B616D7200C3AEFC /* Bet.swift */; };
 		035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872DA2B616DEB00C3AEFC /* IncrementalAuction.swift */; };
-		035872DD2B6170CF00C3AEFC /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872DC2B6170CF00C3AEFC /* SignupViewModel.swift */; };
 		038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */; };
 		038407732B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407722B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift */; };
 		038407752B3F0D0000CD9501 /* AuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407742B3F0D0000CD9501 /* AuctionView.swift */; };
@@ -65,7 +63,6 @@
 		2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */; };
 		2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */; };
 		2624AE952B6F329700EBDB88 /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE942B6F329700EBDB88 /* RepositoryProtocol.swift */; };
-		2624AE972B6F32E000EBDB88 /* BHO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE962B6F32E000EBDB88 /* BHO.swift */; };
 		2624AE992B6F336400EBDB88 /* AlamofireSellerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE982B6F336400EBDB88 /* AlamofireSellerRepository.swift */; };
 		2624AE9C2B6F3DF000EBDB88 /* AccountRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2624AE9B2B6F3DF000EBDB88 /* AccountRequest.swift */; };
 		2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2652882D2B30972C001A4AB9 /* SettingsView.swift */; };
@@ -100,7 +97,6 @@
 
 /* Begin PBXFileReference section */
 		030315E02B246DA400D2044A /* Auction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auction.swift; sourceTree = "<group>"; };
-		030315E22B246E0300D2044A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoAuctionsView.swift; sourceTree = "<group>"; };
 		0322F2642B863DC800F359CC /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		032B9B752B2C4CBB005566A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -118,7 +114,6 @@
 		035872D62B616B4500C3AEFC /* FixedTimeAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuction.swift; sourceTree = "<group>"; };
 		035872D82B616D7200C3AEFC /* Bet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
 		035872DA2B616DEB00C3AEFC /* IncrementalAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalAuction.swift; sourceTree = "<group>"; };
-		035872DC2B6170CF00C3AEFC /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFixedTimeAuctionView.swift; sourceTree = "<group>"; };
 		038407722B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncrementalAuctionView.swift; sourceTree = "<group>"; };
 		038407742B3F0D0000CD9501 /* AuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionView.swift; sourceTree = "<group>"; };
@@ -152,7 +147,6 @@
 		2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsViewModel.swift; sourceTree = "<group>"; };
 		2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		2624AE942B6F329700EBDB88 /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
-		2624AE962B6F32E000EBDB88 /* BHO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BHO.swift; sourceTree = "<group>"; };
 		2624AE982B6F336400EBDB88 /* AlamofireSellerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireSellerRepository.swift; sourceTree = "<group>"; };
 		2624AE9B2B6F3DF000EBDB88 /* AccountRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRequest.swift; sourceTree = "<group>"; };
 		2652882D2B30972C001A4AB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -209,7 +203,6 @@
 				2620C01C2B61758800B9DC44 /* Notifications */,
 				2620C01D2B6175F300B9DC44 /* Auctions */,
 				2620C01E2B61761100B9DC44 /* CreateAuctions */,
-				035872DE2B6170F800C3AEFC /* LoginSignup */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -230,29 +223,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		030315DF2B246D7400D2044A /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				2624AE962B6F32E000EBDB88 /* BHO.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		03123C2A2B31864200CD7FB5 /* Auctions */ = {
 			isa = PBXGroup;
 			children = (
 				038407742B3F0D0000CD9501 /* AuctionView.swift */,
 			);
 			path = Auctions;
-			sourceTree = "<group>";
-		};
-		035872DE2B6170F800C3AEFC /* LoginSignup */ = {
-			isa = PBXGroup;
-			children = (
-				035872DC2B6170CF00C3AEFC /* SignupViewModel.swift */,
-				030315E22B246E0300D2044A /* LoginViewModel.swift */,
-			);
-			path = LoginSignup;
 			sourceTree = "<group>";
 		};
 		03A6EE7B2B235A8600163DB6 /* LoginSignup */ = {
@@ -423,7 +399,6 @@
 		2624AE9A2B6F35BE00EBDB88 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				030315DF2B246D7400D2044A /* Services */,
 				260882162B6DA03900C67B9D /* Networking */,
 				030315DE2B246D5700D2044A /* Models */,
 				2624AE912B6F304000EBDB88 /* Repository */,
@@ -644,7 +619,6 @@
 				26D219872B26164600942747 /* MyAuctionsView.swift in Sources */,
 				26DEF6FF2B237B8000700AC1 /* Buttons.swift in Sources */,
 				2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */,
-				035872DD2B6170CF00C3AEFC /* SignupViewModel.swift in Sources */,
 				2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */,
 				032B9B7A2B2C7585005566A6 /* EditProfileSheetView.swift in Sources */,
 				2608821F2B6DA48400C67B9D /* NotificationAPI.swift in Sources */,
@@ -655,7 +629,6 @@
 				266BFA622B2275840063C68B /* LoginView.swift in Sources */,
 				2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */,
 				2624AE952B6F329700EBDB88 /* RepositoryProtocol.swift in Sources */,
-				2624AE972B6F32E000EBDB88 /* BHO.swift in Sources */,
 				26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */,
 				03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */,
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
@@ -681,7 +654,6 @@
 				260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */,
 				03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */,
 				032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */,
-				030315E32B246E0400D2044A /* LoginViewModel.swift in Sources */,
 				260882432B6DD36600C67B9D /* Utils.swift in Sources */,
 				2608823D2B6DBBBF00C67B9D /* SellerRequest.swift in Sources */,
 				260882292B6DAB8F00C67B9D /* ConfigurationNetworking.swift in Sources */,

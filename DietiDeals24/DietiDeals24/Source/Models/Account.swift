@@ -24,7 +24,6 @@ protocol Account: Codable {
     var telephoneNumber : String {get set}
     
     var country : String? {get set}
-    
 
     
 }

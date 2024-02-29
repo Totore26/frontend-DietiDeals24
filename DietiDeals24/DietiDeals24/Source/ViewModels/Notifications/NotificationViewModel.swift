@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import Amplify
+
+class NotificationViewModel: ObservableObject {
+    let user: AuthUser
+    
+    init(user: AuthUser) {
+        self.user = user
+    }
+    
+    // Qui potresti aggiungere altre logiche e proprietà specifiche del ViewModel per la vista Notification
+}

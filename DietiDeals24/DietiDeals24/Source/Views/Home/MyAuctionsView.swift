@@ -34,7 +34,6 @@ struct MyAuctionsView: View {
                 .padding(.top, 20)
                 .padding(.bottom, 100)
             }
-            
             .background(
                     Color(
                         red: Double(0x90) / 255.0,
@@ -52,8 +51,6 @@ struct MyAuctionsView: View {
                         .scaledToFit()
                         .frame(height: 40)
                 }
-                
-                
             }
             .navigationBarItems(
                 trailing: Button(action: {
@@ -64,13 +61,9 @@ struct MyAuctionsView: View {
                         .scaledToFit()
                         .frame(width: 30, height: 30)
                         .bold()
-                    
-                    //TODO: INSERIRE IL TIPO DI UTENTE PER AGGIUNGERE O MENO IL BOTTONE PER CREARE L'ASTA
-                } .foregroundColor((true) ? .black : .clear)
+                }
                 
             )
-            
-
             .searchable(text: $searchText)
         }
     }

@@ -1,8 +1,3 @@
-
-// ========================================
-// MARK: - Gestione del signupView
-// ========================================
-
 import SwiftUI
 
 struct SignUpView: View {
@@ -15,9 +10,9 @@ struct SignUpView: View {
     @State private var repeatPassword = ""
     @State private var telephoneNumber = ""
     @State private var otp = ""
-    @State private var selectedUserType: FormattedUserType = .buyer
     @State private var isConfirmationAlertPresented = false
     @State private var confirmationMessage = ""
+    @State private var passwordMatchError = false // Aggiunta variabile per gestire l'errore
     
     var body: some View {
         NavigationView {
@@ -35,28 +30,33 @@ struct SignUpView: View {
                         .multilineTextAlignment(.center)
                         .padding(.bottom, 10)
                     
+                    // Gestione dell'errore
+                    if let errorBanner = sessionManager.errorBanner {
+                        Text(errorBanner)
+                            .foregroundColor(.red)
+                            .font(.caption)
+                    }
+                    
                     VStack(spacing: 10) {
                         FormattedTextField(title: "Enter your full Name", text: $fullName)
                         FormattedTextField(title: "Enter your email", text: $email)
                         FormattedSecureTextField(title: "Enter your password", text: $password)
                         FormattedSecureTextField(title: "Repeat your password", text: $repeatPassword)
+                            .onChange(of: repeatPassword, perform: { _ in
+                                passwordMatchError = !passwordsMatch() // Verifica se le password corrispondono quando viene modificato il campo di ripetizione password
+                            })
                         FormattedNumberTextField(title: "Enter your phone number", text: $telephoneNumber)
                         
-                        Text("You are a...")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.black)
-                        
-                        Picker("Select User Type", selection: $selectedUserType) {
-                            ForEach(FormattedUserType.allCases, id: \.self) { userType in
-                                Text(userType.rawValue).tag(userType)
-                            }
+                        // Visualizzazione dell'errore se le password non corrispondono
+                        if passwordMatchError {
+                            Text("Passwords do not match")
+                                .foregroundColor(.red)
+                                .font(.caption)
                         }
-                        .pickerStyle(SegmentedPickerStyle())
                     }
                     
                     Button(action: signUp) {
-                        Text("Sign Up!")
+                        Text("Signup")
                             .font(.custom("SF Pro", size: 22))
                             .fontWeight(.bold)
                             .padding(.horizontal, 20)
@@ -66,16 +66,17 @@ struct SignUpView: View {
                             .cornerRadius(14)
                             .foregroundColor(.white)
                     }
+                    .disabled(email.isEmpty || password.isEmpty || fullName.isEmpty || repeatPassword.isEmpty || telephoneNumber.isEmpty || passwordMatchError)
                     .padding(.bottom, 10)
                     
                     SocialLoginButtonsView()
                 }
                 .padding(.horizontal, 20)
                 .adaptiveSheet(isPresented: $isConfirmationAlertPresented, detents: [.medium()], smallestUndimmedDetentIdentifier: .large) {
-                    //contenuto della sheet con campo per inserimento del codice di verifica e bottone per confermare
+                    // Contenuto della sheet con campo per inserimento del codice di verifica e bottone per confermare
                     VStack {
                         Spacer()
-                        Text("Insert OTP code sended by mail")
+                        Text("Insert OTP code sent by mail")
                         FormattedTextField(title: "Enter OTP", text: $otp)
                         Spacer()
                         Button(action: continueSignUp ) {
@@ -94,6 +95,10 @@ struct SignUpView: View {
                 }
             }
         }
+        .onDisappear {
+            // Imposta l'errore a stringa vuota quando si torna alla schermata di login
+            sessionManager.errorBanner = ""
+        }
     }
     
     private func signUp() {
@@ -103,10 +108,10 @@ struct SignUpView: View {
                 password: password,
                 email: email,
                 fullName: fullName,
-                phoneNumber: telephoneNumber,
-                userType: selectedUserType
+                phoneNumber: telephoneNumber
             )
         }
+        isConfirmationAlertPresented = true
     }
 
     private func continueSignUp() {
@@ -115,13 +120,15 @@ struct SignUpView: View {
             print("Sign up confirmed successfully")
             confirmationMessage = "REGISTRATION COMPLETE"
             sessionManager.showLogin()
-            isConfirmationAlertPresented = true
+            isConfirmationAlertPresented = false
+            sessionManager.showLogin()
         }
     }
     
+    private func passwordsMatch() -> Bool {
+        return password == repeatPassword
+    }
 }
-
-
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {

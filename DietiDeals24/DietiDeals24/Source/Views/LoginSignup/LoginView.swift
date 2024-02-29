@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject private var viewModel = LoginViewModel()
     @EnvironmentObject var sessionManager: SessionManager
+    @State private var email = ""
+    @State private var password = ""
 
     var body: some View {
         NavigationView {
@@ -24,11 +25,10 @@ struct LoginView: View {
                     .padding(.bottom, 40)
 
                 VStack(spacing: 10) {
-                    FormattedTextField(title: "Email", text: $viewModel.email)
-                    FormattedSecureTextField(title: "Password", text: $viewModel.password)
+                    FormattedTextField(title: "Email", text: $email)
+                    FormattedSecureTextField(title: "Password", text: $password)
 
                     NavigationLink("Did you forget your password?", destination: Text("Forgot Password")) // Aggiungi la destinazione corretta
-
                         .font(
                             Font.custom("SF Pro", size: 12)
                                 .weight(.light)
@@ -37,14 +37,22 @@ struct LoginView: View {
                         .foregroundColor(Color(red: 0, green: 0.48, blue: 1))
                         .frame(maxWidth: 300, alignment: .leading)
                         .padding(.bottom, 40)
+                    
+                    //gestione dell'errore
+                    if let errorBanner = sessionManager.errorBanner {
+                        Text(errorBanner)
+                            .foregroundColor(.red)
+                            .bold()
+                    }
                 }
 
                 Button {
                     Task {
-                            await sessionManager.login(email: viewModel.email, password: viewModel.password)
+                        await sessionManager.logOutLocally()
+                        await sessionManager.login(email: email, password: password)
                     }
                 } label: {
-                    Text("LogIn !")
+                    Text("Login")
                         .font(.custom("SF Pro", size: 22))
                         .fontWeight(.bold)
                         .padding(.horizontal, 20)
@@ -55,17 +63,12 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .padding(.bottom, 10)
                 }
-                .alert(isPresented: Binding<Bool>(get: { viewModel.error != "" }, set: { _ in viewModel.error = "" })) {
-                    Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
-                }
-                
-                .alert(isPresented: Binding<Bool>(get: { viewModel.error != "" }, set: { _ in viewModel.error = "" })) {
-                    Alert(title: Text("Error"), message: Text(viewModel.error), dismissButton: .default(Text("OK")))
-                }
+                .disabled(email.isEmpty || password.isEmpty)
+
                 FormattedSeparator()
                     .padding(.bottom, 15)
-
-                SocialLoginButtonsView()
+                
+                SocialLoginButtonsView(presentationAnchor: UIApplication.shared.windows.first)
 
                 NavigationLink("Don't have an account? SignUp!", destination: SignUpView())
                     .font(.caption)

@@ -43,7 +43,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/dietideals2465286f24-cloudformation-template.json",
         "logicalId": "authdietideals2465286f24"
       },
-      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "lastPushTimeStamp": "2024-02-29T16:06:14.525Z",
       "output": {
         "UserPoolId": "eu-west-1_98AlluIA8",
         "AppClientIDWeb": "2cdl5bt2066iuoq6od72s3k10b",
@@ -70,7 +70,7 @@
           ]
         }
       ],
-      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "lastPushTimeStamp": "2024-02-29T16:06:15.076Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
         "logicalId": "authuserPoolGroups"

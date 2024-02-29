@@ -8,7 +8,7 @@
 import Amplify
 import AWSCognitoAuthPlugin
 import Foundation
-
+import AuthenticationServices
 
 enum AuthState {
     case signUp
@@ -16,19 +16,11 @@ enum AuthState {
     case session(user: AuthUser)
 }
 
-
-// ========================================
-// MARK: Gestione dell'accesso all'utente
-// ========================================
-
 class SessionManager : ObservableObject {
     @Published var authState : AuthState = .login
-    
-    /*
-        La seguente funzione serve a controllare se l'utente attuale è loggato, nel caso in cui lo sui mostra
-        la sessione dell'utente, altrimenti se l'utente non è loggato mostra la schermata di login.
-        tutto viene svolto sul thread principale in maniera tale da rendere piu veloce l'interfaccia.
-    */
+    @Published var errorBanner : String? = ""
+    @Published var isBuyerSession = true
+
     public func getCurrentAuthUser() async {
         do {
             let user = try await Amplify.Auth.getCurrentUser()
@@ -44,21 +36,23 @@ class SessionManager : ObservableObject {
     }
     
     func showSignUp(){
-        authState = .signUp
+        DispatchQueue.main.async {
+            self.authState = .signUp
+        }
     }
     
     func showLogin(){
-        authState = .login
+        DispatchQueue.main.async {
+            self.authState = .login
+        }
     }
     
     
-    func signUp(username: String, password: String, email: String, fullName: String, phoneNumber: String, userType: FormattedUserType) async {
-        let userTypeAttribute = AuthUserAttribute(.custom("userType"), value: userType.rawValue)
+    func signUp(username: String, password: String, email: String, fullName: String, phoneNumber: String) async {
         let userAttributes = [
             AuthUserAttribute(.email, value: email),
             AuthUserAttribute(.name, value: fullName),
             AuthUserAttribute(.phoneNumber, value: phoneNumber),
-            userTypeAttribute
         ]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
 
@@ -76,14 +70,15 @@ class SessionManager : ObservableObject {
             }
 
         } catch let error as AuthError {
-            print("An error occurred while registering a user \(error)")
+            print("An error occurred while registering a user: \(self.errorMessage(for: error))")
+            DispatchQueue.main.async {
+                self.errorBanner = self.errorMessage(for: error)
+            }
         } catch {
             print("Unexpected error: \(error)")
         }
     }
-    
-    
-    
+
     func login(email: String, password: String) async {
         do {
             let signInResult = try await Amplify.Auth.signIn(
@@ -95,13 +90,15 @@ class SessionManager : ObservableObject {
                 await self.getCurrentAuthUser()
             }
         } catch let error as AuthError {
-            print("Sign in failed \(error)")
+            print("Sign in failed: \(self.errorMessage(for: error))")
+            DispatchQueue.main.async {
+                self.errorBanner = self.errorMessage(for: error)
+            }
         } catch {
             print("Unexpected error: \(error)")
         }
     }
 
-    
     func confirmSignUp(for username: String, with confirmationCode: String) async {
         do {
             let confirmSignUpResult = try await Amplify.Auth.confirmSignUp(
@@ -110,13 +107,15 @@ class SessionManager : ObservableObject {
             )
             print("Confirm sign up result completed: \(confirmSignUpResult.isSignUpComplete)")
         } catch let error as AuthError {
-            print("An error occurred while confirming sign up \(error)")
+            print("An error occurred while confirming sign up: \(self.errorMessage(for: error))")
+            DispatchQueue.main.async {
+                self.errorBanner = self.errorMessage(for: error)
+            }
         } catch {
             print("Unexpected error: \(error)")
         }
     }
     
-    /* MARK:  la seguente funzione permette un logOut locale del dispositivo e non di tutti quelli connessi sullo stesso account */
     func logOutLocally() async {
         let result = await Amplify.Auth.signOut()
         guard let signOutResult = result as? AWSCognitoSignOutResult else {
@@ -127,7 +126,6 @@ class SessionManager : ObservableObject {
         switch signOutResult {
             case .complete:
                 print("Signed out successfully")
-                // After local logout, reset the authentication state to `.login`
                 DispatchQueue.main.async {
                     self.authState = .login
                 }
@@ -143,6 +141,54 @@ class SessionManager : ObservableObject {
                 }
             case .failed(let error):
                 print("SignOut failed with \(error)")
+        }
+    }
+    
+    func signInWithGoogle(presentationAnchor: ASPresentationAnchor) async {
+        do {
+            let signInResult = try await Amplify.Auth.signInWithWebUI(for: .google, presentationAnchor: presentationAnchor)
+            if signInResult.isSignedIn {
+                print("Sign in succeeded")
+            }
+        } catch let error as AuthError {
+            print("Sign in failed \(error)")
+        } catch {
+            print("Unexpected error: \(error)")
+        }
+    }
+
+    func signInWithFacebook(presentationAnchor: ASPresentationAnchor) async {
+        do {
+            let signInResult = try await Amplify.Auth.signInWithWebUI(for: .facebook, presentationAnchor: presentationAnchor)
+            if signInResult.isSignedIn {
+                print("Sign in succeeded")
+            }
+        } catch let error as AuthError {
+            print("Sign in failed \(error)")
+        } catch {
+            print("Unexpected error: \(error)")
+        }
+    }
+
+    
+    private func errorMessage(for error: AuthError) -> String {
+        switch error {
+            case .configuration(let errorDescription, _, _):
+                return "error: \(errorDescription)"
+            case .service(let errorDescription, _, _):
+                return "error: \(errorDescription)"
+            case .validation(_, let errorDescription, _, _):
+                return "error: \(errorDescription)"
+            case .notAuthorized(let errorDescription, _, _):
+                return "Not authorized: \(errorDescription)"
+            case .signedOut(let errorDescription, _, _):
+                return "Signed out error: \(errorDescription)"
+            case .sessionExpired(let errorDescription, _, _):
+                return "Session expired: \(errorDescription)"
+            case .invalidState(let errorDescription, _, _):
+                return "Invalid state error: \(errorDescription)"
+            case .unknown(let errorDescription, _):
+                return "Unknown error: \(errorDescription)"
         }
     }
 }

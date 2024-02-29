@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import Amplify
 
-class HomeViewModel {
+
+class HomeViewModel: ObservableObject {
+    let user: AuthUser
     
-    /*
-        Dipendenza dall'account --> e quindi delle aste
-        Dipendenza da seller/buyerAPI --> per tornare la lista di aste (falla in modo asincrona).
-    */
-
+    init(user: AuthUser) {
+        self.user = user
+    }
+    
+    // Qui potresti aggiungere altre logiche e proprietà specifiche del ViewModel per la vista Home
 }

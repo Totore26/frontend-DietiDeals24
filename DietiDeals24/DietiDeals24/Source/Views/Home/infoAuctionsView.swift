@@ -12,8 +12,6 @@ struct Auctions {
     let description: String
 }
 
-
-
 struct InfoAuctionsView: View {
     
     @Environment(\.presentationMode) var presentationMode
