@@ -9,8 +9,13 @@ import SwiftUI
 
 struct NotificationView: View {
     
-    @State private var isDetailViewPresented = false
+    @ObservedObject var notificationViewModel : NotificationViewModel
+        
+    init(notificationViewModel: NotificationViewModel) {
+        self.notificationViewModel = notificationViewModel
+    }
     
+    @State private var isDetailViewPresented = false
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -120,6 +125,9 @@ struct NotificationDetailView: View {
 
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationView()
+        let notificationViewModel = NotificationViewModel(user: DummyUser())
+        return NotificationView(
+            notificationViewModel: notificationViewModel
+        )
     }
 }

@@ -10,11 +10,27 @@ import Amplify
 
 
 class HomeViewModel: ObservableObject {
+    
+    @Published  var searchText = ""
+    @Published  var selectedPriceRange: String? = "All"
+    @Published  var selectedCategory: String? = "All"
+    @Published  var showCreateAuctionBanner = false
+    @Published  var selectedAuctionType = FormattedAuctionType.null
+    @Published  var isSeller = true
+    
     let user: AuthUser
     
     init(user: AuthUser) {
         self.user = user
     }
     
-    // Qui potresti aggiungere altre logiche e proprietà specifiche del ViewModel per la vista Home
+    
+    
+    //funzione per ricercare un asta all'interno della searchView.
+    func searchAuctions(category: String, princeRange: String, searchText: String) -> [Auction] {
+        return []
+    }
+    
+    
+
 }

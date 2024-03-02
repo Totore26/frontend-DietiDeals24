@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FixedTimeAuction: Auction {
+class FixedTimeAuction: AuctionProtocol {
     
     var creator: Seller
     

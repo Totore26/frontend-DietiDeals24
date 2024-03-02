@@ -5,7 +5,7 @@
 //  Created by Francesco Terrecuso on 09/12/23.
 //
 
-protocol Auction {
+protocol AuctionProtocol {
     
     var creator : Seller {get set}
     

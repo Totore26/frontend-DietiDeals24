@@ -10,9 +10,17 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    
+    @ObservedObject var viewModel : ProfileViewModel
+    @EnvironmentObject var sessionManager : SessionManager
+    
+    init(viewModel: ProfileViewModel ) {
+        self.viewModel = viewModel
+    }
+    
+    
     @State var isEditProfileSheetPresented = false
     @State var isPersonalProfile = true
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -42,7 +50,7 @@ struct ProfileView: View {
                        }
                        .foregroundColor(.black)
                        .sheet(isPresented: $isEditProfileSheetPresented) {
-                           EditProfileSheetView()
+                           EditProfileSheetView().environmentObject(sessionManager)
                        }
                    }
                 }
@@ -56,7 +64,7 @@ struct ProfileView: View {
                         .padding(.leading, 60)
                 }
             }
-        } 
+        }
     }
 }
 
@@ -123,7 +131,7 @@ struct DescriptionsProfile: View {
                 .bold()
                 .foregroundColor(.black)
                 .padding(.trailing, 260)
-                .padding(.top, 10)
+                .padding(.top, 20)
             
             Text("Welcome to my profile as a passionate collector and auction participant! I'm Giampiero, a lover of art, antiques and rarities.")
                 .multilineTextAlignment(.leading)
@@ -217,9 +225,11 @@ struct LinksProfile: View {
 }
 
 
-
-
-
-#Preview {
-    ProfileView()
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = ProfileViewModel(user : DummyUser())
+        return ProfileView(viewModel: viewModel)
+    }
 }
+
+

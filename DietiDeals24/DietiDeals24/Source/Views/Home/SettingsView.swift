@@ -30,7 +30,7 @@ struct SettingsView: View {
                                 }
                                 .listRowBackground(Color.white)
                                 .sheet(isPresented: $isEditProfileSheetPresented) {
-                                    EditProfileSheetView()
+                                    EditProfileSheetView().environmentObject(sessionManager)
                                 }
                         }
                         Section {
@@ -61,7 +61,7 @@ struct SettingsView: View {
                     VStack {
                         // Toggle per passare all'account venditore
                         //TODO: cambiare prove con sessionManager.isBuyerSession
-                        Toggle(isOn: $prove) {
+                        Toggle(isOn: $sessionManager.isSellerSession) {
                             Text("Switch to Seller Account")
                                 .font(Font.custom("SF Pro", size: 17))
                                 .foregroundColor(.black)

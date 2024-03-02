@@ -19,7 +19,7 @@ enum AuthState {
 class SessionManager : ObservableObject {
     @Published var authState : AuthState = .login
     @Published var errorBanner : String? = ""
-    @Published var isBuyerSession = true
+    @Published var isSellerSession = false
 
     public func getCurrentAuthUser() async {
         do {
@@ -169,7 +169,17 @@ class SessionManager : ObservableObject {
             print("Unexpected error: \(error)")
         }
     }
-
+    
+    func changePassword(oldPassword: String, newPassword: String) async {
+        do {
+            try await Amplify.Auth.update(oldPassword: oldPassword, to: newPassword)
+            print("Password changed successfully")
+        } catch let error as AuthError {
+            print("Password change failed \(error)")
+        } catch {
+            print("Unexpected error: \(error)")
+        }
+    }
     
     private func errorMessage(for error: AuthError) -> String {
         switch error {

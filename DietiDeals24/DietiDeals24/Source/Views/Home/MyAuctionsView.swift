@@ -9,9 +9,14 @@ import SwiftUI
 
 struct MyAuctionsView: View {
     
-    //TODO: AccountViewmodel, ListAuctionViewModel().
-    @State private var searchText = ""
+    @ObservedObject var myAuctionViewModel: MyAuctionsViewModel
     
+    init(myAuctionViewModel: MyAuctionsViewModel) {
+        self.myAuctionViewModel = myAuctionViewModel
+    }
+    
+    
+    @State private var searchText = ""
     var body: some View {
         
         NavigationView {
@@ -52,18 +57,6 @@ struct MyAuctionsView: View {
                         .frame(height: 40)
                 }
             }
-            .navigationBarItems(
-                trailing: Button(action: {
-                    
-                }) {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 30, height: 30)
-                        .bold()
-                }
-                
-            )
             .searchable(text: $searchText)
         }
     }
@@ -115,6 +108,9 @@ struct MyAuctionsStructures: View {
 
 
 
-#Preview {
-    MyAuctionsView()
+struct MyAuctionsView_Previews: PreviewProvider {
+    static var previews: some View {
+        let myAuctionViewModel = MyAuctionsViewModel(user: DummyUser())
+        return MyAuctionsView(myAuctionViewModel: myAuctionViewModel)
+    }
 }

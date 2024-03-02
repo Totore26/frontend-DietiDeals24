@@ -7,21 +7,17 @@
 import SwiftUI
 
 struct EditProfileSheetView: View {
-    
     @Environment(\.presentationMode) var presentationMode
-    @State private var profileImage: Image?
+    @ObservedObject var viewModel = EditProfileViewModel()
     @State private var isImagePickerPresented = false
-    @State private var fullName = "Giampiero Esposito"
-    @State private var nationality = "Italy"
-    @State private var description = "Welcome to my profile as a passionate collector and auction participant! I'm Giampiero, a lover of art, antiques, and rarities."
-    @State private var showProfileSavedBanner = false //serve per visualizzare il banner
+    @EnvironmentObject var sessionManager : SessionManager
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Profile Photo")) {
                     VStack(alignment: .center){
-                        if let profileImage = profileImage {
+                        if let profileImage = viewModel.profileImage {
                             profileImage
                                 .resizable()
                                 .scaledToFill()
@@ -51,19 +47,19 @@ struct EditProfileSheetView: View {
                         }
                         .padding(.top, 5)
                         .sheet(isPresented: $isImagePickerPresented) {
-                            ImagePicker(image: $profileImage)
+                            ImagePicker(image: $viewModel.profileImage)
                         }
                     }
                 }
                 .padding(.leading, 100)
 
                 Section(header: Text("Personal Information")) {
-                    TextField("Full Name", text: $fullName)
-                    TextField("Nationality", text: $nationality)
+                    TextField("Full Name", text: $viewModel.fullName)
+                    TextField("Nationality", text: $viewModel.nationality)
                 }
 
                 Section(header: Text("Description")) {
-                    TextEditor(text: $description)
+                    TextEditor(text: $viewModel.description)
                         .frame(height: 100)
                 }
 
@@ -74,27 +70,22 @@ struct EditProfileSheetView: View {
                 }
 
                 Section(header: Text("Social Links")) {
-                    NavigationLink(destination: EditLinkView(linkType: "link 1")) {
-                        Text("Link 1:  www.facebook/account.com")
-                    }
-
-                    NavigationLink(destination: EditLinkView(linkType: "link 2")) {
-                        Text("Link 2:  www.twitter/account.com")
-                    }
+                    TextField("Link 1", text: $viewModel.link1)
+                    TextField("Link 2", text: $viewModel.link2)
                 }
 
                 Section(header: Text("Edit password")) {
-                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $showProfileSavedBanner)) {
+                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $viewModel.showProfileSavedBanner).environmentObject(sessionManager)) {
                         Text("Change Password")
                     }
                 }
             }
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                // TODO: Implementa l'azione per salvare le modifiche al profilo
-                showProfileSavedBanner = true
+                //MARK: LOGICA PER SALVARE IL PROFILO.
+                viewModel.saveProfileChanges()
             })
-            .alert(isPresented: $showProfileSavedBanner) {
+            .alert(isPresented: $viewModel.showProfileSavedBanner) {
                 Alert(title: Text("Profile Saved"), message: Text("Changes to your profile have been saved successfully."), dismissButton: .default(Text("OK")))
             }
         }
@@ -106,28 +97,6 @@ struct EditProfileSheetView: View {
         .padding()
     }
 }
-
-
-struct EditLinkView: View {
-    var linkType: String
-    @State private var link = ""
-
-    var body: some View {
-        Form {
-            Section(header: Text("Social Links")) {
-                TextField("\(link)", text: $link)
-            }
-            }
-        .navigationBarTitle(" Link", displayMode: .inline)
-        .navigationBarItems(trailing: Button("Save"){
-            
-            //TODO: gestire il salvataggio del nuovo link
-        }
-            
-        )
-    }
-}
-
 
 struct EditContactView: View {
     @State private var newContact = ""
@@ -154,6 +123,7 @@ struct EditContactView: View {
 
 
 struct EditPasswordView: View {
+    @EnvironmentObject var sessionManager : SessionManager
     @Environment(\.presentationMode) var presentationMode
     @State private var currentPassword = ""
     @State private var newPassword = ""
@@ -181,16 +151,15 @@ struct EditPasswordView: View {
                 .padding(.horizontal)
             
             Button("Save") {
-                // TODO: Implementa l'azione per salvare la nuova password
+                Task {
+                    await sessionManager.changePassword(oldPassword: currentPassword, newPassword: confirmPassword)
+                }
                 showPasswordSavedBanner = true
             }
             .disabled(newPassword.isEmpty || confirmPassword.isEmpty || newPassword != confirmPassword)
             .frame(minWidth: 0, maxWidth: .infinity)
             .contentShape(Rectangle())
-
-
-
-        }
+      }
         .navigationBarTitle("Change Password", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
@@ -210,54 +179,6 @@ struct EditPasswordView: View {
         }
     }
 }
-
-//TODO: da mettere nel view model dell'EditProfile.
-struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: Image?
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        @Binding var image: Image?
-
-        init(image: Binding<Image?>) {
-            _image = image
-        }
-
-        func imagePickerController(
-            _ picker: UIImagePickerController,
-            didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
-        ) {
-            if let uiImage = info[.originalImage] as? UIImage {
-                image = Image(uiImage: uiImage)
-            }
-
-            picker.dismiss(animated: true)
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true)
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(image: $image)
-    }
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = UIViewController()
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.sourceType = .photoLibrary
-        viewController.view.backgroundColor = .clear
-
-        // Presenta il picker come foglio modale
-        viewController.present(picker, animated: true)
-
-        return viewController
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
-
 
 
 #Preview {

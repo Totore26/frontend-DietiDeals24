@@ -11,16 +11,8 @@ struct CreateIncrementalAuctionView: View {
     let categories = ["All", "Technology", "Sport & Free Time", "Home & Garden", "Vehicle", "Service", "Other"]
     
     @Environment(\.presentationMode) var presentationMode
-    @State private var selectedCategory: String = "All"
+    @ObservedObject var viewModel = CreateIncrementalAuctionViewModel()
     @State private var isImagePickerPresented = false
-    @State private var title: String = ""
-    @State private var auctionImage: Image? = nil
-    @State private var category: String = ""
-    @State private var location: String = ""
-    @State private var description: String = ""
-    @State private var timer: Int = 1
-    @State private var startingPrice: Float = 0.0
-    @State private var raisingThreshold: Float = 10.0
     @State private var isAuctionCreated = false
     
     var body: some View {
@@ -28,7 +20,7 @@ struct CreateIncrementalAuctionView: View {
             Form {
                 Section(header: Text("Image")) {
                     VStack {
-                        if let auctionImage = auctionImage {
+                        if let auctionImage = viewModel.auctionImage {
                             auctionImage
                                 .resizable()
                                 .scaledToFill()
@@ -55,10 +47,6 @@ struct CreateIncrementalAuctionView: View {
                         }) {
                             Text("Edit")
                                 .padding(.top, 5)
-                                .sheet(isPresented: $isImagePickerPresented) {
-                                    //TODO: ricordarsi di mettere nel viewModel il tutto.
-                                    ImagePicker(image: $auctionImage)
-                                }
                         }
                     }
                     .padding()
@@ -66,9 +54,9 @@ struct CreateIncrementalAuctionView: View {
                 }
                 
                 Section(header: Text("auction details")) {
-                    TextField("Insert Title", text: $title)
-                    TextField("Insert Location", text: $location)
-                    Picker("Category", selection: $selectedCategory) {
+                    TextField("Insert Title", text: $viewModel.title)
+                    TextField("Insert Location", text: $viewModel.location)
+                    Picker("Category", selection: $viewModel.selectedCategory) {
                         ForEach(categories, id: \.self) { category in
                             Text(category)
                         }
@@ -76,7 +64,7 @@ struct CreateIncrementalAuctionView: View {
                 }
                 
                 Section(header: Text("Description")) {
-                    TextEditor(text: $description)
+                    TextEditor(text: $viewModel.description)
                         .frame(minHeight: 100)
                 }
                 
@@ -84,10 +72,10 @@ struct CreateIncrementalAuctionView: View {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", startingPrice) },
+                            get: { String(format: "%.2f", viewModel.startingPrice) },
                             set: {
                                 if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    startingPrice = max(0.0,newValue)
+                                    viewModel.startingPrice = max(0.0,newValue)
                                 }
                             }
                         ))
@@ -99,10 +87,10 @@ struct CreateIncrementalAuctionView: View {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", raisingThreshold) },
+                            get: { String(format: "%.2f", viewModel.raisingThreshold) },
                             set: {
                                 if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    raisingThreshold = max(10.0,newValue)
+                                    viewModel.raisingThreshold = max(10.0,newValue)
                                 }
                             }
                         ))
@@ -111,8 +99,8 @@ struct CreateIncrementalAuctionView: View {
                 }
                 
                 Section(header: Text("Timer")) {
-                        Stepper(value: $timer, in: 1...48, step: 1) {
-                            Text("Hours: \(timer) ")
+                    Stepper(value: $viewModel.timer, in: 1...48, step: 1) {
+                        Text("Hours: \(viewModel.timer) ")
                     }
                     .foregroundColor(.primary)
                     .font(.headline)
@@ -121,13 +109,14 @@ struct CreateIncrementalAuctionView: View {
                 Section(header: Text("Enter all missing data to continue")) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
+                        //TODO: aggiusta la chiamata con i parametri.
+                        viewModel.createIncrementalAuction()
                         isAuctionCreated.toggle()
-                        //TODO: inserire la logica per creare l'asta
                     }) {
                         Text("CREATE AUCTION")
                             .padding(.leading, 85)
                     }
-                    .disabled(title.isEmpty || location.isEmpty || description.isEmpty)
+                    .disabled(viewModel.title.isEmpty || viewModel.location.isEmpty || viewModel.description.isEmpty)
                 }
             }
             .navigationBarTitle("Create Incremental Auction", displayMode: .inline)
@@ -143,7 +132,6 @@ struct CreateIncrementalAuctionView: View {
         }
     }
 }
-
 
 struct CreateIncrementalAuctionView_Preview: PreviewProvider {
     static var previews: some View {

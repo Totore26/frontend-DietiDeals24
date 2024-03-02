@@ -11,15 +11,8 @@ struct CreateFixedTimeAuctionView: View {
     let categories = ["All", "Technology", "Sport & Free Time", "Home & Garden", "Vehicle", "Service", "Other"]
     
     @Environment(\.presentationMode) var presentationMode
-    @State private var selectedCategory: String = "All"
+    @ObservedObject var viewModel = CreateFixedTimeAuctionViewModel()
     @State private var isImagePickerPresented = false
-    @State private var title: String = ""
-    @State private var auctionImage: Image? = nil
-    @State private var category: String = ""
-    @State private var location: String = ""
-    @State private var description: String = ""
-    @State private var endOfAuction: Date = Date()
-    @State private var secretThreshold: Float = 0.0
     @State private var isAuctionCreated = false
     
     var body: some View {
@@ -27,7 +20,7 @@ struct CreateFixedTimeAuctionView: View {
             Form {
                 Section(header: Text("Image")) {
                     VStack {
-                        if let auctionImage = auctionImage {
+                        if let auctionImage = viewModel.auctionImage {
                             auctionImage
                                 .resizable()
                                 .scaledToFill()
@@ -35,6 +28,7 @@ struct CreateFixedTimeAuctionView: View {
                                 .clipShape(Circle())
                                 .overlay(Circle().stroke(Color.white, lineWidth: 2))
                                 .onTapGesture {
+                                    isImagePickerPresented.toggle()
                                 }
                         } else {
                             Image(systemName: "questionmark.circle")
@@ -53,10 +47,6 @@ struct CreateFixedTimeAuctionView: View {
                         }) {
                             Text("Edit")
                                 .padding(.top, 5)
-                                .sheet(isPresented: $isImagePickerPresented) {
-                                    //TODO: ricordarsi di mettere nel viewModel il tutto.
-                                    ImagePicker(image: $auctionImage)
-                                }
                         }
                     }
                     .padding()
@@ -64,9 +54,9 @@ struct CreateFixedTimeAuctionView: View {
                 }
                 
                 Section(header: Text("auction details")) {
-                    TextField("Insert Title", text: $title)
-                    TextField("Insert Location", text: $location)
-                    Picker("Category", selection: $selectedCategory) {
+                    TextField("Insert Title", text: $viewModel.title)
+                    TextField("Insert Location", text: $viewModel.location)
+                    Picker("Category", selection: $viewModel.selectedCategory) {
                         ForEach(categories, id: \.self) { category in
                             Text(category)
                         }
@@ -74,13 +64,13 @@ struct CreateFixedTimeAuctionView: View {
                 }
                 
                 Section(header: Text("Description")) {
-                    TextEditor(text: $description)
+                    TextEditor(text: $viewModel.description)
                         .frame(minHeight: 100)
                 }
                 
                 Section(header: Text("End of Auctions")) {
                     DisclosureGroup("Data ") {
-                        DatePicker("", selection: $endOfAuction, displayedComponents: [.date, .hourAndMinute])
+                        DatePicker("", selection: $viewModel.endOfAuction, displayedComponents: [.date, .hourAndMinute])
                             .datePickerStyle(CompactDatePickerStyle())
                     }
                     .foregroundColor(.primary)
@@ -91,10 +81,10 @@ struct CreateFixedTimeAuctionView: View {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", secretThreshold) },
+                            get: { String(format: "%.2f", viewModel.secretThreshold) },
                             set: {
                                 if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    secretThreshold = max(0.0, newValue)
+                                    viewModel.secretThreshold = max(0.0, newValue)
                                 }
                             }
                         ))
@@ -105,13 +95,14 @@ struct CreateFixedTimeAuctionView: View {
                 Section(header: Text("Enter all missing data to continue")) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
+                        //TODO: AGGIUSTA QUESTA CHIAMATA
+                        viewModel.createFixedTimeAuction()
                         isAuctionCreated.toggle()
-                        //TODO: inserire la logica per creare l'asta
                     }) {
                         Text("CREATE AUCTION")
                         .padding(.leading, 85)
                     }
-                    .disabled(title.isEmpty || location.isEmpty || description.isEmpty)
+                    .disabled(viewModel.title.isEmpty || viewModel.location.isEmpty || viewModel.description.isEmpty)
                 }
             }
             .navigationBarTitle("Create Fixed-Time Auction", displayMode: .inline)

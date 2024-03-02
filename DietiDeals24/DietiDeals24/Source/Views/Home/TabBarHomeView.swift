@@ -15,29 +15,33 @@ struct TabBarHomeView: View {
     var body: some View {
         TabView{
             
-            HomeView()
+            HomeView(homeViewModel: HomeViewModel(user: user))
                 .tabItem {
                     Image(systemName: "house.fill" )
                     Text("HOME")
                 }
+                .environmentObject(sessionManager)
             
-            MyAuctionsView()
+            MyAuctionsView(myAuctionViewModel: MyAuctionsViewModel(user: user))
                 .tabItem {
                     Image(systemName: "eye")
                     Text("MY AUCTIONS")
                 }
+                .environmentObject(sessionManager)
             
-            NotificationView()
+            NotificationView(notificationViewModel: NotificationViewModel(user: user))
                 .tabItem {
                     Image(systemName: "bell.fill")
                     Text("NOTICE")
                 }
+                .environmentObject(sessionManager)
                 
-            ProfileView()
+            ProfileView(viewModel: ProfileViewModel(user: user))
                 .tabItem{
                     Image(systemName: "person")
                     Text("PROFILE")
                 }
+                .environmentObject(sessionManager)
             
             SettingsView()
                 .tabItem {

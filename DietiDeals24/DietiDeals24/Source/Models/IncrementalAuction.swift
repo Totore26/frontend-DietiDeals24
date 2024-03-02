@@ -7,7 +7,7 @@
 
 import Foundation
 
-class IncrementalAuction: Auction {
+class IncrementalAuction: AuctionProtocol {
     
     var creator: Seller
     

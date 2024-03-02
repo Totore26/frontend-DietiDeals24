@@ -79,7 +79,7 @@ struct OfferMoreButton: View {
                 .background(Color(red: 51/255, green: 204/255, blue: 153/255))
                 .cornerRadius(14)
                 .foregroundColor(.white)
-                .padding(.bottom, 10)
+                .padding()
         }
     }
 }

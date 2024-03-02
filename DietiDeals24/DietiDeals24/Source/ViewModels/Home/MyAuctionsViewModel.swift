@@ -9,11 +9,12 @@ import Foundation
 import Amplify
 
 class MyAuctionsViewModel: ObservableObject {
+    
     let user: AuthUser
     
     init(user: AuthUser) {
         self.user = user
     }
     
-    // Qui potresti aggiungere altre logiche e proprietà specifiche del ViewModel per la vista MyAuctions
+    
 }

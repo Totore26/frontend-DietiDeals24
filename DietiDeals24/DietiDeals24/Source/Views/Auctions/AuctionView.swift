@@ -9,16 +9,8 @@ import SwiftUI
 
 struct AuctionView: View {
     
-    @State private var isFullScreen = false
-    @State private var isSeller = false
-    @State private var isPersonalSellerAuction = false
-    @State private var auctionType = FormattedAuctionType.incremental
-    @State private var isShowedOfferSheetView = false
-    @State private var isShowedSellerProfileSheetView = false
-    @State private var offerAmount: String = ""
-    @State var raisingThreshold: Float = 10
-    @State var currentOffer: Float = 100
-    
+    @EnvironmentObject var sessionManager : SessionManager
+    @StateObject var viewModel = AuctionViewModel()
     
     var body: some View {
         VStack() {
@@ -34,88 +26,83 @@ struct AuctionView: View {
                     Spacer()
                         .frame(height: 20)
                     
-                    Text("VM Name")
+                    //MARK: TITOLO E CATEGORIA
+                    Text(viewModel.auction.name)
                         .font(.title)
                         .fontWeight(.bold)
-                        .padding(.trailing, 220)
                     
+                    Text("Category: \(viewModel.auction.category)")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
                     
-                    // Immagine cliccabile
-                    Image("png-defaultImage")
+                    //MARK: IMMAGINE
+                    Image(viewModel.auction.imageName)
                         .resizable()
                         .onTapGesture {
                             withAnimation {
-                                self.isFullScreen.toggle()
+                                self.viewModel.isFullScreen.toggle()
                             }
                         }
-                        .frame(width: isFullScreen ? UIScreen.main.bounds.width : 350,
-                               height: isFullScreen ? UIScreen.main.bounds.height : 220)
+                        .frame(width: viewModel.isFullScreen ? UIScreen.main.bounds.width : 350,
+                               height: viewModel.isFullScreen ? UIScreen.main.bounds.height : 220)
                         .clipped()
                         .cornerRadius(10)
                     
-                    //rettangolo invisibile per far funzionare lo sfondo
                     Rectangle()
                         .fill(Color.clear)
                         .frame(width: 1000, height: 0)
-                     
-                    Text("Category: " + String("VM Category"))
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.trailing, 110)
                     
+                    //MARK: attributi dell'asta
                     Rectangle()
                         .fill(Color.white.opacity(0.5))
                         .frame(width: 350, height: 120)
                         .cornerRadius(10)
                         .overlay(
-                            AuctionDataSection(auctionType: $auctionType)
+                            AuctionDataSection(viewModel: viewModel)
                         )
                     
-                    if isSeller {
-                            if isPersonalSellerAuction && auctionType == FormattedAuctionType.fixed {
-                                //caso in cui l'asta è del venditore che la vede e di tipo fixed mostro la soglia segreta
-                                
+                    if sessionManager.isSellerSession {
+                        if viewModel.auction.sellerIsYou {
+                            if viewModel.auction.auctionType == .fixed {
                                 Text("SPECIFIED MINIMUM TRESHOLD:")
                                     .bold()
                                     .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
-                                Text(" 30,000.00€")
+                                Text(viewModel.auction.specifiedMinimumThreshold ?? "")
                                     .bold()
                                     .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
-                            } else {
-                                //caso in cui il venditore è uno qualsiasi o l asta non è fixed non mostro nulla
                             }
+                        }
                     } else {
-                        //caso in cui sono un compratore visualizzo il bottone offer more
-                        
-                        //se è fixed
-                        if auctionType == FormattedAuctionType.fixed {
+                        if viewModel.auction.auctionType == .fixed {
                             OfferMoreButton(title: "Offer more", fontSize: 18, action: {
-                                //OfferMoreAction
-                                isShowedOfferSheetView.toggle()
+                                viewModel.isShowedOfferSheetView.toggle()
                             })
-                            .adaptiveSheet(isPresented: $isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
-                                CofirmFixedTimeOfferView(offerAmount: $offerAmount, isShowedOfferSheetView: $isShowedOfferSheetView)
+                            .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
+                                CofirmFixedTimeOfferView(offerAmount: $viewModel.offerAmount,
+                                                         isShowedOfferSheetView: $viewModel.isShowedOfferSheetView
+                                )
                             }
-                        //se è english
                         } else {
-                            OfferMoreButton(title: "Offer +" + "10€" , fontSize: 18, action: {
-                                //OfferMoreAction
-                                isShowedOfferSheetView.toggle()
+                            OfferMoreButton(title: "Offer +\(viewModel.raisingThreshold)€", fontSize: 18, action: {
+                                viewModel.isShowedOfferSheetView.toggle()
                             })
-                            .adaptiveSheet(isPresented: $isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
-                                ConfirmIncrementalOfferView(raisingThreshold: $raisingThreshold, currentOffer: $currentOffer, isShowedOfferSheetView: $isShowedOfferSheetView)
+                            .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
+                                ConfirmIncrementalOfferView(raisingThreshold: $viewModel.raisingThreshold, 
+                                                            currentOffer: $viewModel.currentOffer,
+                                                            isShowedOfferSheetView: $viewModel.isShowedOfferSheetView
+                                )
                             }
                         }
                     }
                     
                     Text("Description: ")
-                        .font(.title2)
+                        .font(.headline)
                         .fontWeight(.bold)
-                        .padding(.trailing, 220)
-                    Text("""
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, diam sit amet lacinia lacinia, nisl enim aliquam diam, ut faucibus odio ante nec sem. Cras quis nunc et nisl venenatis ultrices. Nulla facilisi. Donec vitae eros sed leo ultricies aliquet. Sed sed semper magna. Sed sed mauris vel ipsum ultricies pharetra. Vivamus in dolor at lacus aliquam ultrices. Donec auctor, nisl quis aliquam luctus, magna quam tincidunt mauris, sit amet volutpat quam magna quis lectus. Sed auctor, nisl quis aliquam luctus, magna quam tincidunt mauris, sit amet volutpat quam magna quis lectus.
-                        """)
-                    .padding(.horizontal, 330)
+                        .padding(.trailing, 250)
+                    Text(viewModel.auction.description)
+                        .padding(.horizontal, 330)
+                        .padding(.leading, -40)
+                    
                     
                     Rectangle()
                         .fill(Color.white.opacity(0.5))
@@ -127,7 +114,7 @@ struct AuctionView: View {
                                     .bold()
                                     .padding(.trailing,280)
                                 
-                                if isPersonalSellerAuction {
+                                if viewModel.auction.sellerIsYou {
                                     Text("YOU")
                                         .bold()
                                         .padding(.trailing,290)
@@ -135,17 +122,13 @@ struct AuctionView: View {
                                 }
                                 else {
                                     Button(action: {
-                                        isShowedSellerProfileSheetView.toggle()
+                                        // Action per visualizzare il profilo del venditore
                                     }) {
-                                        Text("Giampiero Esposito")
+                                        Text(viewModel.auction.sellerName)
                                             .bold()
                                             .padding(.trailing,175)
                                             .foregroundColor(.black.opacity(0.5))
                                             .underline()
-                                    }
-                                    .sheet(isPresented: $isShowedSellerProfileSheetView) {
-                                        // Contenuto dello sheet del profilo del venditore
-                                        ProfileView()
                                     }
                                 }
                             }
@@ -163,9 +146,9 @@ struct AuctionView: View {
                 .clipped()
             )
             .navigationBarTitleDisplayMode(.inline)
-            .fullScreenCover(isPresented: $isFullScreen) {
+            .fullScreenCover(isPresented: $viewModel.isFullScreen) {
                 // Contenuto a schermo intero
-                FullScreenImageView(imageName: "png-defaultImage", isFullScreen: $isFullScreen)
+                FullScreenImageView(imageName: viewModel.auction.imageName, isFullScreen: $viewModel.isFullScreen)
             }
         }
     }
@@ -228,6 +211,7 @@ struct ConfirmIncrementalOfferView: View {
             }
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
+                //MARK: chiama la funzione del viewModel corrispondente.
                 isShowedOfferSheetView.toggle()
             })
 
@@ -247,24 +231,26 @@ struct FixedTimeAuctionView_Previews: PreviewProvider {
     }
 }
 
+
 struct AuctionDataSection: View {
-    @Binding var auctionType: FormattedAuctionType
+    @ObservedObject var viewModel: AuctionViewModel
+    
     var body: some View {
         VStack {
-            if auctionType == FormattedAuctionType.fixed { //asta fixed
+            if viewModel.auction.auctionType == .fixed { // Asta fixed
                 HStack {
                     Text("End of the auction:")
                         .bold()
-                    Text("2d 4h 37m")
+                    Text(viewModel.auction.endTime) // Attributo dell'asta
                         .bold()
                         .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
                         .padding(.trailing, 83)
                 }
-            } else { //Asta incrementale
+            } else { // Asta incrementale
                 HStack {
                     Text("Time to bet:")
                         .bold()
-                    Text("0d 4h 0m")
+                    Text("0d 4h 0m") // Attributo dell'asta
                         .bold()
                         .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
                 }
@@ -274,12 +260,12 @@ struct AuctionDataSection: View {
             HStack {
                 Text("Current Offer:")
                     .bold()
-                Text("100,00€")
+                Text(viewModel.auction.currentOffer) // Attributo dell'asta
                     .bold()
                     .foregroundColor(Color(red: 51/255, green: 204/255, blue: 153/255))
-            }.padding(.trailing, 160)
+            }.padding(.trailing, 143)
             
-            if auctionType == FormattedAuctionType.fixed {
+            if viewModel.auction.auctionType == .fixed { // Attributo dell'asta
                 HStack {
                     Text("Type of Auction:")
                         .bold()
@@ -298,10 +284,12 @@ struct AuctionDataSection: View {
             HStack {
                 Text("Location:")
                     .bold()
-                Text("London")
+                Text(viewModel.auction.location) // Attributo dell'asta
                     .bold()
             }.padding(.trailing, 180)
             
         }
     }
 }
+
+
