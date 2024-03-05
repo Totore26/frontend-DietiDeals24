@@ -17,6 +17,7 @@ enum AuthState {
 }
 
 class SessionManager : ObservableObject {
+    
     @Published var authState : AuthState = .login
     @Published var errorBanner : String? = ""
     @Published var isSellerSession = false
@@ -106,6 +107,7 @@ class SessionManager : ObservableObject {
                 confirmationCode: confirmationCode
             )
             print("Confirm sign up result completed: \(confirmSignUpResult.isSignUpComplete)")
+            
         } catch let error as AuthError {
             print("An error occurred while confirming sign up: \(self.errorMessage(for: error))")
             DispatchQueue.main.async {

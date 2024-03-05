@@ -3,16 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     
     @EnvironmentObject var sessionManager: SessionManager
-    
-    @State private var fullName = ""
-    @State private var email = ""
-    @State private var password = ""
-    @State private var repeatPassword = ""
-    @State private var telephoneNumber = ""
-    @State private var otp = ""
-    @State private var isConfirmationAlertPresented = false
-    @State private var confirmationMessage = ""
-    @State private var passwordMatchError = false // Aggiunta variabile per gestire l'errore
+    @StateObject private var viewModel = SignUpViewModel() // Crea un'istanza del tuo ViewModel
     
     var body: some View {
         NavigationView {
@@ -38,17 +29,17 @@ struct SignUpView: View {
                     }
                     
                     VStack(spacing: 10) {
-                        FormattedTextField(title: "Enter your full Name", text: $fullName)
-                        FormattedTextField(title: "Enter your email", text: $email)
-                        FormattedSecureTextField(title: "Enter your password", text: $password)
-                        FormattedSecureTextField(title: "Repeat your password", text: $repeatPassword)
-                            .onChange(of: repeatPassword, perform: { _ in
-                                passwordMatchError = !passwordsMatch() // Verifica se le password corrispondono quando viene modificato il campo di ripetizione password
+                        FormattedTextField(title: "Enter your full Name", text: $viewModel.fullName)
+                        FormattedTextField(title: "Enter your email", text: $viewModel.email)
+                        FormattedSecureTextField(title: "Enter your password", text: $viewModel.password)
+                        FormattedSecureTextField(title: "Repeat your password", text: $viewModel.repeatPassword)
+                            .onChange(of: viewModel.repeatPassword, perform: { _ in
+                                viewModel.passwordMatchError = !passwordsMatch()
                             })
-                        FormattedNumberTextField(title: "Enter your phone number", text: $telephoneNumber)
+                        FormattedNumberTextField(title: "Enter your phone number", text: $viewModel.telephoneNumber)
                         
                         // Visualizzazione dell'errore se le password non corrispondono
-                        if passwordMatchError {
+                        if viewModel.passwordMatchError {
                             Text("Passwords do not match")
                                 .foregroundColor(.red)
                                 .font(.caption)
@@ -66,31 +57,31 @@ struct SignUpView: View {
                             .cornerRadius(14)
                             .foregroundColor(.white)
                     }
-                    .disabled(email.isEmpty || password.isEmpty || fullName.isEmpty || repeatPassword.isEmpty || telephoneNumber.isEmpty || passwordMatchError)
-                    .padding(.bottom, 10)
+                    .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.fullName.isEmpty || viewModel.repeatPassword.isEmpty || viewModel.telephoneNumber.isEmpty || viewModel.passwordMatchError)
+                                        .padding(.bottom, 10)
                     
                     SocialLoginButtonsView()
                 }
                 .padding(.horizontal, 20)
-                .adaptiveSheet(isPresented: $isConfirmationAlertPresented, detents: [.medium()], smallestUndimmedDetentIdentifier: .large) {
-                    // Contenuto della sheet con campo per inserimento del codice di verifica e bottone per confermare
-                    VStack {
-                        Spacer()
-                        Text("Insert OTP code sent by mail")
-                        FormattedTextField(title: "Enter OTP", text: $otp)
-                        Spacer()
-                        Button(action: continueSignUp ) {
-                            Text("Continue")
-                                .font(.custom("SF Pro", size: 22))
-                                .fontWeight(.bold)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 14)
-                                .frame(width: 300, height: 44)
-                                .background(Color(red: 0.06, green: 0.45, blue: 0.64))
-                                .cornerRadius(14)
-                                .foregroundColor(.white)
-                        }
-                        .padding(.bottom, 70)
+               .adaptiveSheet(isPresented: $viewModel.isConfirmationAlertPresented, detents: [.medium()], smallestUndimmedDetentIdentifier: .large) {
+                   // Contenuto della sheet con campo per inserimento del codice di verifica e bottone per confermare
+                   VStack {
+                       Spacer()
+                       Text("Insert OTP code sent by mail")
+                       FormattedTextField(title: "Enter OTP", text: $viewModel.otp)
+                       Spacer()
+                       Button(action: continueSignUp ) {
+                           Text("Continue")
+                               .font(.custom("SF Pro", size: 22))
+                               .fontWeight(.bold)
+                               .padding(.horizontal, 20)
+                               .padding(.vertical, 14)
+                               .frame(width: 300, height: 44)
+                               .background(Color(red: 0.06, green: 0.45, blue: 0.64))
+                               .cornerRadius(14)
+                               .foregroundColor(.white)
+                       }
+                       .padding(.bottom, 70)
                     }
                 }
             }
@@ -104,29 +95,33 @@ struct SignUpView: View {
     private func signUp() {
         Task(priority: .userInitiated) {
                 await sessionManager.signUp(
-                username: email,
-                password: password,
-                email: email,
-                fullName: fullName,
-                phoneNumber: telephoneNumber
+                username: viewModel.email,
+                password: viewModel.password,
+                email: viewModel.email,
+                fullName: viewModel.fullName,
+                phoneNumber: viewModel.telephoneNumber
             )
         }
-        isConfirmationAlertPresented = true
+        viewModel.isConfirmationAlertPresented = true
     }
 
     private func continueSignUp() {
         Task(priority: .userInitiated) {
-            await sessionManager.confirmSignUp(for: email, with: otp)
+            
+            await sessionManager.confirmSignUp(for: viewModel.email, with: viewModel.otp)
             print("Sign up confirmed successfully")
-            confirmationMessage = "REGISTRATION COMPLETE"
+            viewModel.confirmationMessage = "REGISTRATION COMPLETE"
+            //aggiungo al DB
+            viewModel.addUser()
+            // Mostra la schermata di login solo se l'inserimento nel database va a buon fine
             sessionManager.showLogin()
-            isConfirmationAlertPresented = false
+            viewModel.isConfirmationAlertPresented = false
             sessionManager.showLogin()
         }
     }
-    
+
     private func passwordsMatch() -> Bool {
-        return password == repeatPassword
+        return viewModel.password == viewModel.repeatPassword
     }
 }
 

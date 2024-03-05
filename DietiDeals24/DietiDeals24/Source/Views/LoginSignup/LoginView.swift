@@ -74,6 +74,11 @@ struct LoginView: View {
                     .font(.caption)
                     .padding(.bottom, 20)
                     .padding(.top, 20)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        sessionManager.errorBanner = ""
+                    })
+
+                
             }
             .padding(.horizontal, 20)
             .onTapGesture {
@@ -82,6 +87,7 @@ struct LoginView: View {
         }
         .navigationBarBackButtonHidden(true)
     }
+    
 
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

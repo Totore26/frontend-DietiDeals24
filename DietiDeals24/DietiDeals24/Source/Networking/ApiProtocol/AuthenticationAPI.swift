@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+
+protocol AuthenticationAPI {
+    
+    func addUserRequest(fullname: String, email: String, telephoneNumber: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+}

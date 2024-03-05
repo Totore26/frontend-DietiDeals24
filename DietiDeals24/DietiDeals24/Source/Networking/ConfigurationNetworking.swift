@@ -8,7 +8,7 @@
 import Alamofire
 
 struct baseURL {
-    static let baseURL = "https://localhost:8080/api/"
+    static let baseURL = "https://localhost:8080/"
     
     static func append(path: String) -> String {
         return baseURL + path
