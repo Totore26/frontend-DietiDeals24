@@ -76,6 +76,7 @@ struct LoginView: View {
                     .padding(.top, 20)
                     .simultaneousGesture(TapGesture().onEnded {
                         sessionManager.errorBanner = ""
+                        sessionManager.showSignUp()
                     })
 
                 
@@ -85,7 +86,7 @@ struct LoginView: View {
                 hideKeyboard()
             }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarBackButtonHidden(false)
     }
     
 

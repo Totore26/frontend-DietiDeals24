@@ -1,7 +1,7 @@
 {
   "dev": {
     "configLevel": "project",
-    "useProfile": true,
-    "profileName": "amplify-dd24"
+    "useProfile": false,
+    "awsConfigFilePath": "/Users/salvatoretortora/.amplify/awscloudformation/DmDRcM7EQG"
   }
 }

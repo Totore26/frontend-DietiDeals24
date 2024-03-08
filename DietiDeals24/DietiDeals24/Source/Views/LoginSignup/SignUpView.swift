@@ -61,6 +61,17 @@ struct SignUpView: View {
                                         .padding(.bottom, 10)
                     
                     SocialLoginButtonsView()
+                    
+                    Button(action: {
+                        sessionManager.errorBanner = ""
+                        sessionManager.showLogin()
+                    }) {
+                        Text("Have an account? Login!")
+                            .font(.caption)
+                            .padding(.bottom, 20)
+                            .padding(.top, 20)
+                    }
+                    
                 }
                 .padding(.horizontal, 20)
                .adaptiveSheet(isPresented: $viewModel.isConfirmationAlertPresented, detents: [.medium()], smallestUndimmedDetentIdentifier: .large) {
@@ -111,10 +122,7 @@ struct SignUpView: View {
             await sessionManager.confirmSignUp(for: viewModel.email, with: viewModel.otp)
             print("Sign up confirmed successfully")
             viewModel.confirmationMessage = "REGISTRATION COMPLETE"
-            //aggiungo al DB
             viewModel.addUser()
-            // Mostra la schermata di login solo se l'inserimento nel database va a buon fine
-            sessionManager.showLogin()
             viewModel.isConfirmationAlertPresented = false
             sessionManager.showLogin()
         }

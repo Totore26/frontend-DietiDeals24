@@ -1,31 +1,41 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-dietideals24-dev-154044-authRole",
-      "UnauthRoleArn": "arn:aws:iam::767398022913:role/amplify-dietideals24-dev-154044-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::767398022913:role/amplify-dietideals24-dev-154044-authRole",
+      "AuthRoleName": "amplify-dietideals24-dev-135554-authRole",
+      "UnauthRoleArn": "arn:aws:iam::767398022913:role/amplify-dietideals24-dev-135554-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::767398022913:role/amplify-dietideals24-dev-135554-authRole",
       "Region": "eu-west-1",
-      "DeploymentBucketName": "amplify-dietideals24-dev-154044-deployment",
-      "UnauthRoleName": "amplify-dietideals24-dev-154044-unauthRole",
-      "StackName": "amplify-dietideals24-dev-154044",
-      "StackId": "arn:aws:cloudformation:eu-west-1:767398022913:stack/amplify-dietideals24-dev-154044/5f686230-ccd9-11ee-8b7e-06f7563613cf",
-      "AmplifyAppId": "d3oi09pdvntcsr"
+      "DeploymentBucketName": "amplify-dietideals24-dev-135554-deployment",
+      "UnauthRoleName": "amplify-dietideals24-dev-135554-unauthRole",
+      "StackName": "amplify-dietideals24-dev-135554",
+      "StackId": "arn:aws:cloudformation:eu-west-1:767398022913:stack/amplify-dietideals24-dev-135554/3437c560-dd4b-11ee-9d3d-02d390414505",
+      "AmplifyAppId": "d2rjj9bk9k7jsh",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-135554-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     }
   },
   "auth": {
-    "dietideals2465286f24": {
+    "dietideals24f4eace64": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage",
+          "triggerProvider": "Cognito",
+          "attributes": [
+            "Arn",
+            "Name"
+          ]
+        }
+      ],
       "customAuth": false,
       "frontendAuthConfig": {
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL",
-          "PHONE_NUMBER"
-        ],
+        "usernameAttributes": [],
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME",
+          "PHONE_NUMBER"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
@@ -40,45 +50,66 @@
         ]
       },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/dietideals2465286f24-cloudformation-template.json",
-        "logicalId": "authdietideals2465286f24"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-135554-deployment/amplify-cfn-templates/auth/dietideals24f4eace64-cloudformation-template.json",
+        "logicalId": "authdietideals24f4eace64"
       },
-      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "lastPushTimeStamp": "2024-03-08T13:08:46.550Z",
       "output": {
-        "UserPoolId": "eu-west-1_98AlluIA8",
-        "AppClientIDWeb": "2cdl5bt2066iuoq6od72s3k10b",
-        "AppClientID": "6cr8gpju35p9quor186spi1ml2",
-        "IdentityPoolId": "eu-west-1:b8d441b8-34e6-4358-b93d-5395fddd676f",
-        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:767398022913:userpool/eu-west-1_98AlluIA8",
-        "IdentityPoolName": "dietideals2465286f24_identitypool_65286f24__dev",
-        "UserPoolName": "dietideals2465286f24_userpool_65286f24"
+        "CreatedSNSRole": "arn:aws:iam::767398022913:role/snsf4eace64135554-dev",
+        "UserPoolId": "eu-west-1_2Rz24Th8K",
+        "AppClientIDWeb": "5vltj67g16lqqmu7ac513vcf09",
+        "AppClientID": "6uniib0qi8qcvjsn6t7k95irkj",
+        "IdentityPoolId": "eu-west-1:74233f95-dd3b-48c8-994f-dbe21489857f",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-west-1:767398022913:userpool/eu-west-1_2Rz24Th8K",
+        "IdentityPoolName": "dietideals24f4eace64_identitypool_f4eace64__dev",
+        "UserPoolName": "dietideals24f4eace64_userpool_f4eace64"
       },
-      "lastPushDirHash": "9zAJOIhx2p9ZZ0YkQNLYViBaqKs="
-    },
-    "userPoolGroups": {
-      "service": "Cognito-UserPool-Groups",
+      "lastPushDirHash": "+Tml6BNaFYCrn8/HzVfuMa4ULsU="
+    }
+  },
+  "function": {
+    "dietideals24f4eace64CustomMessage": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "dietideals2465286f24",
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ]
-        }
-      ],
-      "lastPushTimeStamp": "2024-02-22T16:00:21.515Z",
+      "service": "Lambda",
+      "lastBuildTimeStamp": "2024-03-08T13:00:48.271Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-03-08T13:00:48.382Z",
+      "distZipFilename": "dietideals24f4eace64CustomMessage-506475534d7875717450-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-dietideals24-dev-135554-deployment",
+        "s3Key": "amplify-builds/dietideals24f4eace64CustomMessage-506475534d7875717450-build.zip"
+      },
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-154044-deployment/amplify-cfn-templates/auth/userPoolGroups-cloudformation-template.json",
-        "logicalId": "authuserPoolGroups"
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-135554-deployment/amplify-cfn-templates/function/dietideals24f4eace64CustomMessage-cloudformation-template.json",
+        "logicalId": "functiondietideals24f4eace64CustomMessage"
+      },
+      "lastPushTimeStamp": "2024-03-08T13:08:46.554Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::767398022913:role/dietideals24f4eace64CustomMessage-dev",
+        "Region": "eu-west-1",
+        "Arn": "arn:aws:lambda:eu-west-1:767398022913:function:dietideals24f4eace64CustomMessage-dev",
+        "Name": "dietideals24f4eace64CustomMessage-dev",
+        "LambdaExecutionRole": "dietideals24f4eace64CustomMessage-dev"
+      },
+      "lastPushDirHash": "Ns1TRYR7/nAv6F6JAUjYS77dnUQ="
+    }
+  },
+  "storage": {
+    "s3dd24": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "lastPushTimeStamp": "2024-03-08T13:08:47.383Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-dietideals24-dev-135554-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3dd24"
       },
       "output": {
-        "dd24GroupRole": "arn:aws:iam::767398022913:role/eu-west-1_98AlluIA8-dd24GroupRole"
+        "BucketName": "dietidea135554-dev",
+        "Region": "eu-west-1"
       },
-      "lastPushDirHash": "z59vrA+fAMb5f+WLJ4342lZ14N0="
+      "lastPushDirHash": "jFCLQrDoU82Q1HpD1uq7Y6ZFVAM="
     }
   }
 }

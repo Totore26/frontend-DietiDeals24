@@ -45,3 +45,4 @@ struct DietiDeals24: App {
         }
     }
 }
+ 

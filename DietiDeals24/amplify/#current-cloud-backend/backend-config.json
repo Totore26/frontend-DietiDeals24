@@ -1,8 +1,18 @@
 {
   "auth": {
-    "dietideals2465286f24": {
+    "dietideals24f4eace64": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -13,35 +23,74 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [],
-        "usernameAttributes": [
           "EMAIL",
+          "NAME",
           "PHONE_NUMBER"
         ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
-    },
-    "userPoolGroups": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "UserPoolId",
-            "AppClientIDWeb",
-            "AppClientID",
-            "IdentityPoolId"
-          ],
-          "category": "auth",
-          "resourceName": "dietideals2465286f24"
-        }
-      ],
+    }
+  },
+  "function": {
+    "dietideals24f4eace64CustomMessage": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Cognito-UserPool-Groups"
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_dietideals24f4eace64CustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_dietideals24f4eace64CustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_dietideals24f4eace64CustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_dietideals24f4eace64CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_dietideals24f4eace64CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "dietideals24f4eace64CustomMessage"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s3dd24": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }
