@@ -11,7 +11,7 @@ import SwiftUI
 import SwiftUI
 
 class EditProfileViewModel: ObservableObject {
-    @Published var profileImage: Image?
+    @Published var profileImage: UIImage?
     @Published var fullName: String
     @Published var nationality: String
     @Published var description: String
@@ -42,12 +42,12 @@ class EditProfileViewModel: ObservableObject {
 
 
 struct ImagePicker: UIViewControllerRepresentable {
-    @Binding var image: Image?
+    @Binding var image: UIImage?
 
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        @Binding var image: Image?
+        @Binding var image: UIImage?
 
-        init(image: Binding<Image?>) {
+        init(image: Binding<UIImage?>) {
             _image = image
         }
 
@@ -56,7 +56,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
         ) {
             if let uiImage = info[.originalImage] as? UIImage {
-                image = Image(uiImage: uiImage)
+                image = uiImage
             }
 
             picker.dismiss(animated: true)

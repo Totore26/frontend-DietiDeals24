@@ -17,8 +17,13 @@ class CreateIncrementalAuctionViewModel: ObservableObject {
     @Published var raisingThreshold: Float = 10.0
     @Published var timer: Int = 1
     @Published var selectedCategory: String = "All"
-    @Published var auctionImage: Image? = nil
+    @Published var auctionImage: UIImage? = nil
     
-    func createIncrementalAuction() {}
+    func createIncrementalAuction(imageData: Data) async {
+        await uploadData(imageData: imageData, auctionId: "1234")
+        let uiImange = UIImage(data: imageData)
+        
+    }
     
 }
+

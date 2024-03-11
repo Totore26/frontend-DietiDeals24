@@ -18,7 +18,7 @@ struct EditProfileSheetView: View {
                 Section(header: Text("Profile Photo")) {
                     VStack(alignment: .center){
                         if let profileImage = viewModel.profileImage {
-                            profileImage
+                            Image(uiImage: profileImage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 100, height: 100)

@@ -66,6 +66,7 @@
 		263BA78D2B9627C700DE0B68 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */; };
 		2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2652882D2B30972C001A4AB9 /* SettingsView.swift */; };
 		265976622B5AF4F500A6745A /* PersonalizedSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */; };
+		266043542B9CBCA000FAC47A /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266043532B9CBCA000FAC47A /* PhotoManager.swift */; };
 		266BFA602B2275840063C68B /* DietiDeals24App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA5F2B2275840063C68B /* DietiDeals24App.swift */; };
 		266BFA622B2275840063C68B /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA612B2275840063C68B /* LoginView.swift */; };
 		266BFA642B2275850063C68B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA632B2275850063C68B /* Assets.xcassets */; };
@@ -149,6 +150,7 @@
 		263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2652882D2B30972C001A4AB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedSheetView.swift; sourceTree = "<group>"; };
+		266043532B9CBCA000FAC47A /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		266BFA5C2B2275840063C68B /* DietiDeals24.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietiDeals24.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		266BFA5F2B2275840063C68B /* DietiDeals24App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24App.swift; sourceTree = "<group>"; };
 		266BFA612B2275840063C68B /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 				03EF0F952B227803000D78F0 /* Views */,
 				266BFA5F2B2275840063C68B /* DietiDeals24App.swift */,
 				0322F2642B863DC800F359CC /* SessionManager.swift */,
+				266043532B9CBCA000FAC47A /* PhotoManager.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				2620C0202B6176A800B9DC44 /* CreateFixedTimeAuctionViewModel.swift in Sources */,
 				260882392B6DBBBF00C67B9D /* NotificationRequest.swift in Sources */,
 				2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */,
+				266043542B9CBCA000FAC47A /* PhotoManager.swift in Sources */,
 				033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */,
 				035872D32B61615400C3AEFC /* Notification.swift in Sources */,
 				0322F2652B863DC800F359CC /* SessionManager.swift in Sources */,
@@ -812,7 +816,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = S4BQYWPVVW;
+				DEVELOPMENT_TEAM = N6VGMQT332;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -843,7 +847,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = S4BQYWPVVW;
+				DEVELOPMENT_TEAM = N6VGMQT332;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
