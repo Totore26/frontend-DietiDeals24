@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Amplify
+import UIKit
 
 
 //per le aste utilizzo l id dell asta come nome dell immagine, cosi posso recuperarla facilmente
@@ -48,17 +49,26 @@ public func uploadData(imageData: Data, auctionId: String) async {
     }
 }
 
-public func fetchData(key: String) async {
+public func fetchData(key: String) async throws -> UIImage {
     do {
         let downloadTask = Amplify.Storage.downloadData(key: key)
-
+        
         for await progress in await downloadTask.progress {
             print("Progress: \(progress)")
         }
-
+        
         let data = try await downloadTask.value
         print("Completed: \(data)")
+        
+        guard let image = UIImage(data: data) else {
+            throw NSError(domain: "fetchData", code: 0, userInfo: [NSLocalizedDescriptionKey: "Impossibile convertire i dati in un'immagine."])
+        }
+        
+        return image
     } catch {
-        print("Error downloading data: \(error)")
+        print("Error fetching data: \(error)")
+        throw error
     }
 }
+
+

@@ -17,11 +17,15 @@ class HomeViewModel: ObservableObject {
     @Published  var showCreateAuctionBanner = false
     @Published  var selectedAuctionType = FormattedAuctionType.null
     @Published  var isSeller = true
+    @Published  var auctions = [AuctionProtocol]()
     
     let user: AuthUser
     
     init(user: AuthUser) {
         self.user = user
+        Task{
+            try await auctions = //richiesta http
+        }
     }
     
     
@@ -29,6 +33,10 @@ class HomeViewModel: ObservableObject {
     //funzione per ricercare un asta all'interno della searchView.
     func searchAuctions(category: String, princeRange: String, searchText: String) -> [Auction] {
         return []
+    }
+    //fa la richiesta ad S3 per scaricare tutte le foto (gli passo la lista di idAste)
+    func FetchPhoto(key: String) {
+        
     }
     
     

@@ -26,7 +26,7 @@ struct HomeView: View {
                     ForEach(0..<20) { index in
                         NavigationLink(destination: AuctionView().environmentObject(sessionManager)) {
                             AuctionsStructures (
-                                imageName: "png-sfondo",
+                                imageName: nil,
                                 title: "Titolo dell'elemento \(index)",
                                 subtitle: "Sottotitolo dell'elemento \(index)"
                             )
@@ -125,18 +125,28 @@ struct HomeView: View {
 }
 
 struct AuctionsStructures: View {
-    let imageName: String
+    let imageName: UIImage?
     let title: String
     let subtitle: String
 
     var body: some View {
         HStack {
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .cornerRadius(10)
-                .padding(.trailing, 10)
+            if let image = imageName {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+            } else {
+                // Immagine predefinita quando imageName è nil
+                Image("png-defaultImage")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+            }
 
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(title)")
@@ -236,5 +246,3 @@ struct HomeView_Previews: PreviewProvider {
         return HomeView(homeViewModel: homeViewModel)
     }
 }
-
-

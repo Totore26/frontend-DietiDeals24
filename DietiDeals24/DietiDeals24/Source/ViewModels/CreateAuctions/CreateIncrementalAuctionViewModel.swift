@@ -21,7 +21,6 @@ class CreateIncrementalAuctionViewModel: ObservableObject {
     
     func createIncrementalAuction(imageData: Data) async {
         await uploadData(imageData: imageData, auctionId: "1234")
-        let uiImange = UIImage(data: imageData)
         
     }
     

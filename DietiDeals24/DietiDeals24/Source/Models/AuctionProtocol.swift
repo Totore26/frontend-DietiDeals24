@@ -7,9 +7,7 @@
 
 protocol AuctionProtocol {
     
-    var creator : Seller {get set}
-    
-    var participants : Array<Buyer>? {get set}
+    var creator : String {get set}
     
     var imageAuction :  String {get set}
     

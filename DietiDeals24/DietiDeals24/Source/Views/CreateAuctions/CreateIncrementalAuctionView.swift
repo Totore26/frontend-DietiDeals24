@@ -34,8 +34,6 @@ struct CreateIncrementalAuctionView: View {
                         } else {
                             // Gestisci il caso in cui viewModel.auctionImage è nil
                             // Potresti visualizzare un segnaposto o fornire un comportamento predefinito
-                        }
-
                             Image(systemName: "questionmark.circle")
                                 .resizable()
                                 .scaledToFill()
@@ -47,6 +45,7 @@ struct CreateIncrementalAuctionView: View {
                                     isImagePickerPresented.toggle()
                                 }
                         }
+                        
                         Button(action: {
                             isImagePickerPresented.toggle()
                         }) {
@@ -110,7 +109,7 @@ struct CreateIncrementalAuctionView: View {
                     .foregroundColor(.primary)
                     .font(.headline)
                 }
-                                
+                
                 Section(header: Text("Enter all missing data to continue")) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
@@ -128,14 +127,14 @@ struct CreateIncrementalAuctionView: View {
                         } else {
                             // Gestisci il caso in cui viewModel.auctionImage è nil
                         }
-
-
+                        
+                        
                     }) {
                         Text("CREATE AUCTION")
                             .padding(.leading, 85)
                     }
                     .disabled(viewModel.title.isEmpty || viewModel.location.isEmpty || viewModel.description.isEmpty || viewModel.auctionImage == nil)
-
+                    
                 }
             }
             .navigationBarTitle("Create Incremental Auction", displayMode: .inline)
@@ -150,8 +149,8 @@ struct CreateIncrementalAuctionView: View {
             }
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(image: $viewModel.auctionImage)
+            }
         }
-
     }
 }
 

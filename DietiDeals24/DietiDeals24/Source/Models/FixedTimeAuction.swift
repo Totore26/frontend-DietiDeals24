@@ -9,9 +9,7 @@ import Foundation
 
 class FixedTimeAuction: AuctionProtocol {
     
-    var creator: Seller
-    
-    var participants: Array<Buyer>?
+    var creator: String
     
     var imageAuction: String
     
@@ -27,9 +25,8 @@ class FixedTimeAuction: AuctionProtocol {
     
     var minimumSecretThreshold: Float
     
-    init(creator: Seller, participants: Array<Buyer>? = nil, imageAuction: String, title: String, description: String, location: String, category: String, endOfAuction: Date, minimumSecretThreshold: Float) {
+    init(creator: String, imageAuction: String, title: String, description: String, location: String, category: String, endOfAuction: Date, minimumSecretThreshold: Float) {
         self.creator = creator
-        self.participants = participants
         self.imageAuction = imageAuction
         self.title = title
         self.description = description
