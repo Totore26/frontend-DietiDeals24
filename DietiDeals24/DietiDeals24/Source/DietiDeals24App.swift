@@ -25,12 +25,15 @@ struct DietiDeals24: App {
             case .signUp:
                 SignUpView()
                     .environmentObject(sessionManager)
+                    .preferredColorScheme(.light)
             case .login:
                 LoginView()
                     .environmentObject(sessionManager)
+                    .preferredColorScheme(.light)
             case .session(let user):
                 TabBarHomeView(user: user)
                     .environmentObject(sessionManager)
+                    .preferredColorScheme(.light)
             }
         }
     }

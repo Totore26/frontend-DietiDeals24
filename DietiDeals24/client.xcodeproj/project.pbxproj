@@ -207,8 +207,7 @@
 				2620C01C2B61758800B9DC44 /* Notifications */,
 				2620C01D2B6175F300B9DC44 /* Auctions */,
 				2620C01E2B61761100B9DC44 /* CreateAuctions */,
-				263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */,
-				26B510262BBDCE93002D6FFE /* LoginViewModel.swift */,
+				265B001D2BBDD1D100C03C1C /* LoginSignup */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -398,6 +397,15 @@
 				266043532B9CBCA000FAC47A /* PhotoManager.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		265B001D2BBDD1D100C03C1C /* LoginSignup */ = {
+			isa = PBXGroup;
+			children = (
+				26B510262BBDCE93002D6FFE /* LoginViewModel.swift */,
+				263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */,
+			);
+			path = LoginSignup;
 			sourceTree = "<group>";
 		};
 		266ADA3D2B5C25FD0001AC1C /* CreateAuctions */ = {
