@@ -73,6 +73,8 @@
 		266BFA672B2275850063C68B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 266BFA662B2275850063C68B /* Preview Assets.xcassets */; };
 		266BFA712B2275850063C68B /* DietiDeals24Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 266BFA702B2275850063C68B /* DietiDeals24Tests.swift */; };
 		268F43192B6D49C500F43B24 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 268F43182B6D49C500F43B24 /* Alamofire */; };
+		26B510252BBDCBD8002D6FFE /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B510242BBDCBD8002D6FFE /* ImagePicker.swift */; };
+		26B510272BBDCE93002D6FFE /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B510262BBDCE93002D6FFE /* LoginViewModel.swift */; };
 		26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B65A202B6BF50B00FED1CB /* HomeView.swift */; };
 		26D219872B26164600942747 /* MyAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D219862B26164600942747 /* MyAuctionsView.swift */; };
 		26DEF6FF2B237B8000700AC1 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DEF6FE2B237B8000700AC1 /* Buttons.swift */; };
@@ -159,6 +161,8 @@
 		266BFA6C2B2275850063C68B /* DietiDeals24Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		266BFA702B2275850063C68B /* DietiDeals24Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietiDeals24Tests.swift; sourceTree = "<group>"; };
 		266BFA762B2275850063C68B /* DietiDeals24UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietiDeals24UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		26B510242BBDCBD8002D6FFE /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		26B510262BBDCE93002D6FFE /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		26B65A202B6BF50B00FED1CB /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		26D219862B26164600942747 /* MyAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsView.swift; sourceTree = "<group>"; };
 		26DEF6FE2B237B8000700AC1 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				2620C01D2B6175F300B9DC44 /* Auctions */,
 				2620C01E2B61761100B9DC44 /* CreateAuctions */,
 				263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */,
+				26B510262BBDCE93002D6FFE /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 				03A6EE822B235DBB00163DB6 /* SocialLogin.swift */,
 				26DEF6FE2B237B8000700AC1 /* Buttons.swift */,
 				265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */,
+				26B510242BBDCBD8002D6FFE /* ImagePicker.swift */,
 				260882422B6DD36600C67B9D /* Utils.swift */,
 			);
 			path = Components;
@@ -614,6 +620,7 @@
 				2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */,
 				263BA78D2B9627C700DE0B68 /* SignUpViewModel.swift in Sources */,
 				26B65A212B6BF50C00FED1CB /* HomeView.swift in Sources */,
+				26B510252BBDCBD8002D6FFE /* ImagePicker.swift in Sources */,
 				03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */,
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
 				035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */,
@@ -641,6 +648,7 @@
 				260882432B6DD36600C67B9D /* Utils.swift in Sources */,
 				2608823D2B6DBBBF00C67B9D /* SellerRequest.swift in Sources */,
 				260882292B6DAB8F00C67B9D /* ConfigurationNetworking.swift in Sources */,
+				26B510272BBDCE93002D6FFE /* LoginViewModel.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
 				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
 				030315E12B246DA400D2044A /* AuctionProtocol.swift in Sources */,

@@ -24,7 +24,7 @@ class HomeViewModel: ObservableObject {
     init(user: AuthUser) {
         self.user = user
         Task{
-            try await auctions = //richiesta http
+            // try await auctions = //richiesta http
         }
     }
     

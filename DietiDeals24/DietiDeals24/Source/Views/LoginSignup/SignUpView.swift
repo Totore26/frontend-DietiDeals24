@@ -3,7 +3,7 @@ import SwiftUI
 struct SignUpView: View {
     
     @EnvironmentObject var sessionManager: SessionManager
-    @StateObject private var viewModel = SignUpViewModel() // Crea un'istanza del tuo ViewModel
+    @StateObject private var viewModel = SignUpViewModel() 
     
     var body: some View {
         NavigationView {

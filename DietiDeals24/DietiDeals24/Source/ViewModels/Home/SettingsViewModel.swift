@@ -9,11 +9,16 @@ import Foundation
 import Amplify
 
 class SettingsViewModel: ObservableObject {
+    
     let user: AuthUser
+    
+    @Published var isEditProfileSheetPresented = false
+    @Published var isInfoAuctionsSheetPresented = false
+    @Published var isLoading = false
+    @Published var isSellerSession = false // stato per la sessione del venditore
     
     init(user: AuthUser) {
         self.user = user
     }
-    
-    // Qui potresti aggiungere altre logiche e proprietà specifiche del ViewModel per la vista Settings
+
 }

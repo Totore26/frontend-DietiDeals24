@@ -9,6 +9,8 @@
 
 import Amplify
 
+let categories = ["All", "Technology", "Sport & Free Time", "Home & Garden", "Vehicle", "Service", "Other"]
+
 //tipi di utente
 enum FormattedUserType: String, CaseIterable {
     case buyer = "Buyer"

@@ -43,7 +43,7 @@ struct TabBarHomeView: View {
                 }
                 .environmentObject(sessionManager)
             
-            SettingsView()
+            SettingsView(viewModel: SettingsViewModel(user: user))
                 .tabItem {
                     Image(systemName: "gear")
                     Text("SETTINGS")

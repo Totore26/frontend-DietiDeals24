@@ -9,10 +9,10 @@ import SwiftUI
 import UIKit
 
 struct CreateIncrementalAuctionView: View {
-    let categories = ["All", "Technology", "Sport & Free Time", "Home & Garden", "Vehicle", "Service", "Other"]
+    
+    @ObservedObject var viewModel = CreateIncrementalAuctionViewModel()
     
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel = CreateIncrementalAuctionViewModel()
     @State private var isImagePickerPresented = false
     @State private var isAuctionCreated = false
     

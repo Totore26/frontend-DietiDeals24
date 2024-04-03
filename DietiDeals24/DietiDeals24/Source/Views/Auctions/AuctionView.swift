@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AuctionView: View {
     
-    @EnvironmentObject var sessionManager : SessionManager
     @StateObject var viewModel = AuctionViewModel()
+    @EnvironmentObject var sessionManager : SessionManager
     
     var body: some View {
         VStack() {

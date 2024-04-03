@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var isEditProfileSheetPresented = false
-    @State private var isInfoAuctionsSheetPresented = false
+    
+    @StateObject var viewModel: SettingsViewModel
     @EnvironmentObject var sessionManager: SessionManager
     @State private var prove = false
-    @State private var isLoading = false // Aggiunto stato per gestire la visualizzazione della rotellina di caricamento
 
     var body: some View {
         NavigationView {
@@ -26,20 +25,20 @@ struct SettingsView: View {
                         Section {
                             SettingsItem(systemName: "pencil.and.outline", title: "Edit Your Profile")
                                 .onTapGesture {
-                                    isEditProfileSheetPresented.toggle()
+                                    viewModel.isEditProfileSheetPresented.toggle()
                                 }
                                 .listRowBackground(Color.white)
-                                .sheet(isPresented: $isEditProfileSheetPresented) {
+                                .sheet(isPresented: $viewModel.isEditProfileSheetPresented) {
                                     EditProfileSheetView().environmentObject(sessionManager)
                                 }
                         }
                         Section {
                             SettingsItem(systemName: "i.circle", title: "Info Auctions")
                                 .onTapGesture {
-                                    isInfoAuctionsSheetPresented.toggle()
+                                    viewModel.isInfoAuctionsSheetPresented.toggle()
                                 }
                                 .listRowBackground(Color.white)
-                                .sheet(isPresented: $isInfoAuctionsSheetPresented) {
+                                .sheet(isPresented: $viewModel.isInfoAuctionsSheetPresented) {
                                     InfoAuctionsView()
                                     Spacer()
                                 }
@@ -82,13 +81,13 @@ struct SettingsView: View {
                     .shadow(radius: 3)
                     .padding()
                     
-                    if isLoading {
+                    if viewModel.isLoading {
                         ProgressView() // Visualizza la rotellina di caricamento quando isLoading è true
                             .progressViewStyle(CircularProgressViewStyle())
                             .padding()
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // Nascondi l'indicatore dopo 5 secondi
-                                    isLoading = false
+                                    viewModel.isLoading = false
                                 }
                             }
                     }
@@ -100,9 +99,9 @@ struct SettingsView: View {
             }
         }
         .onChange(of: prove) { newValue in
-            isLoading = true // Mostra la rotellina di caricamento quando il valore del toggle cambia
+            viewModel.isLoading = true // Mostra la rotellina di caricamento quando il valore del toggle cambia
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // Nascondi l'indicatore dopo 5 secondi
-                isLoading = false
+                viewModel.isLoading = false
             }
         }
     }
@@ -128,11 +127,5 @@ struct SettingsItem: View {
                 .foregroundColor(.gray)
         }
         .padding(.bottom, 10)
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
     }
 }

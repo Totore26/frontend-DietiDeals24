@@ -10,12 +10,9 @@ import SwiftUI
 struct NotificationView: View {
     
     @ObservedObject var notificationViewModel : NotificationViewModel
-        
-    init(notificationViewModel: NotificationViewModel) {
-        self.notificationViewModel = notificationViewModel
-    }
     
     @State private var isDetailViewPresented = false
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {

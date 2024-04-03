@@ -7,10 +7,12 @@
 import SwiftUI
 
 struct EditProfileSheetView: View {
-    @Environment(\.presentationMode) var presentationMode
+    
     @ObservedObject var viewModel = EditProfileViewModel()
-    @State private var isImagePickerPresented = false
     @EnvironmentObject var sessionManager : SessionManager
+    
+    @State private var isImagePickerPresented = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         NavigationView {

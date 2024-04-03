@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CreateFixedTimeAuctionView: View {
-    let categories = ["All", "Technology", "Sport & Free Time", "Home & Garden", "Vehicle", "Service", "Other"]
+    
+    @ObservedObject var viewModel = CreateFixedTimeAuctionViewModel()
     
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel = CreateFixedTimeAuctionViewModel()
     @State private var isImagePickerPresented = false
     @State private var isAuctionCreated = false
     

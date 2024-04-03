@@ -15,6 +15,7 @@ import UIKit
 //per l'account invece ho pensato di utilizzare sempre l'id/mail e aggiungere una lettera finale per capire se ci riferiamo a buyer o seller (visto che nel dabatase sono 2 profili diversi)
 //key = "user/\(userId)" + "b.jpg" per i compratori
 //key = "user/\(userId)" + "s.jpg" per i venditori
+
 public func uploadImage(imageData: Data, auctionId: String) {
     let key = "auction/\(auctionId).jpg"
     
@@ -26,10 +27,6 @@ public func uploadImage(imageData: Data, auctionId: String) {
 }
 
 public func uploadData(imageData: Data, auctionId: String) async {
-    /*
-     let dataString = "My Data"
-     let data = Data(dataString.utf8)
-     */
     
     do {
         let uploadTask = Amplify.Storage.uploadData(
@@ -49,9 +46,9 @@ public func uploadData(imageData: Data, auctionId: String) async {
     }
 }
 
-public func fetchData(key: String) async throws -> UIImage {
+public func fetchAuctionPhoto(auctionID: String) async throws -> UIImage {
     do {
-        let downloadTask = Amplify.Storage.downloadData(key: key)
+        let downloadTask = Amplify.Storage.downloadData(key: "auction/\(auctionID).jpg")
         
         for await progress in await downloadTask.progress {
             print("Progress: \(progress)")

@@ -1,17 +1,9 @@
-
-//
-//  manageHomesViews.swift
-//  DietiDeals24X
-//
-//  Created by Francesco Terrecuso on 10/11/23.
-//
-
 import SwiftUI
 
 struct LoginView: View {
+    
+    @StateObject var viewModel = LoginViewModel()
     @EnvironmentObject var sessionManager: SessionManager
-    @State private var email = ""
-    @State private var password = ""
 
     var body: some View {
         NavigationView {
@@ -25,8 +17,8 @@ struct LoginView: View {
                     .padding(.bottom, 40)
 
                 VStack(spacing: 10) {
-                    FormattedTextField(title: "Email", text: $email)
-                    FormattedSecureTextField(title: "Password", text: $password)
+                    FormattedTextField(title: "Email", text: $viewModel.email)
+                    FormattedSecureTextField(title: "Password", text: $viewModel.password)
 
                     NavigationLink("Did you forget your password?", destination: Text("Forgot Password")) // Aggiungi la destinazione corretta
                         .font(
@@ -39,8 +31,8 @@ struct LoginView: View {
                         .padding(.bottom, 40)
                     
                     //gestione dell'errore
-                    if let errorBanner = sessionManager.errorBanner {
-                        Text(errorBanner)
+                    if !viewModel.errorBanner.isEmpty {
+                        Text(viewModel.errorBanner)
                             .foregroundColor(.red)
                             .bold()
                     }
@@ -49,7 +41,7 @@ struct LoginView: View {
                 Button {
                     Task {
                         await sessionManager.logOutLocally()
-                        await sessionManager.login(email: email, password: password)
+                        await sessionManager.login(email: viewModel.email, password: viewModel.password)
                     }
                 } label: {
                     Text("Login")
@@ -63,7 +55,7 @@ struct LoginView: View {
                         .foregroundColor(.white)
                         .padding(.bottom, 10)
                 }
-                .disabled(email.isEmpty || password.isEmpty)
+                .disabled(viewModel.email.isEmpty || viewModel.password.isEmpty)
 
                 FormattedSeparator()
                     .padding(.bottom, 15)

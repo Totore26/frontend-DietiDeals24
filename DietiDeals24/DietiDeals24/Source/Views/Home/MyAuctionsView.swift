@@ -10,13 +10,8 @@ import SwiftUI
 struct MyAuctionsView: View {
     
     @ObservedObject var myAuctionViewModel: MyAuctionsViewModel
-    
-    init(myAuctionViewModel: MyAuctionsViewModel) {
-        self.myAuctionViewModel = myAuctionViewModel
-    }
-    
-    
     @State private var searchText = ""
+    
     var body: some View {
         
         NavigationView {
