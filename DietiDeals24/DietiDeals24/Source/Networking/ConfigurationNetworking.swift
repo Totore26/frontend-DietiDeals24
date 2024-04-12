@@ -7,6 +7,9 @@
 
 import Alamofire
 
+
+var autenticationToken: String = ""
+
 struct baseURL {
     static let baseURL = "http://localhost:8080/"
     
@@ -22,6 +25,8 @@ struct APIError: Error {
     let statusCode: Int?
     
 }
+
+
 
 /*
     esempio utilizzo:

@@ -20,7 +20,6 @@ class SignUpViewModel: ObservableObject {
     @Published var isConfirmationAlertPresented: Bool = false
     @Published var confirmationMessage: String = ""
     @Published var passwordMatchError: Bool = false
-
     
     func addUser() {
         api.addUserRequest(
@@ -36,6 +35,11 @@ class SignUpViewModel: ObservableObject {
             }
         }
     }
+    
+
+    
+    
+    
     
     
 }

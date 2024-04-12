@@ -41,6 +41,7 @@ struct LoginView: View {
                 Button {
                     Task {
                         await sessionManager.logOutLocally()
+                        viewModel.getToken() 
                         await sessionManager.login(email: viewModel.email, password: viewModel.password)
                     }
                 } label: {
