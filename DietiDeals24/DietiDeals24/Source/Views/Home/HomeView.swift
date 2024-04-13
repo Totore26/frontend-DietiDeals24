@@ -23,15 +23,15 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
-                    ForEach(0..<20) { index in
-                        NavigationLink(destination: AuctionView().environmentObject(sessionManager)) {
-                            AuctionsStructures (
-                                imageName: nil,
-                                title: "Titolo dell'elemento \(index)",
-                                subtitle: "Sottotitolo dell'elemento \(index)"
-                            )
+                    LazyVStack{
+                        ForEach(homeViewModel.auctions.prefix(8), id: \.id) { auction in // Utilizza i dati delle aste ricevuti dal modello
+                            NavigationLink(destination: AuctionView(viewModel : AuctionViewModel(user: homeViewModel.user.username, auction: auction))
+                                .environmentObject(sessionManager)) {
+                                    AuctionsStructures (auction: auction)
+                                }
                         }
                     }
+                    .padding(.vertical, 20)
                 }
                 .padding(.top, 20)
                 .padding(.bottom, 100)
@@ -125,13 +125,11 @@ struct HomeView: View {
 }
 
 struct AuctionsStructures: View {
-    let imageName: UIImage?
-    let title: String
-    let subtitle: String
+    let auction: AuctionData
 
     var body: some View {
         HStack {
-            if let image = imageName {
+           /* if let image = auction.imageAuction {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
@@ -147,18 +145,33 @@ struct AuctionsStructures: View {
                     .cornerRadius(10)
                     .padding(.trailing, 10)
             }
-
+            */
+            
+            Image("png-defaultImage")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+                .cornerRadius(10)
+                .padding(.trailing, 10)
+            
             VStack(alignment: .leading, spacing: 4) {
-                Text("\(title)")
+                Text("\(auction.title ?? "N/A")")
                     .font(.headline)
                     .foregroundColor(.black)
                 
-                Text("End: 10h" )
-                    .font(.subheadline)
-                    .foregroundColor(.red)
-                    .bold()
-                
-                Text("2000€")
+                if let endOfAuction = auction.endOfAuction {
+                    Text("End : \(endOfAuction)")
+                        .font(.subheadline)
+                        .foregroundColor(.red)
+                        .bold()
+                } else if let timer = auction.timer {
+                    Text("Timer : \(timer) h")
+                        .font(.subheadline)
+                        .foregroundColor(.red)
+                        .bold()
+                }
+            
+                Text("\(auction.currentPrice ?? 0)€")
                     .font(.subheadline)
                     .foregroundColor(.green)
                     .bold()

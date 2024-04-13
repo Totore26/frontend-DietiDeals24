@@ -7,6 +7,6 @@
 
 protocol BuyerAPI {
     
-    func getFollowedAuctions(accountId: String) -> [Auction]
+    func getFollowedAuctions(accountId: String) -> [AuctionData]
     
 }

@@ -10,7 +10,7 @@ import Alamofire
 //questa classe eredita i metodi di AccountRequest e deve implementare SellerAPI
 class SellerRequest: AccountRequest, SellerAPI {
     
-    func getGeneratedAuctions(accountId: String) -> [Auction] {
+    func getGeneratedAuctions(accountId: String) -> [AuctionData] {
         return []
     }
     

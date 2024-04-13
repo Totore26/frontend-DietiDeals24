@@ -9,9 +9,9 @@ class Bet {
     
     var value : Float
     var buyerAssociated : Buyer
-    var auctionAssociated : Auction
+    var auctionAssociated : AuctionData
     
-    init(value: Float, buyerAssociated: Buyer, auctionAssociated: Auction) {
+    init(value: Float, buyerAssociated: Buyer, auctionAssociated: AuctionData) {
         self.value = value
         self.buyerAssociated = buyerAssociated
         self.auctionAssociated = auctionAssociated

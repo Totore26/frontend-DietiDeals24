@@ -7,13 +7,13 @@
 
 protocol AuctionAPI {
     
-    func getAllActiveAuctions(completion: @escaping (Result<[AuctionProtocol], Error>) -> Void)
+    func getAllActiveAuctions(completion: @escaping (Result<[AuctionData], Error>) -> Void)
     
-    func getAuctionById(auctionId: String) -> Auction?
+    func getAuctionById(auctionId: String) -> AuctionData?
     
-    func createAuction(auction: Auction)
+    func createAuction(auction: AuctionData)
     
-    func updateAuction(auction: Auction)
+    func updateAuction(auction: AuctionData)
     
 }
  

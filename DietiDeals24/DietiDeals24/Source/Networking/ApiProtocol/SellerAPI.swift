@@ -7,6 +7,6 @@
 
 protocol SellerAPI {
     
-    func getGeneratedAuctions(accountId: String) -> [Auction]
+    func getGeneratedAuctions(accountId: String) -> [AuctionData]
     
 }

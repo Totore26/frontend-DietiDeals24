@@ -41,8 +41,8 @@ class AuthenticationRequest: AuthenticationAPI {
             .responseString { response in
                 switch response.result {
                 case .success(let tokenResponse):
-                    autenticationToken = tokenResponse
-                    print("\n\n \(autenticationToken) \n\n")
+                    authToken = tokenResponse
+                    print("\n\n \(authToken) \n\n")
                     completion(.success(()))
                         
                 case .failure(let error):

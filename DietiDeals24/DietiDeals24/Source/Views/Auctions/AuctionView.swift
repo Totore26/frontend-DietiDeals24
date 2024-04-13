@@ -9,8 +9,12 @@ import SwiftUI
 
 struct AuctionView: View {
     
-    @StateObject var viewModel = AuctionViewModel()
-    @EnvironmentObject var sessionManager : SessionManager
+    @ObservedObject var viewModel: AuctionViewModel
+    @EnvironmentObject var sessionManager: SessionManager
+    
+    init(viewModel: AuctionViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         VStack() {
@@ -27,16 +31,16 @@ struct AuctionView: View {
                         .frame(height: 20)
                     
                     //MARK: TITOLO E CATEGORIA
-                    Text(viewModel.auction.name)
+                    Text(viewModel.auction.title ?? "N/A")
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    Text("Category: \(viewModel.auction.category)")
+                    Text("Category: \(viewModel.auction.category ?? "N/A")")
                         .font(.subheadline)
                         .fontWeight(.bold)
                     
                     //MARK: IMMAGINE
-                    Image(viewModel.auction.imageName)
+                    Image(viewModel.auction.imageAuction ?? "png-defaultImage")
                         .resizable()
                         .onTapGesture {
                             withAnimation {
@@ -62,18 +66,18 @@ struct AuctionView: View {
                         )
                     
                     if sessionManager.isSellerSession {
-                        if viewModel.auction.sellerIsYou {
-                            if viewModel.auction.auctionType == .fixed {
+                        if viewModel.sellerIsYou() {
+                            if let minimumSecretThreshold = viewModel.auction.minimumSecretThreshold {
                                 Text("SPECIFIED MINIMUM TRESHOLD:")
                                     .bold()
                                     .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
-                                Text(viewModel.auction.specifiedMinimumThreshold ?? "")
+                                Text("\(viewModel.auction.minimumSecretThreshold ?? 0)")
                                     .bold()
                                     .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
                             }
                         }
                     } else {
-                        if viewModel.auction.auctionType == .fixed {
+                        if let bool = viewModel.auction.endOfAuction {
                             OfferMoreButton(title: "Offer more", fontSize: 18, action: {
                                 viewModel.isShowedOfferSheetView.toggle()
                             })
@@ -87,7 +91,7 @@ struct AuctionView: View {
                                 viewModel.isShowedOfferSheetView.toggle()
                             })
                             .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
-                                ConfirmIncrementalOfferView(raisingThreshold: $viewModel.raisingThreshold, 
+                                ConfirmIncrementalOfferView(raisingThreshold: $viewModel.raisingThreshold,
                                                             currentOffer: $viewModel.currentOffer,
                                                             isShowedOfferSheetView: $viewModel.isShowedOfferSheetView
                                 )
@@ -99,7 +103,7 @@ struct AuctionView: View {
                         .font(.headline)
                         .fontWeight(.bold)
                         .padding(.trailing, 250)
-                    Text(viewModel.auction.description)
+                    Text(viewModel.auction.description ?? "")
                         .padding(.horizontal, 330)
                         .padding(.leading, -40)
                     
@@ -113,8 +117,9 @@ struct AuctionView: View {
                                 Text("Seller:")
                                     .bold()
                                     .padding(.trailing,280)
+                                    
                                 
-                                if viewModel.auction.sellerIsYou {
+                                if viewModel.sellerIsYou() {
                                     Text("YOU")
                                         .bold()
                                         .padding(.trailing,290)
@@ -124,11 +129,12 @@ struct AuctionView: View {
                                     Button(action: {
                                         // Action per visualizzare il profilo del venditore
                                     }) {
-                                        Text(viewModel.auction.sellerName)
+                                        Text(viewModel.auction.creator.email ?? "Seller Name")
                                             .bold()
-                                            .padding(.trailing,175)
+                                            .padding(.trailing,160)
                                             .foregroundColor(.black.opacity(0.5))
                                             .underline()
+                                            .fixedSize()
                                     }
                                 }
                             }
@@ -148,11 +154,12 @@ struct AuctionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $viewModel.isFullScreen) {
                 // Contenuto a schermo intero
-                FullScreenImageView(imageName: viewModel.auction.imageName, isFullScreen: $viewModel.isFullScreen)
+                FullScreenImageView(imageName: viewModel.auction.imageAuction ?? "png-defaultImage", isFullScreen: $viewModel.isFullScreen)
             }
         }
     }
 }
+
 
 struct FullScreenImageView: View {
     let imageName: String
@@ -225,69 +232,65 @@ struct ConfirmIncrementalOfferView: View {
 }
 
 
-struct FixedTimeAuctionView_Previews: PreviewProvider {
-    static var previews: some View {
-        AuctionView()
-    }
-}
-
-
 struct AuctionDataSection: View {
     @ObservedObject var viewModel: AuctionViewModel
     
     var body: some View {
         VStack {
-            if viewModel.auction.auctionType == .fixed { // Asta fixed
+            if let endOfAuction = viewModel.auction.endOfAuction { // Asta fixed
                 HStack {
-                    Text("End of the auction:")
+                    Text("End :")
                         .bold()
-                    Text(viewModel.auction.endTime) // Attributo dell'asta
+                    Text(viewModel.auction.endOfAuction ?? "N/A") // Attributo dell'asta
                         .bold()
                         .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
-                        .padding(.trailing, 83)
-                }
+                    Spacer() // Spinge verso sinistra
+                }.padding(.leading)
             } else { // Asta incrementale
                 HStack {
                     Text("Time to bet:")
                         .bold()
-                    Text("0d 4h 0m") // Attributo dell'asta
+                    Text("\(viewModel.auction.timer ?? 0) h") // Attributo dell'asta
                         .bold()
                         .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
-                }
-                .padding(.trailing, 150)
+                    Spacer() // Spinge verso sinistra
+                }.padding(.leading)
             }
             
             HStack {
                 Text("Current Offer:")
                     .bold()
-                Text(viewModel.auction.currentOffer) // Attributo dell'asta
+                Text("\(viewModel.auction.currentPrice ?? 0) € ") // Attributo dell'asta
                     .bold()
                     .foregroundColor(Color(red: 51/255, green: 204/255, blue: 153/255))
-            }.padding(.trailing, 143)
+                Spacer() // Spinge verso sinistra
+            }.padding(.leading)
             
-            if viewModel.auction.auctionType == .fixed { // Attributo dell'asta
+            if let bool = viewModel.auction.endOfAuction { // Attributo dell'asta
                 HStack {
                     Text("Type of Auction:")
                         .bold()
                     Text("Fixed-Time")
                         .bold()
-                }.padding(.trailing, 100)
+                    Spacer() // Spinge verso sinistra
+                }.padding(.leading)
             } else {
                 HStack {
                     Text("Type of Auction:")
                         .bold()
                     Text("English")
                         .bold()
-                }.padding(.trailing, 130)
+                    Spacer() // Spinge verso sinistra
+                }.padding(.leading)
             }
             
             HStack {
                 Text("Location:")
                     .bold()
-                Text(viewModel.auction.location) // Attributo dell'asta
+                Text(viewModel.auction.location ?? "not available") // Attributo dell'asta
                     .bold()
-            }.padding(.trailing, 180)
-            
+                Spacer() // Spinge verso sinistra
+            }.padding(.leading)
         }
     }
 }

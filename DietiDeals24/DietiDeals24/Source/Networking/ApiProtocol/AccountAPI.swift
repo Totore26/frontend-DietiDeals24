@@ -11,7 +11,7 @@ import Foundation
 protocol AccountAPI {
     
     
-    func getHomeAuctionByUsername(accountUsername : String, resultHandlerCallBack: @escaping (Result<Auction, APIError>) -> Void)
+    func getHomeAuctionByUsername(accountUsername : String, resultHandlerCallBack: @escaping (Result<AuctionData, APIError>) -> Void)
     
     func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Account, APIError>) -> Void)
     

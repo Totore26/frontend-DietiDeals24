@@ -11,7 +11,7 @@
 		0301F8A12B7FAE93008BDC5E /* AWSCognitoAuthPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 0301F8A02B7FAE93008BDC5E /* AWSCognitoAuthPlugin */; };
 		0301F8A32B7FAE93008BDC5E /* AWSS3StoragePlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 0301F8A22B7FAE93008BDC5E /* AWSS3StoragePlugin */; };
 		0301F8A52B7FAE93008BDC5E /* Amplify in Frameworks */ = {isa = PBXBuildFile; productRef = 0301F8A42B7FAE93008BDC5E /* Amplify */; };
-		030315E12B246DA400D2044A /* AuctionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E02B246DA400D2044A /* AuctionProtocol.swift */; };
+		030315E12B246DA400D2044A /* Auction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030315E02B246DA400D2044A /* Auction.swift */; };
 		03123C2C2B318D8300CD7FB5 /* infoAuctionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */; };
 		0322F2652B863DC800F359CC /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0322F2642B863DC800F359CC /* SessionManager.swift */; };
 		032B9B762B2C4CBB005566A6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032B9B752B2C4CBB005566A6 /* ProfileView.swift */; };
@@ -22,14 +22,12 @@
 		033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033825A72B260E23008AFC3D /* TabBarHomeView.swift */; };
 		033A76672B2DF36A0032052E /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033A76662B2DF36A0032052E /* NotificationView.swift */; };
 		034606DE2B2F305700BA9295 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 034606DD2B2F305700BA9295 /* Algorithms */; };
-		035872CD2B615E7E00C3AEFC /* AccountProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872CC2B615E7E00C3AEFC /* AccountProtocol.swift */; };
+		035872CD2B615E7E00C3AEFC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872CC2B615E7E00C3AEFC /* Account.swift */; };
 		035872CF2B61602600C3AEFC /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872CE2B61602600C3AEFC /* Seller.swift */; };
 		035872D12B61603500C3AEFC /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D02B61603500C3AEFC /* Buyer.swift */; };
 		035872D32B61615400C3AEFC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D22B61615400C3AEFC /* Notification.swift */; };
 		035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D42B61653A00C3AEFC /* SocialLink.swift */; };
-		035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D62B616B4500C3AEFC /* FixedTimeAuction.swift */; };
 		035872D92B616D7200C3AEFC /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D82B616D7200C3AEFC /* Bet.swift */; };
-		035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872DA2B616DEB00C3AEFC /* IncrementalAuction.swift */; };
 		038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */; };
 		038407732B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407722B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift */; };
 		038407752B3F0D0000CD9501 /* AuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407742B3F0D0000CD9501 /* AuctionView.swift */; };
@@ -98,7 +96,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		030315E02B246DA400D2044A /* AuctionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionProtocol.swift; sourceTree = "<group>"; };
+		030315E02B246DA400D2044A /* Auction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auction.swift; sourceTree = "<group>"; };
 		03123C2B2B318D8300CD7FB5 /* infoAuctionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = infoAuctionsView.swift; sourceTree = "<group>"; };
 		0322F2642B863DC800F359CC /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		032B9B752B2C4CBB005566A6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -108,14 +106,12 @@
 		032F929E2B7FAF69002621BD /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		033825A72B260E23008AFC3D /* TabBarHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarHomeView.swift; sourceTree = "<group>"; };
 		033A76662B2DF36A0032052E /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		035872CC2B615E7E00C3AEFC /* AccountProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountProtocol.swift; sourceTree = "<group>"; };
+		035872CC2B615E7E00C3AEFC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		035872CE2B61602600C3AEFC /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
 		035872D02B61603500C3AEFC /* Buyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
 		035872D22B61615400C3AEFC /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		035872D42B61653A00C3AEFC /* SocialLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLink.swift; sourceTree = "<group>"; };
-		035872D62B616B4500C3AEFC /* FixedTimeAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTimeAuction.swift; sourceTree = "<group>"; };
 		035872D82B616D7200C3AEFC /* Bet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
-		035872DA2B616DEB00C3AEFC /* IncrementalAuction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalAuction.swift; sourceTree = "<group>"; };
 		038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFixedTimeAuctionView.swift; sourceTree = "<group>"; };
 		038407722B3F0CAF00CD9501 /* CreateIncrementalAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIncrementalAuctionView.swift; sourceTree = "<group>"; };
 		038407742B3F0D0000CD9501 /* AuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionView.swift; sourceTree = "<group>"; };
@@ -215,14 +211,12 @@
 		030315DE2B246D5700D2044A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				035872CC2B615E7E00C3AEFC /* AccountProtocol.swift */,
+				035872CC2B615E7E00C3AEFC /* Account.swift */,
 				035872CE2B61602600C3AEFC /* Seller.swift */,
 				035872D02B61603500C3AEFC /* Buyer.swift */,
 				035872D22B61615400C3AEFC /* Notification.swift */,
 				035872D42B61653A00C3AEFC /* SocialLink.swift */,
-				030315E02B246DA400D2044A /* AuctionProtocol.swift */,
-				035872D62B616B4500C3AEFC /* FixedTimeAuction.swift */,
-				035872DA2B616DEB00C3AEFC /* IncrementalAuction.swift */,
+				030315E02B246DA400D2044A /* Auction.swift */,
 				035872D82B616D7200C3AEFC /* Bet.swift */,
 			);
 			path = Models;
@@ -613,7 +607,7 @@
 			files = (
 				035872CF2B61602600C3AEFC /* Seller.swift in Sources */,
 				038407752B3F0D0000CD9501 /* AuctionView.swift in Sources */,
-				035872CD2B615E7E00C3AEFC /* AccountProtocol.swift in Sources */,
+				035872CD2B615E7E00C3AEFC /* Account.swift in Sources */,
 				26D219872B26164600942747 /* MyAuctionsView.swift in Sources */,
 				26DEF6FF2B237B8000700AC1 /* Buttons.swift in Sources */,
 				2652882E2B30972C001A4AB9 /* SettingsView.swift in Sources */,
@@ -631,7 +625,6 @@
 				26B510252BBDCBD8002D6FFE /* ImagePicker.swift in Sources */,
 				03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */,
 				033A76672B2DF36A0032052E /* NotificationView.swift in Sources */,
-				035872DB2B616DEB00C3AEFC /* IncrementalAuction.swift in Sources */,
 				03A6EE812B235D2500163DB6 /* TextField.swift in Sources */,
 				038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */,
 				2620C0262B61839C00B9DC44 /* NotificationViewModel.swift in Sources */,
@@ -658,8 +651,7 @@
 				260882292B6DAB8F00C67B9D /* ConfigurationNetworking.swift in Sources */,
 				26B510272BBDCE93002D6FFE /* LoginViewModel.swift in Sources */,
 				2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */,
-				035872D72B616B4500C3AEFC /* FixedTimeAuction.swift in Sources */,
-				030315E12B246DA400D2044A /* AuctionProtocol.swift in Sources */,
+				030315E12B246DA400D2044A /* Auction.swift in Sources */,
 				035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */,
 				2620C0282B6183B100B9DC44 /* ProfileViewModel.swift in Sources */,
 				2608822B2B6DAD9800C67B9D /* AuthenticationAPI.swift in Sources */,
@@ -832,7 +824,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -863,7 +855,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

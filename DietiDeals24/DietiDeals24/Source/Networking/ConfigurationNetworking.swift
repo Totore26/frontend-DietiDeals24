@@ -8,7 +8,7 @@
 import Alamofire
 
 
-var autenticationToken: String = ""
+var authToken: String = ""
 
 struct baseURL {
     static let baseURL = "http://localhost:8080/"

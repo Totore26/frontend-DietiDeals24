@@ -1,15 +1,16 @@
 //
-//  Buyer.swift
+//  Account.swift
 //  DietiDeals24X
 //
 //  Created by Francesco Terrecuso on 24/01/24.
 //
 
-class Buyer: Codable {
+import Foundation
 
-    var notifications: Array<Notification>?
-    var socialLinks: Array<SocialLink>?
-    var followedAuction: Array<AuctionData>?
+struct Account: Codable {
+    
+    var notifications: [Notification]?
+    var socialLinks: [SocialLink]?
     var fullName: String
     var imageAccount: String?
     var email: String
@@ -17,33 +18,29 @@ class Buyer: Codable {
     var description: String?
     var telephoneNumber: String
     var country: String?
-
+    
     enum CodingKeys: String, CodingKey {
-        case notifications
-        case socialLinks
-        case followedAuction
-        case fullName
-        case imageAccount
-        case email
-        case password
-        case description
-        case telephoneNumber
-        case country
-    }
-
-    init(fullName: String, imageAccount: String? = nil, email: String, password: String, description: String? = nil, telephoneNumber: String, country: String? = nil) {
-        self.fullName = fullName
-        self.imageAccount = imageAccount
-        self.email = email
-        self.password = password
-        self.description = description
-        self.telephoneNumber = telephoneNumber
-        self.country = country
+        case notifications, socialLinks, fullName, imageAccount, email, password, description, telephoneNumber, country
     }
     
-    required init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-
+    // Aggiunto un init personalizzato per inizializzare le proprietà richieste.
+    init(fullName: String, email: String, password: String, telephoneNumber: String) {
+        self.notifications = nil
+        self.socialLinks = nil
+        self.fullName = fullName
+        self.imageAccount = nil
+        self.email = email
+        self.password = password
+        self.description = nil
+        self.telephoneNumber = telephoneNumber
+        self.country = nil
+    }
+    
+    // Aggiunte implementazioni dei metodi per la codifica e la decodifica.
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        notifications = try container.decodeIfPresent([Notification].self, forKey: .notifications)
+        socialLinks = try container.decodeIfPresent([SocialLink].self, forKey: .socialLinks)
         fullName = try container.decode(String.self, forKey: .fullName)
         imageAccount = try container.decodeIfPresent(String.self, forKey: .imageAccount)
         email = try container.decode(String.self, forKey: .email)
@@ -52,10 +49,12 @@ class Buyer: Codable {
         telephoneNumber = try container.decode(String.self, forKey: .telephoneNumber)
         country = try container.decodeIfPresent(String.self, forKey: .country)
     }
-
+    
+    
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
+        try container.encodeIfPresent(notifications, forKey: .notifications)
+        try container.encodeIfPresent(socialLinks, forKey: .socialLinks)
         try container.encode(fullName, forKey: .fullName)
         try container.encodeIfPresent(imageAccount, forKey: .imageAccount)
         try container.encode(email, forKey: .email)
