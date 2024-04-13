@@ -7,11 +7,11 @@
 
 import Foundation
 
-class IncrementalAuction: AuctionProtocol {
+class IncrementalAuction: AuctionProtocol , Decodable {
+    
+    var id: String
     
     var creator: String
-    
-    var imageAuction: String
     
     var title: String
     
@@ -27,9 +27,9 @@ class IncrementalAuction: AuctionProtocol {
     
     var timer : Data
 
-    init(creator: String, imageAuction: String, title: String, description: String, location: String, category: String, raisingThreshold: Float, startingPrice: Float, timeToBet: Data) {
+    init(id: String, creator: String, title: String, description: String, location: String, category: String, raisingThreshold: Float, startingPrice: Float, timeToBet: Data) {
+        self.id = id
         self.creator = creator
-        self.imageAuction = imageAuction
         self.title = title
         self.description = description
         self.location = location

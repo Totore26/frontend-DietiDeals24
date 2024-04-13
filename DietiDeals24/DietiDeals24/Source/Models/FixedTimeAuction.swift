@@ -7,11 +7,11 @@
 
 import Foundation
 
-class FixedTimeAuction: AuctionProtocol {
+class FixedTimeAuction: AuctionProtocol, Decodable {
+    
+    var id: String
     
     var creator: String
-    
-    var imageAuction: String
     
     var title: String
     
@@ -25,9 +25,9 @@ class FixedTimeAuction: AuctionProtocol {
     
     var minimumSecretThreshold: Float
     
-    init(creator: String, imageAuction: String, title: String, description: String, location: String, category: String, endOfAuction: Date, minimumSecretThreshold: Float) {
+    init(id: String, creator: String, title: String, description: String, location: String, category: String, endOfAuction: Date, minimumSecretThreshold: Float) {
+        self.id = id
         self.creator = creator
-        self.imageAuction = imageAuction
         self.title = title
         self.description = description
         self.location = location
