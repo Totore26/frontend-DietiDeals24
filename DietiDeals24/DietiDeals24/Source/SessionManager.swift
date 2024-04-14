@@ -21,7 +21,6 @@ class SessionManager : ObservableObject {
     @Published var authState : AuthState = .login
     @Published var errorBanner : String? = ""
     @Published var isSellerSession = false
-    @Published var authToken = "" //TODO: Implementare il salvataggio dell'authToken
 
     public func getCurrentAuthUser() async {
         do {

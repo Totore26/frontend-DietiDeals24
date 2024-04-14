@@ -1,3 +1,6 @@
+
+
+
 import Alamofire
 import Foundation
 
@@ -6,8 +9,7 @@ class AuthenticationRequest: AuthenticationAPI {
     static let singleton = AuthenticationRequest()
     var url: String = ""
 
-    private init() {
-    }
+    private init() {}
 
     func addUserRequest(fullname: String, email: String, telephoneNumber: String, completion: @escaping (Result<Void, Error>) -> Void) {
         url = baseURL.append(path: "account/user")
@@ -50,11 +52,5 @@ class AuthenticationRequest: AuthenticationAPI {
                 }
             }
     }
-
-
-    
-    
-    
-    
     
 }

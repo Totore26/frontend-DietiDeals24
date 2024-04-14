@@ -13,17 +13,26 @@ import Foundation
 
 class AuctionRequest: AuctionAPI {
     
+    
+    
     func getAuctionById(auctionId: String) -> AuctionData? {
         return nil
     }
+    
+    
     
     func createAuction(auction: AuctionData) {
         
     }
     
+    
+    
     func updateAuction(auction: AuctionData) {
         
     }
+    
+    
+    
 
     func getAllActiveAuctions(completion: @escaping (Result<[AuctionData], Error>) -> Void) {
         let url = baseURL.append(path: "auction/home")
@@ -41,6 +50,26 @@ class AuctionRequest: AuctionAPI {
             }
         }
     }
+    
+    
+    func getMyAuctionBuyer(){
+        
+    }
+    
+    func getMyAuctionSeller(){
+        
+    }
+    
+    func filterAuctions() {
+        
+    }
+    
+    
+    
+    
+    
+    
+    
 }
 
     
