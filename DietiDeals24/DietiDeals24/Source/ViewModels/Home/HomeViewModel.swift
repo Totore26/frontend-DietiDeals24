@@ -28,7 +28,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func getAllAuctions() {
-        api.getAllActiveAuctions { result in
+        api.getAllActiveAuctionsAPI { result in
             switch result {
             case .success(let auctions):
                 DispatchQueue.main.async { [weak self] in
@@ -36,7 +36,7 @@ class HomeViewModel: ObservableObject {
                 }
                 print("Aste recuperate con successo:")
                 for auction in auctions {
-                    print(auctions)
+                    print("\(auction.id ?? "N/A")")
                 }
             case .failure(let error):
                 print("Errore nel recupero delle aste attive: \(error)")

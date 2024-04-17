@@ -6,24 +6,76 @@
 //
 
 import Alamofire
+import Foundation
 
 class AccountRequest: AccountAPI {
     
     
-    func getHomeAuctionByUsername(accountUsername: String, resultHandlerCallBack: @escaping (Result<AuctionData, APIError>) -> Void) {
+    func getInfoBuyerAccountAPI(completion: @escaping (Result<Account, Error>) -> Void, username : String) {
+        let url = baseURL.append(path: "account/info/buyer/\(username)")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        // Effettua la richiesta HTTP utilizzando Alamofire
+        AF.request(url, method: .get, headers: headers).validate()
+            .responseDecodable(of: Account.self) { response in
+                switch response.result {
+                case .success(let account):
+                    completion(.success(account))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
     
-    //@escaping serve per eseguire la closure in modo asincrono (modo piu semplice e veloce di tutti)
-    func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Account, APIError>) -> Void){
+    func getInfoSellerAccountAPI(completion: @escaping (Result<Account, Error>) -> Void, username : String) {
+        let url = baseURL.append(path: "account/info/seller/\(username)")
         
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        // Effettua la richiesta HTTP utilizzando Alamofire
+        AF.request(url, method: .get, headers: headers).validate()
+            .responseDecodable(of: Account.self) { response in
+                switch response.result {
+                case .success(let account):
+                    completion(.success(account))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
     
-    func addAccount(account: Account) {
-        
-    }
     
-    func updateAccount(account: Account) {
+    
+    
+    func modifyAccountAttributeAPI(json: Data, completion: @escaping (Result<Account, Error>) -> Void) {
+        let url = baseURL.append(path: "account/buyer/modifyAccount")
         
+        do {
+            guard let parameters = try JSONSerialization.jsonObject(with: json, options: []) as? Parameters else {
+                print("Non è possibile convertire i dati JSON in Parameters")
+                return
+            }
+            
+            let headers: HTTPHeaders = [
+                "Authorization": "Bearer \(authToken)",
+                "Content-Type": "application/json"
+            ]
+            
+            AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate()
+                .responseDecodable(of: Account.self) { response in
+                    switch response.result {
+                    case .success(let account):
+                        completion(.success(account))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+        } catch {
+            print("Errore durante la serializzazione dei dati JSON: \(error.localizedDescription)")
+        }
     }
     
 }

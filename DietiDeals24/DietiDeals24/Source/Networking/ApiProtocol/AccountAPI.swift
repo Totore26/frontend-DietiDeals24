@@ -10,14 +10,12 @@ import Foundation
 
 protocol AccountAPI {
     
+    func getInfoBuyerAccountAPI(completion: @escaping (Result<Account, Error>) -> Void, username : String)
     
-    func getHomeAuctionByUsername(accountUsername : String, resultHandlerCallBack: @escaping (Result<AuctionData, APIError>) -> Void)
+    func getInfoSellerAccountAPI(completion: @escaping (Result<Account, Error>) -> Void, username : String)
+
+    func modifyAccountAttributeAPI(json: Data, completion: @escaping (Result<Account, Error>) -> Void)
     
-    func getAccountById(accountId: String, resultHandlerCallBack: @escaping (Result<Account, APIError>) -> Void)
-    
-    func addAccount(account: Account) 
-    
-    func updateAccount(account: Account)
     
 }
 

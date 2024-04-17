@@ -16,6 +16,7 @@ class EditProfileViewModel: ObservableObject {
     @Published var showProfileSavedBanner: Bool
     @Published var link1 : String
     @Published var link2 : String
+    //@Published var user : Auth
     
     init() {
         self.profileImage = nil
@@ -32,6 +33,25 @@ class EditProfileViewModel: ObservableObject {
         showProfileSavedBanner = true
     }
     
+ /*
+    private func prepareJSON() -> Data? {
+            let json: [String: Any] = [
+                "email" : email,
+                "fullName": fullName,
+                "country": nationality,
+                "description": description,
+                "link": link1,
+                "link": link2
+            ]
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+                return jsonData
+            } catch {
+                print("Error preparing JSON: \(error.localizedDescription)")
+                return nil
+            }
+        }
     
-
+    */
 }

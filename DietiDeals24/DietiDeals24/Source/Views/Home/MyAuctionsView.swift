@@ -11,28 +11,34 @@ struct MyAuctionsView: View {
     
     @ObservedObject var myAuctionViewModel: MyAuctionsViewModel
     @State private var searchText = ""
+    @EnvironmentObject var sessionManager : SessionManager
     
     var body: some View {
         
         NavigationView {
             ScrollView {
-                
                 VStack(spacing: 20) {
-                    ForEach(0..<20) { index in
-                        
-                        //TODO: Inserisco i dati dell'asta specifica per creare l'oggetto ViewAuctions,
-                        ///mentre come imageName, title e subtitle gli passo gli attributi.
-                        NavigationLink(destination: self) {
-                            MyAuctionsStructures(
-                                  imageName: "png-sfondo",
-                                  title: "Titolo dell'elemento \(index)",
-                                  subtitle: "Sottotitolo dell'elemento \(index)"
-                            )
+                    
+                    if myAuctionViewModel.myAuctions.isEmpty {
+                        Text("You are not following any auctions.")
+                            .foregroundColor(.gray)
+                            .italic()
+                            .padding()
+                    }
+                    
+                    
+                    LazyVStack{
+                        ForEach(myAuctionViewModel.myAuctions.prefix(8), id: \.id) { myAuction in
+                            NavigationLink(destination: AuctionView(
+                                viewModel: AuctionViewModel(user: myAuctionViewModel.user.username , auction: myAuction)
+                            )) {
+                                AuctionsStructures(auction : myAuction)
+                            }
                         }
                     }
+                    .padding(.top, 20)
+                    .padding(.bottom, 100)
                 }
-                .padding(.top, 20)
-                .padding(.bottom, 100)
             }
             .background(
                     Color(
@@ -56,51 +62,6 @@ struct MyAuctionsView: View {
         }
     }
 }
-
-
-
-// TODO: Gestisce cosa mostrare a seconda se è buyer o seller!!
-struct MyAuctionsStructures: View {
-    let imageName: String
-    let title: String
-    let subtitle: String
-
-    var body: some View {
-        HStack {
-            
-            // Immagine
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .cornerRadius(10)
-                .padding(.trailing, 10)
-
-            // Titolo e sottotitolo
-            VStack(alignment: .leading, spacing: 4) {
-                Text("\(title)")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                
-                Text("Auction close" )
-                    .font(.headline)
-                    .foregroundColor(.gray)
-                    .bold()
-                
-            }
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
-
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
-        .background(Color.white)
-        .cornerRadius(10)
-        .padding(.horizontal, 10)
-    }
-}
-
 
 
 struct MyAuctionsView_Previews: PreviewProvider {

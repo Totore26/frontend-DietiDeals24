@@ -10,7 +10,7 @@ import SwiftUI
 struct NotificationView: View {
     
     @ObservedObject var notificationViewModel : NotificationViewModel
-    
+    @EnvironmentObject var sessionManager : SessionManager
     @State private var isDetailViewPresented = false
     
     var body: some View {

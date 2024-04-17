@@ -20,11 +20,11 @@ struct ProfileView: View {
     
     
     @State var isEditProfileSheetPresented = false
-    @State var isPersonalProfile = true
+    
     var body: some View {
         NavigationView {
             ScrollView {
-                ProfileStructure()
+                ProfileStructure(viewModel: viewModel)
                     .padding(.top, 30)
             }
             .background(Color(
@@ -38,7 +38,7 @@ struct ProfileView: View {
            .navigationBarTitleDisplayMode(.inline)
            .navigationBarItems(trailing:
                 HStack {
-                   if isPersonalProfile { //mostro il tasto di modifica solo se chi lo vede è il proprietario
+               if (viewModel.isPersonalProfile()) { //mostro il tasto di modifica solo se chi lo vede è il proprietario
                        Button(action: {
                            isEditProfileSheetPresented.toggle()
                        }) {
@@ -71,20 +71,21 @@ struct ProfileView: View {
 
 
 struct ProfileStructure: View {
+    var viewModel : ProfileViewModel
     
     var body: some View {
         VStack {
             
-            FullnamePhotoNazionalityProfile()
+            FullnamePhotoNazionalityProfile(viewModel : viewModel)
             
-            DescriptionsProfile()
+            DescriptionsProfile(viewModel : viewModel)
             
             //TODO: la logica per aprire l'url va messa nel viewmodel
-            LinksProfile()
+            LinksProfile(viewModel : viewModel)
             
             FormattedSeparator().padding()
             //TODO: gestire il click sul viewmodel
-            ContactsButtons()
+            ContactsButtons(viewModel : viewModel)
         }
     }
 }
@@ -92,6 +93,7 @@ struct ProfileStructure: View {
 
 
 struct FullnamePhotoNazionalityProfile: View {
+    var viewModel : ProfileViewModel
     var body: some View {
         HStack(alignment: .center) {
             Image(systemName: "person.crop.circle.fill")
@@ -102,14 +104,13 @@ struct FullnamePhotoNazionalityProfile: View {
                 .padding()
             
             VStack(alignment: .center) {
-                Text("GIAMPIERO ESPOSITO")
+                Text("\(viewModel.fullName)")
                     .font(.title2)
                     .bold()
                     .font(Font.custom("SF Pro", size: 20))
                     .padding()
                 
-                Text("I'm a seller!")
-                Text("Italy")
+                Text("\(viewModel.country)")
                 
             }
             
@@ -124,6 +125,8 @@ struct FullnamePhotoNazionalityProfile: View {
 
 
 struct DescriptionsProfile: View {
+    
+    var viewModel : ProfileViewModel
     var body: some View {
         VStack {
             Text("Description:")
@@ -133,7 +136,7 @@ struct DescriptionsProfile: View {
                 .padding(.trailing, 260)
                 .padding(.top, 20)
             
-            Text("Welcome to my profile as a passionate collector and auction participant! I'm Giampiero, a lover of art, antiques and rarities.")
+            Text("\(viewModel.description)")
                 .multilineTextAlignment(.leading)
                 .font(Font.custom("SF Compact", size: 16))
                 .foregroundColor(Color(red: 0.25, green: 0.25, blue: 0.25))
@@ -145,10 +148,12 @@ struct DescriptionsProfile: View {
 
 
 struct ContactsButtons: View {
+    var viewModel : ProfileViewModel
+    
     var body: some View {
         HStack(spacing: 30) {
             Button(action: {
-                if let phoneURL = URL(string: "tel://123456789") {
+                if let phoneURL = URL(string: "tel://\(viewModel.phoneNumber)") {
                     UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
                 }
                 
@@ -163,7 +168,7 @@ struct ContactsButtons: View {
             }
             Button(action: {
                 // Apri il compositore di posta elettronica
-                if let emailURL = URL(string: "mailto:example@email.com") {
+                if let emailURL = URL(string: "\(viewModel.email)") {
                     if UIApplication.shared.canOpenURL(emailURL) {
                         UIApplication.shared.open(emailURL, options: [:], completionHandler: nil)
                     }
@@ -187,15 +192,17 @@ struct ContactsButtons: View {
 
 
 struct LinksProfile: View {
+    var viewModel : ProfileViewModel
+    
     var body: some View {
         VStack {
             Button(action: {
                 // TODO: Inserisci la logica nel viewmodel
-                if let url = URL(string: "http://www.facebook/account.com") {
+                if let url = URL(string: "\(viewModel.link1)") {
                     UIApplication.shared.open(url)
                 }
             }) {
-                Text("Visit Facebook")
+                Text("Visit social 1")
                     .font(Font.custom("SF Compact", size: 18))
                     .lineSpacing(22)
                     .foregroundColor(.black)
@@ -207,11 +214,11 @@ struct LinksProfile: View {
 
             Button(action: {
                 // TODO: Inserisci la logica nel viewmodel
-                if let url = URL(string: "http://www.twitter/account.com") {
+                if let url = URL(string: "\(viewModel.link2)") {
                     UIApplication.shared.open(url)
                 }
             }) {
-                Text("Visit Twitter")
+                Text("Visit social 2")
                     .font(Font.custom("SF Compact", size: 18))
                     .lineSpacing(22)
                     .foregroundColor(.black)

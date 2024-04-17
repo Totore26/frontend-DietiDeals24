@@ -10,14 +10,33 @@ import Amplify
 
 class MyAuctionsViewModel: ObservableObject {
     
+    let api = AuctionRequest()
+    
+    var myAuctions = [AuctionData]()
     let user: AuthUser
     
     init(user: AuthUser) {
         self.user = user
+        getMyAuctionBuyer(username: user.username)
     }
     
+        
     
-    
-    
+    func getMyAuctionBuyer(username: String) {
+        api.getMyAuctionBuyerAPI(completion: { result in
+            switch result {
+            case .success(let auctions):
+                DispatchQueue.main.async { [weak self] in
+                    self?.myAuctions = auctions
+                }
+                print("\n\nAste buyer recuperate con successo:")
+                for auction in auctions {
+                    print("\(auction.id ?? "N/A")")
+                }
+            case .failure(let error):
+                print("Errore nel recupero delle mie aste buyer : \(error)")
+            }
+        }, username: username)
+    }
     
 }
