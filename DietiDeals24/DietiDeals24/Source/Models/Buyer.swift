@@ -7,7 +7,7 @@
 
 class Buyer: Codable {
 
-    var notifications: Array<Notification>?
+    var notifications: Array<NotificationData>?
     var socialLinks: Array<SocialLink>?
     var followedAuction: Array<AuctionData>?
     var fullName: String

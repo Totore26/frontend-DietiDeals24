@@ -6,20 +6,24 @@
 //
 import SwiftUI
 
+
 struct EditProfileSheetView: View {
-    
-    @ObservedObject var viewModel = EditProfileViewModel()
-    @EnvironmentObject var sessionManager : SessionManager
-    
-    @State private var isImagePickerPresented = false
+
+    @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject var sessionManager: SessionManager
     @Environment(\.presentationMode) var presentationMode
+    @State private var isImagePickerPresented = false
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+    }
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Profile Photo")) {
-                    VStack(alignment: .center){
-                        if let profileImage = viewModel.profileImage {
+                    VStack(alignment: .center) {
+                        if let profileImage = viewModel.imageProfile {
                             Image(uiImage: profileImage)
                                 .resizable()
                                 .scaledToFill()
@@ -49,77 +53,67 @@ struct EditProfileSheetView: View {
                         }
                         .padding(.top, 5)
                         .sheet(isPresented: $isImagePickerPresented) {
-                            ImagePicker(image: $viewModel.profileImage)
+                            ImagePicker(image: $viewModel.imageProfile)
                         }
                     }
                 }
                 .padding(.leading, 100)
 
                 Section(header: Text("Personal Information")) {
-                    TextField("Full Name", text: $viewModel.fullName)
-                    TextField("Nationality", text: $viewModel.nationality)
+                    TextField("Full Name", text: Binding(
+                        get: { viewModel.account?.fullName ?? "" },
+                        set: { newValue in viewModel.account?.fullName = newValue }
+                    ))
+                    TextField("Nationality", text: Binding(
+                        get: { viewModel.account?.country ?? "" },
+                        set: { newValue in viewModel.account?.country = newValue }
+                    ))
                 }
 
                 Section(header: Text("Description")) {
-                    TextEditor(text: $viewModel.description)
-                        .frame(height: 100)
+                    TextEditor(text: Binding(
+                        get: { viewModel.account?.description ?? "" },
+                        set: { newValue in viewModel.account?.description = newValue }
+                    ))
+                    .frame(height: 100)
                 }
 
                 Section(header: Text("Contact")) {
-                    NavigationLink(destination: EditContactView(contactType: "Phone Number")) {
-                        Text("Change Phone Number")
-                    }
+                    TextField("Phone Number", text: Binding(
+                        get: { viewModel.account?.telephoneNumber ?? "" },
+                        set: { newValue in viewModel.account?.telephoneNumber = newValue }
+                    ))
+                    TextField("Email", text: Binding(
+                        get: { viewModel.account?.email ?? "" },
+                        set: { newValue in viewModel.account?.email = newValue }
+                    ))
                 }
 
                 Section(header: Text("Social Links")) {
-                    TextField("Link 1", text: $viewModel.link1)
-                    TextField("Link 2", text: $viewModel.link2)
+                    TextField("Link 1", text: Binding(
+                        get: { viewModel.account?.socialLinks?[0].link ?? "" },
+                        set: { newValue in viewModel.account?.socialLinks?[0].link = newValue }
+                    ))
+                    TextField("Link 2", text: Binding(
+                        get: { viewModel.account?.socialLinks?[1].link ?? "" },
+                        set: { newValue in viewModel.account?.socialLinks?[1].link = newValue }
+                    ))
                 }
 
-                Section(header: Text("Edit password")) {
-                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $viewModel.showProfileSavedBanner).environmentObject(sessionManager)) {
+                Section(header: Text("Edit Password")) {
+                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $viewModel.showProfileSavedBanner)) {
                         Text("Change Password")
                     }
                 }
             }
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                //MARK: LOGICA PER SALVARE IL PROFILO.
-                viewModel.saveProfileChanges()
+                viewModel.saveChanges()
             })
             .alert(isPresented: $viewModel.showProfileSavedBanner) {
                 Alert(title: Text("Profile Saved"), message: Text("Changes to your profile have been saved successfully."), dismissButton: .default(Text("OK")))
             }
         }
-        Spacer()
-
-        Button("Close") {
-            presentationMode.wrappedValue.dismiss()
-        }
-        .padding()
-    }
-}
-
-struct EditContactView: View {
-    @State private var newContact = ""
-    @State private var isEditing = false
-    let contactType: String
-
-    var body: some View {
-        Form {
-            Section(header: Text("New \(contactType)")) {
-                TextField("Enter \(contactType)", text: $newContact)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(contactType == "Phone Number" ? .phonePad : .default)
-            }
-        }
-        .navigationBarTitle("Edit \(contactType)", displayMode: .inline)
-        .navigationBarItems(
-            trailing: Button("Save") {
-                //TODO: Implementa l'azione per salvare il nuovo contatto
-            }
-            .disabled(newContact.isEmpty)
-        )
     }
 }
 
@@ -181,9 +175,3 @@ struct EditPasswordView: View {
         }
     }
 }
-
-
-#Preview {
-    EditProfileSheetView()
-}
-

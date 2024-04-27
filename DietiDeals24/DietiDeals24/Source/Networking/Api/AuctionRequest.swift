@@ -103,15 +103,44 @@ class AuctionRequest: AuctionAPI {
         
     }
     
-    func filterAuctions() {
+    func filterAuctions(
+        searchText: String?,
+        category: String?,
+        startingPrice: String?,
+        endingPrice: String?,
+        completion: @escaping (Result<[AuctionData], Error>) -> Void
+    ) {
+        let url = baseURL.append(path: "auction/home/search")
         
+        var parameters: [String: Any] = [:]
+        if let searchText = searchText {
+            parameters["toSearch"] = searchText
+        }
+        if let category = category {
+            parameters["category"] = category
+        }
+        if let startingPrice = startingPrice {
+            parameters["startingPrice"] = startingPrice
+        }
+        if let endingPrice = endingPrice {
+            parameters["endingPrice"] = endingPrice
+        }
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        
+        AF.request(url, method: .get, parameters: parameters, headers: headers)
+            .validate()
+            .responseDecodable(of: [AuctionData].self) { response in
+                switch response.result {
+                case .success(let auctions):
+                    completion(.success(auctions))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
     }
-    
-    
-    
-    
-    
-    
     
 }
 

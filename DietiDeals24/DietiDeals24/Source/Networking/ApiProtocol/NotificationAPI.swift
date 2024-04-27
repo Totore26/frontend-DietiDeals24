@@ -7,11 +7,11 @@
 
 protocol NotificationAPI {
     
-    func getAllNotifications(accountId: String) -> [Notification]
+    func fetchNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void)
     
-    func getNotificationById(notificationId: String) -> Notification?
+    func getNotificationById(notificationId: String) -> NotificationData?
     
-    func updateAllNotifications(updateFunction: (inout Notification) -> Void)
+    func updateAllNotifications(updateFunction: (inout NotificationData) -> Void)
     
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 struct Account: Codable {
     var followedAuctions: [String]?
-    var notifications: [Notification]?
+    var notifications: [NotificationData]?
     var socialLinks: [SocialLink]?
     var fullName: String
     var imageAccount: String?
@@ -25,7 +25,7 @@ struct Account: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         followedAuctions = try container.decodeIfPresent([String].self, forKey: .followedAuctions)
-        notifications = try container.decodeIfPresent([Notification].self, forKey: .notifications)
+        notifications = try container.decodeIfPresent([NotificationData].self, forKey: .notifications)
         socialLinks = try container.decodeIfPresent([SocialLink].self, forKey: .socialLinks)
         fullName = try container.decode(String.self, forKey: .fullName)
         imageAccount = try container.decodeIfPresent(String.self, forKey: .imageAccount)

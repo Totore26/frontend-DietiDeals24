@@ -30,9 +30,6 @@ class MyAuctionsViewModel: ObservableObject {
                     self?.myAuctions = auctions
                 }
                 print("\n\nAste buyer recuperate con successo:")
-                for auction in auctions {
-                    print("\(auction.id ?? "N/A")")
-                }
             case .failure(let error):
                 print("Errore nel recupero delle mie aste buyer : \(error)")
             }

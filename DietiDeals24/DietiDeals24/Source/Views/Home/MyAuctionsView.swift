@@ -12,6 +12,7 @@ struct MyAuctionsView: View {
     @ObservedObject var myAuctionViewModel: MyAuctionsViewModel
     @State private var searchText = ""
     @EnvironmentObject var sessionManager : SessionManager
+    @State private var isRefreshing = false
     
     var body: some View {
         
@@ -59,6 +60,16 @@ struct MyAuctionsView: View {
                 }
             }
             .searchable(text: $searchText)
+        }
+        .refreshable {
+            isRefreshing = true
+            if(!sessionManager.isSellerSession){
+                myAuctionViewModel.getMyAuctionBuyer(username: myAuctionViewModel.user.username)
+            }
+            else{
+                //myAuctionViewModel.getMyAuctionSeller()
+            }
+            isRefreshing = false
         }
     }
 }

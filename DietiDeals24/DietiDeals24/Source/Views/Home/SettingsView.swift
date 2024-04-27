@@ -29,7 +29,6 @@ struct SettingsView: View {
                                 }
                                 .listRowBackground(Color.white)
                                 .sheet(isPresented: $viewModel.isEditProfileSheetPresented) {
-                                    EditProfileSheetView().environmentObject(sessionManager)
                                 }
                         }
                         Section {

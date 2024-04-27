@@ -25,7 +25,7 @@
 		035872CD2B615E7E00C3AEFC /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872CC2B615E7E00C3AEFC /* Account.swift */; };
 		035872CF2B61602600C3AEFC /* Seller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872CE2B61602600C3AEFC /* Seller.swift */; };
 		035872D12B61603500C3AEFC /* Buyer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D02B61603500C3AEFC /* Buyer.swift */; };
-		035872D32B61615400C3AEFC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D22B61615400C3AEFC /* Notification.swift */; };
+		035872D32B61615400C3AEFC /* NotificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D22B61615400C3AEFC /* NotificationData.swift */; };
 		035872D52B61653A00C3AEFC /* SocialLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D42B61653A00C3AEFC /* SocialLink.swift */; };
 		035872D92B616D7200C3AEFC /* Bet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035872D82B616D7200C3AEFC /* Bet.swift */; };
 		038407712B3F0C9000CD9501 /* CreateFixedTimeAuctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */; };
@@ -34,6 +34,7 @@
 		03A33EE72B2311DD00C5A302 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A33EE62B2311DD00C5A302 /* SignUpView.swift */; };
 		03A6EE812B235D2500163DB6 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE802B235D2500163DB6 /* TextField.swift */; };
 		03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03A6EE822B235DBB00163DB6 /* SocialLogin.swift */; };
+		03ED6CA82BDBACEC00658BC9 /* ComunicationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ED6CA72BDBACEC00658BC9 /* ComunicationProtocol.swift */; };
 		2608821B2B6DA22500C67B9D /* SellerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821A2B6DA22500C67B9D /* SellerAPI.swift */; };
 		2608821D2B6DA43B00C67B9D /* BuyerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821C2B6DA43B00C67B9D /* BuyerAPI.swift */; };
 		2608821F2B6DA48400C67B9D /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2608821E2B6DA48400C67B9D /* NotificationAPI.swift */; };
@@ -109,7 +110,7 @@
 		035872CC2B615E7E00C3AEFC /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		035872CE2B61602600C3AEFC /* Seller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Seller.swift; sourceTree = "<group>"; };
 		035872D02B61603500C3AEFC /* Buyer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buyer.swift; sourceTree = "<group>"; };
-		035872D22B61615400C3AEFC /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		035872D22B61615400C3AEFC /* NotificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationData.swift; sourceTree = "<group>"; };
 		035872D42B61653A00C3AEFC /* SocialLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLink.swift; sourceTree = "<group>"; };
 		035872D82B616D7200C3AEFC /* Bet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bet.swift; sourceTree = "<group>"; };
 		038407702B3F0C8F00CD9501 /* CreateFixedTimeAuctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFixedTimeAuctionView.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		03A33EE62B2311DD00C5A302 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		03A6EE802B235D2500163DB6 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		03A6EE822B235DBB00163DB6 /* SocialLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLogin.swift; sourceTree = "<group>"; };
+		03ED6CA72BDBACEC00658BC9 /* ComunicationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComunicationProtocol.swift; sourceTree = "<group>"; };
 		2608821A2B6DA22500C67B9D /* SellerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerAPI.swift; sourceTree = "<group>"; };
 		2608821C2B6DA43B00C67B9D /* BuyerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerAPI.swift; sourceTree = "<group>"; };
 		2608821E2B6DA48400C67B9D /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
@@ -214,7 +216,7 @@
 				035872CC2B615E7E00C3AEFC /* Account.swift */,
 				035872CE2B61602600C3AEFC /* Seller.swift */,
 				035872D02B61603500C3AEFC /* Buyer.swift */,
-				035872D22B61615400C3AEFC /* Notification.swift */,
+				035872D22B61615400C3AEFC /* NotificationData.swift */,
 				035872D42B61653A00C3AEFC /* SocialLink.swift */,
 				030315E02B246DA400D2044A /* Auction.swift */,
 				035872D82B616D7200C3AEFC /* Bet.swift */,
@@ -350,6 +352,7 @@
 			children = (
 				2620C0272B6183B100B9DC44 /* ProfileViewModel.swift */,
 				2620C0292B6183C300B9DC44 /* EditProfileViewModel.swift */,
+				03ED6CA72BDBACEC00658BC9 /* ComunicationProtocol.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -640,7 +643,7 @@
 				2620C0222B6176F500B9DC44 /* CreateIncrementalAuctionViewModel.swift in Sources */,
 				266043542B9CBCA000FAC47A /* PhotoManager.swift in Sources */,
 				033825A82B260E23008AFC3D /* TabBarHomeView.swift in Sources */,
-				035872D32B61615400C3AEFC /* Notification.swift in Sources */,
+				035872D32B61615400C3AEFC /* NotificationData.swift in Sources */,
 				0322F2652B863DC800F359CC /* SessionManager.swift in Sources */,
 				260882372B6DBBBF00C67B9D /* BetRequest.swift in Sources */,
 				260882212B6DA4D300C67B9D /* SocialLinkAPI.swift in Sources */,
@@ -659,6 +662,7 @@
 				2608821B2B6DA22500C67B9D /* SellerAPI.swift in Sources */,
 				2624AE9C2B6F3DF000EBDB88 /* AccountRequest.swift in Sources */,
 				260882232B6DA4E900C67B9D /* AuctionAPI.swift in Sources */,
+				03ED6CA82BDBACEC00658BC9 /* ComunicationProtocol.swift in Sources */,
 				03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */,
 				035872D92B616D7200C3AEFC /* Bet.swift in Sources */,
 				2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */,

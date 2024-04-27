@@ -8,37 +8,18 @@
 import SwiftUI
 
 struct NotificationView: View {
-    
-    @ObservedObject var notificationViewModel : NotificationViewModel
-    @EnvironmentObject var sessionManager : SessionManager
-    @State private var isDetailViewPresented = false
-    
+    @ObservedObject var notificationViewModel: NotificationViewModel
+    @State private var isRefreshing = false
+
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) {
-                ScrollView {
-                    VStack(spacing: 20) {
-                        ForEach(0..<20) { index in
-                            Button(action: {
-                                isDetailViewPresented.toggle()
-                            }) {
-                                    NotificationStructures(
-                                        imageName: "png-sfondo",
-                                        title: "Titolo della notifica \(index)",
-                                        subtitle: "Sottotitolo della notifica \(index)",
-                                        timestamp: "2 minuti fa"
-                                    )
-                                }
-                                .sheet(isPresented: $isDetailViewPresented) {
-                                    NotificationDetailView()
-                                }
-                        }
-                    }
-                    .padding(.top, 20)
-                    .padding(.bottom, 100)
+            ScrollView {
+                VStack {
+                    NotificationListView(notificationViewModel: notificationViewModel)
+                        .padding()
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
-            .navigationBarTitle("Notice", displayMode: .large)
             .background(
                 Color(
                     red: Double(0x90) / 255.0,
@@ -47,61 +28,90 @@ struct NotificationView: View {
                 )
                 .edgesIgnoringSafeArea(.all)
                 .clipped()
-        )
+            )
+            .navigationBarTitle("", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Image("png-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 40)
+                }
+            }
+            .refreshable {
+                isRefreshing = true
+                notificationViewModel.fetchNotifications()
+                isRefreshing = false
+            }
         }
     }
 }
 
-
-struct NotificationStructures: View {
-    let imageName: String
-    let title: String
-    let subtitle: String
-    let timestamp: String
+struct NotificationListView: View {
+    @ObservedObject var notificationViewModel: NotificationViewModel
 
     var body: some View {
-        VStack {
-            HStack {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(title)
-                        .font(.headline)
-                        .foregroundColor(.black)
-
-
-                    Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                        .bold()
-
-                    Text(timestamp)
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                }
-                Spacer()
-
-                Image(systemName: "chevron.right")
+        VStack(spacing: 20) {
+            if notificationViewModel.notifications.isEmpty {
+                Text("You have no notifications.")
                     .foregroundColor(.gray)
+                    .italic()
+            } else {
+                ForEach(notificationViewModel.notifications.indices, id: \.self) { index in
+                    NavigationLink(destination: NotificationDetailView()) {
+                        NotificationStructures(notification: notificationViewModel.notifications[index])
+                            .padding(.bottom, 20)
+                    }
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(10)
-            .background(Color.white)
-            .cornerRadius(10)
-            .padding(.horizontal, 10)
-            .shadow(color: Color.gray.opacity(0.4), radius: 5, x: 0, y: 2)
         }
     }
 }
 
+struct NotificationStructures: View {
+    let notification: NotificationData
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy" // Formato data desiderato
+        return formatter
+    }()
+
+    var body: some View {
+        HStack { // Aggiunto spacing tra i componenti
+            Image("png-defaultImage")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 60, height: 60)
+                .cornerRadius(10)
+
+            VStack(alignment: .leading, spacing: 4) { 
+                Text(notification.title)
+                    .font(.headline)
+                    .foregroundColor(.black)
+
+                Text(notification.status)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .bold()
+
+                Text(notification.timeOfNotification)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            Spacer()
+            
+            Image(systemName: "chevron.right")
+                .foregroundColor(.gray)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(10)
+        .background(Color.white)
+        .cornerRadius(10)
+        .padding(.horizontal, 10)
+    }
+}
 
 
-//TODO: DA FARE BENE NEL PACKAGE AUCTIONS
 struct NotificationDetailView: View {
     @Environment(\.presentationMode) var presentationMode
 
@@ -123,8 +133,7 @@ struct NotificationDetailView: View {
 struct NotificationView_Previews: PreviewProvider {
     static var previews: some View {
         let notificationViewModel = NotificationViewModel(user: DummyUser())
-        return NotificationView(
-            notificationViewModel: notificationViewModel
-        )
+        return NotificationView(notificationViewModel: notificationViewModel)
     }
 }
+

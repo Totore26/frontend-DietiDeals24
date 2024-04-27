@@ -5,53 +5,73 @@
 //  Created by Salvatore Tortora on 24/01/24.
 //
 
+/*
 import Foundation
 import SwiftUI
+import Combine
 
 class EditProfileViewModel: ObservableObject {
+    
+    let api = AccountRequest()
+    
     @Published var profileImage: UIImage?
     @Published var fullName: String
     @Published var nationality: String
     @Published var description: String
     @Published var showProfileSavedBanner: Bool
-    @Published var link1 : String
-    @Published var link2 : String
-    //@Published var user : Auth
+    @Published var link1: String
+    @Published var link2: String
+    @Published var telephoneNumber: String
+    @Published var account: Account
     
-    init() {
+    init(account: Account) {
+        self.account = account
         self.profileImage = nil
-        self.fullName = "Giampiero Esposito"
-        self.nationality = "Italy"
-        self.description = "Welcome to my profile as a passionate collector and auction participant! I'm Giampiero, a lover of art, antiques, and rarities."
+        self.fullName = account.fullName
+        self.nationality = account.country ?? ""
+        self.description = account.description ?? ""
         self.showProfileSavedBanner = false
-        self.link1 = "facebook/account.com"
-        self.link2 = "tweeter/account.com"
+        self.link1 = account.socialLinks?.first?.link ?? ""
+        self.link2 = account.socialLinks?.dropFirst().first?.link ?? ""
+        self.telephoneNumber = account.telephoneNumber
     }
     
-    func saveProfileChanges() {
-        // Implementa qui la logica per salvare le modifiche al profilo
-        showProfileSavedBanner = true
-    }
-    
- /*
-    private func prepareJSON() -> Data? {
-            let json: [String: Any] = [
-                "email" : email,
-                "fullName": fullName,
-                "country": nationality,
-                "description": description,
-                "link": link1,
-                "link": link2
-            ]
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-                return jsonData
-            } catch {
-                print("Error preparing JSON: \(error.localizedDescription)")
-                return nil
+    func saveChanges() {
+        var updatedAccount = self.account
+        updatedAccount.fullName = fullName
+        updatedAccount.country = nationality
+        updatedAccount.description = description
+        updatedAccount.telephoneNumber = telephoneNumber
+        
+        // Aggiorna i link social solo se sono stati modificati dall'utente
+        if var socialLinks = updatedAccount.socialLinks {
+            if socialLinks.indices.contains(0) {
+                socialLinks[0].link = link1
             }
+            if socialLinks.indices.contains(1) {
+                socialLinks[1].link = link2
+            }
+            updatedAccount.socialLinks = socialLinks
         }
-    
-    */
+
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(updatedAccount)
+            
+            api.modifyAccountAttributeAPI(json: jsonData) { success in
+                if success {
+                    DispatchQueue.main.async {
+                        self.account = updatedAccount
+                        self.showProfileSavedBanner = true
+                        
+                        //aggiorna profileviewmodel
+                        ProfileUpdatePublisher.shared.sendUpdate()
+                    }
+                }
+            }
+        } catch {
+            print("Error encoding account to JSON: \(error)")
+        }
+    }
 }
+*/

@@ -13,7 +13,13 @@ protocol AuctionAPI {
     
     func getMyAuctionSellerAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void, username: String)
 
-
+    func filterAuctions(
+        searchText: String?,
+        category: String?,
+        startingPrice: String?,
+        endingPrice: String?,
+        completion: @escaping (Result<[AuctionData], Error>) -> Void
+    ) 
     
     func getAuctionById(auctionId: String) -> AuctionData?
     
@@ -22,4 +28,3 @@ protocol AuctionAPI {
     func updateAuction(auction: AuctionData)
     
 }
- 

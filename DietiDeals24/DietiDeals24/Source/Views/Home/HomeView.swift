@@ -11,6 +11,9 @@ import Amplify
 struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @EnvironmentObject var sessionManager : SessionManager
+    @State var isSearchViewPresented : Bool = false
+    @State private var isRefreshing = false
+    
     
     init(homeViewModel: HomeViewModel) {
         self.homeViewModel = homeViewModel
@@ -23,6 +26,27 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
+                    HStack {
+                        Text("Category: \(homeViewModel.selectedCategory ?? "All")")
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                        
+                        Text("Price Range: \(homeViewModel.selectedPriceRange ?? "All")")
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.white)
+                            .cornerRadius(8)
+                        
+                        if !homeViewModel.searchText.isEmpty {
+                            Text("Search: \(homeViewModel.searchText)")
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.white)
+                                .cornerRadius(8)
+                        }
+                    }
                     LazyVStack{
                         ForEach(homeViewModel.auctions.prefix(8), id: \.id) { auction in // Utilizza i dati delle aste ricevuti dal modello
                             NavigationLink(destination: AuctionView(viewModel : AuctionViewModel(user: homeViewModel.user.username, auction: auction))
@@ -43,18 +67,30 @@ struct HomeView: View {
                             .scaledToFit()
                             .frame(height: 40)
                     }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {
+                            // Mostra la SearchView quando viene cliccato l'icona del filtro
+                            isSearchViewPresented = true
+                        }) {
+                            Image(systemName: "line.horizontal.3.decrease.circle")
+                        }
+                    }
                 }
                 .navigationBarItems(
-                    trailing: Button(action: {
-                        homeViewModel.showCreateAuctionBanner.toggle()
-                    }) {
-                        if (sessionManager.isSellerSession) {
-                            Image(systemName: "plus.circle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30, height: 30)
-                                .bold()
-                                .foregroundColor(.black)
+                    trailing: Group {
+                        if sessionManager.isSellerSession {
+                            Button(action: {
+                                homeViewModel.showCreateAuctionBanner.toggle()
+                            }) {
+                                Image(systemName: "plus.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                                    .bold()
+                                    .foregroundColor(.blue)
+                            }
+                        } else {
+                            EmptyView()
                         }
                     }
                 )
@@ -76,16 +112,23 @@ struct HomeView: View {
                         )
                     )
                 }
-                .searchable(text: $homeViewModel.searchText) {
-                    SearchView (
+                // Naviga alla SearchView quando la variabile di stato isSearchViewPresented è true
+                NavigationLink(
+                    destination: SearchView(
                         priceRanges: priceRanges,
                         selectedPriceRange: $homeViewModel.selectedPriceRange,
                         categories: categories,
                         selectedCategory: $homeViewModel.selectedCategory,
                         searchText: $homeViewModel.searchText,
-                        homeViewModel: homeViewModel
-                    )
-                }
+                        homeViewModel: homeViewModel,
+                        onClose: {
+                            // Aggiorna lo stato per chiudere la schermata di ricerca
+                            isSearchViewPresented = false
+                        }
+                    ),
+                    isActive: $isSearchViewPresented,
+                    label: { EmptyView() }
+                )
                 NavigationLink(
                     destination: CreateFixedTimeAuctionView(),
                     isActive: Binding(
@@ -111,6 +154,12 @@ struct HomeView: View {
                     label: EmptyView.init
                 )
             }
+            .refreshable {
+                isRefreshing = true
+                homeViewModel.getAllAuctions()
+                isRefreshing = false
+            }
+            
             .background(
                 Color(
                     red: Double(0x90) / 255.0,
@@ -123,6 +172,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 struct AuctionsStructures: View {
     let auction: AuctionData
@@ -196,9 +246,30 @@ struct SearchView: View {
     @Binding var selectedCategory: String?
     @Binding var searchText: String
     @ObservedObject var homeViewModel: HomeViewModel
+    var onClose: () -> Void // Funzione per chiudere la schermata
 
     var body: some View {
         VStack {
+            // Barra di ricerca
+            HStack {
+                TextField("Search...", text: $searchText)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 8)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .padding(.leading, 10)
+                
+                if !searchText.isEmpty {
+                    Button(action: {
+                        searchText = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 8)
+                    }
+                }
+            }
+
             Text("Scroll to select a price range...")
                 .foregroundColor(.gray)
 
@@ -242,16 +313,23 @@ struct SearchView: View {
                 .frame(width: 400)
                 .padding()
             }
-            .onSubmit {
-                _ = homeViewModel.searchAuctions (
-                    category: selectedCategory ?? "All",
-                    princeRange: selectedPriceRange ?? "All",
-                    searchText: searchText
-                )
+            Button(action: {
+                homeViewModel.filterAuctions()
+                onClose() // Chiudi la schermata quando viene premuto il pulsante di ricerca
+            }) {
+                Text("Search")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
             }
+            .padding()
         }
+        .ignoresSafeArea(.keyboard, edges: .all)
     }
 }
+
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {

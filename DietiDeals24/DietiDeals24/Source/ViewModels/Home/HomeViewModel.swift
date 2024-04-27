@@ -34,20 +34,63 @@ class HomeViewModel: ObservableObject {
                 DispatchQueue.main.async { [weak self] in
                     self?.auctions = auctions
                 }
-                print("Aste recuperate con successo:")
-                for auction in auctions {
-                    print("\(auction.id ?? "N/A")")
-                }
             case .failure(let error):
                 print("Errore nel recupero delle aste attive: \(error)")
             }
         }
     }
     
-    // Funzione per ricercare un'asta all'interno della searchView.
-    func searchAuctions(category: String, princeRange: String, searchText: String) -> [AuctionData] {
-        // Implementa la logica di ricerca qui
-        return []
+    func filterAuctions() {
+        api.filterAuctions(
+            searchText: searchText.isEmpty ? nil : searchText,
+            category: selectedCategory == "All" ? nil : selectedCategory,
+            startingPrice: selectedPriceRange == "All" ? nil : getStartingPrice(selectedPriceRange),
+            endingPrice: selectedPriceRange == "All" ? nil : getEndingPrice(selectedPriceRange)
+        ) { [weak self] result in
+            switch result {
+            case .success(let filteredAuctions):
+                DispatchQueue.main.async {
+                    print("ricera avvenuta con successo!")
+                    self?.auctions = filteredAuctions
+                }
+            case .failure(let error):
+                print("Errore nel filtro delle aste: \(error)")
+            }
+        }
+    }
+
+    private func getStartingPrice(_ priceRange: String?) -> String? {
+        guard let range = priceRange else { return nil }
+        
+        switch range {
+        case "5-10 €": return "5.0"
+        case "10-20 €": return "10.0"
+        case "20-50 €": return "20.0"
+        case "50-100 €": return "50.0"
+        case "100-250 €": return "100.0"
+        case "250-500 €": return "250.0"
+        case "500-1000 €": return "500.0"
+        case "1000-2000 €": return "1000.0"
+        case "2000+ €": return "2000.0"
+        default: return nil
+        }
+    }
+
+    private func getEndingPrice(_ priceRange: String?) -> String? {
+        guard let range = priceRange else { return nil }
+        
+        switch range {
+        case "5-10 €": return "10.0"
+        case "10-20 €": return "20.0"
+        case "20-50 €": return "50.0"
+        case "50-100 €": return "100.0"
+        case "100-250 €": return "250.0"
+        case "250-500 €": return "500.0"
+        case "500-1000 €": return "1000.0"
+        case "1000-2000 €": return "2000.0"
+        case "2000+ €": return nil // Non c'è un limite superiore definito
+        default: return nil
+        }
     }
     
     // Fa la richiesta ad S3 per scaricare tutte le foto (gli passo la lista di idAste)
