@@ -10,11 +10,17 @@ import UIKit
 
 struct CreateIncrementalAuctionView: View {
     
-    @ObservedObject var viewModel = CreateIncrementalAuctionViewModel()
-    
+    @EnvironmentObject var sessionManager : SessionManager
+    @ObservedObject var viewModel : CreateIncrementalAuctionViewModel
     @Environment(\.presentationMode) var presentationMode
     @State private var isImagePickerPresented = false
     @State private var isAuctionCreated = false
+    
+
+    
+    init( viewModel: CreateIncrementalAuctionViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationView {
@@ -76,25 +82,29 @@ struct CreateIncrementalAuctionView: View {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", viewModel.startingPrice) },
+                            get: {
+                                String(format: "%.2f", Double(truncating: viewModel.startingPrice as NSNumber))
+                            },
                             set: {
-                                if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    viewModel.startingPrice = max(0.0,newValue)
+                                if let newValue = NumberFormatter().number(from: $0)?.doubleValue {
+                                    viewModel.startingPrice = Decimal(max(0.0, newValue))
                                 }
                             }
                         ))
                         .keyboardType(.decimalPad)
                     }
                 }
-                
-                Section(header: Text("Raising threshold (default 10€)")) {
+
+                Section(header: Text("Raising Threshold (default 10€)")) {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", viewModel.raisingThreshold) },
+                            get: {
+                                String(format: "%.2f", Double(truncating: viewModel.raisingThreshold as NSNumber))
+                            },
                             set: {
-                                if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    viewModel.raisingThreshold = max(10.0,newValue)
+                                if let newValue = NumberFormatter().number(from: $0)?.doubleValue {
+                                    viewModel.raisingThreshold = Decimal(max(10.0, newValue))
                                 }
                             }
                         ))
@@ -114,27 +124,33 @@ struct CreateIncrementalAuctionView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                         
-                        //TODO: aggiusta la chiamata con i parametri.
-                        if let auctionImage = viewModel.auctionImage {
-                            if let imageData = auctionImage.jpegData(compressionQuality: 0.2) {
-                                Task {
-                                    await viewModel.createIncrementalAuction(imageData: imageData)
-                                    isAuctionCreated.toggle()
-                                }
-                            } else {
-                                // Gestisci il caso in cui la conversione dei dati fallisce
-                            }
-                        } else {
-                            // Gestisci il caso in cui viewModel.auctionImage è nil
+                        // Verifica se è stata selezionata un'immagine per l'asta
+                        guard let auctionImage = viewModel.auctionImage else {
+                            // Gestisci il caso in cui non sia stata selezionata un'immagine
+                            return
                         }
                         
+                        // Converte l'immagine in dati JPEG
+                        guard let imageData = auctionImage.jpegData(compressionQuality: 0.2) else {
+                            // Gestisci il caso in cui la conversione in dati JPEG fallisce
+                            return
+                        }
                         
+                        // Effettua la chiamata alla funzione per creare l'asta incrementale nel view model
+                        viewModel.createIncrementalAuction { success, error in
+                            if let error = error {
+                                // Se si verifica un errore durante la chiamata API, stampalo
+                                print("Error creating auction:", error.localizedDescription)
+                            } else {
+                                // Imposta il flag per mostrare l'alert in base al risultato della chiamata
+                                isAuctionCreated = success
+                            }
+                        }
                     }) {
                         Text("CREATE AUCTION")
                             .padding(.leading, 85)
                     }
                     .disabled(viewModel.title.isEmpty || viewModel.location.isEmpty || viewModel.description.isEmpty || viewModel.auctionImage == nil)
-                    
                 }
             }
             .navigationBarTitle("Create Incremental Auction", displayMode: .inline)
@@ -153,14 +169,6 @@ struct CreateIncrementalAuctionView: View {
         }
     }
 }
-
-
-struct CreateIncrementalAuctionView_Preview: PreviewProvider {
-    static var previews: some View {
-        CreateIncrementalAuctionView()
-    }
-}
-
 
 
 

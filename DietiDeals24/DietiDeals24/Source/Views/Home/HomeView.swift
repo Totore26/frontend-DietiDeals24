@@ -130,7 +130,7 @@ struct HomeView: View {
                     label: { EmptyView() }
                 )
                 NavigationLink(
-                    destination: CreateFixedTimeAuctionView(),
+                    destination: CreateFixedTimeAuctionView(viewModel: CreateFixedTimeAuctionViewModel(user: homeViewModel.user.username)),
                     isActive: Binding(
                         get: { homeViewModel.selectedAuctionType == .fixed },
                         set: { newValue in
@@ -142,7 +142,7 @@ struct HomeView: View {
                     label: EmptyView.init
                 )
                 NavigationLink(
-                    destination: CreateIncrementalAuctionView(),
+                    destination: CreateIncrementalAuctionView(viewModel: CreateIncrementalAuctionViewModel(user: homeViewModel.user.username)),
                     isActive: Binding(
                         get: { homeViewModel.selectedAuctionType == .incremental },
                         set: { newValue in

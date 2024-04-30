@@ -7,23 +7,40 @@
 import Foundation
 
 
-class AuctionData: Decodable, Identifiable {
+class AuctionData: Codable, Identifiable {
     let id: String?
-    let creator: Seller
+    var creator: Seller
     var participants: [Buyer]?
-    let title: String?
-    let description: String?
-    let imageAuction: String?
-    let category: String?
-    let location: String?
+    var title: String?
+    var description: String?
+    var imageAuction: String?
+    var category: String?
+    var location: String?
     var currentPrice: Decimal?
-    let startingPrice: Decimal?
-    let raisingThreshold: Decimal?
-    let endOfAuction: String?
-    let minimumSecretThreshold: Decimal?
-    let timer : Int?
+    var startingPrice: Decimal?
+    var raisingThreshold: Decimal?
+    var endOfAuction: String?
+    var minimumSecretThreshold: Decimal?
+    var timer : Int?
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(creator, forKey: .creator)
+        try container.encode(participants, forKey: .participants)
+        try container.encode(title, forKey: .title)
+        try container.encode(description, forKey: .description)
+        try container.encode(imageAuction, forKey: .imageAuction)
+        try container.encode(category, forKey: .category)
+        try container.encode(location, forKey: .location)
+        try container.encode(currentPrice, forKey: .currentPrice)
+        try container.encode(startingPrice, forKey: .startingPrice)
+        try container.encode(raisingThreshold, forKey: .raisingThreshold)
+        try container.encode(endOfAuction, forKey: .endOfAuction)
+        try container.encode(minimumSecretThreshold, forKey: .minimumSecretThreshold)
+        try container.encode(timer, forKey: .timer)
+    }
 
-    // Implementazione dell'inizializzatore richiesto
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
@@ -42,6 +59,36 @@ class AuctionData: Decodable, Identifiable {
         timer = try container.decodeIfPresent(Int.self, forKey: .timer)
     }
 
+    init(id: String? = nil,
+         creator: Seller = Seller(email: ""),
+         participants: [Buyer]? = [],
+         title: String? = "",
+         description: String? = "",
+         imageAuction: String? = "",
+         category: String? = "All",
+         location: String? = "",
+         currentPrice: Decimal? = Decimal(0.0),
+         startingPrice: Decimal? = Decimal(0.0),
+         raisingThreshold: Decimal? = Decimal(0.0),
+         endOfAuction: String? = "",
+         minimumSecretThreshold: Decimal? = Decimal(0.0),
+         timer: Int? = 0) {
+        self.id = id
+        self.creator = creator
+        self.participants = participants
+        self.title = title
+        self.description = description
+        self.imageAuction = imageAuction
+        self.category = category
+        self.location = location
+        self.currentPrice = currentPrice
+        self.startingPrice = startingPrice
+        self.raisingThreshold = raisingThreshold
+        self.endOfAuction = endOfAuction
+        self.minimumSecretThreshold = minimumSecretThreshold
+        self.timer = timer
+    }
+    
     // Definizione delle chiavi di decodifica
     private enum CodingKeys: String, CodingKey {
         case currentPrice

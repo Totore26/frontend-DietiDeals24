@@ -8,9 +8,6 @@
 import Alamofire
 import Foundation
 
-import Alamofire
-import Foundation
-
 class AuctionRequest: AuctionAPI {
     
     
@@ -23,10 +20,38 @@ class AuctionRequest: AuctionAPI {
     
     
     
-    func createAuction(auction: AuctionData) {
+    func createIncrementalAuctionAPI(auction: AuctionData, completion: @escaping (Bool, Error?) -> Void) {
+        let url = baseURL.append(path: "auction/createAuction/incremental")
         
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)",
+            "Content-Type": "application/json"
+        ]
+        
+        do {
+            let jsonData = try JSONEncoder().encode(auction)
+            
+            var request = URLRequest(url: URL(string: url)!)
+            request.httpMethod = "PUT"
+            request.headers = headers
+            request.httpBody = jsonData
+            
+            AF.request(request)
+                .validate()
+                .response { response in
+                    switch response.result {
+                    case .success:
+                        completion(true, nil)
+                    case .failure(let error):
+                        // Passa l'errore alla chiusura di completamento
+                        completion(false, error)
+                    }
+                }
+        } catch {
+            // Se si verifica un errore durante la codifica dei dati, passalo alla chiusura di completamento
+            completion(false, error)
+        }
     }
-    
     
     
     func updateAuction(auction: AuctionData) {

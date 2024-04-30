@@ -12,6 +12,8 @@ protocol AuctionAPI {
     func getMyAuctionBuyerAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void, username: String)
     
     func getMyAuctionSellerAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void, username: String)
+    
+    func createIncrementalAuctionAPI(auction: AuctionData, completion: @escaping (Bool, Error?) -> Void)
 
     func filterAuctions(
         searchText: String?,
@@ -22,8 +24,6 @@ protocol AuctionAPI {
     ) 
     
     func getAuctionById(auctionId: String) -> AuctionData?
-    
-    func createAuction(auction: AuctionData)
     
     func updateAuction(auction: AuctionData)
     

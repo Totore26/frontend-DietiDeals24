@@ -9,11 +9,15 @@ import SwiftUI
 
 struct CreateFixedTimeAuctionView: View {
     
-    @ObservedObject var viewModel = CreateFixedTimeAuctionViewModel()
-    
+    @EnvironmentObject var sessionManager : SessionManager
     @Environment(\.presentationMode) var presentationMode
     @State private var isImagePickerPresented = false
     @State private var isAuctionCreated = false
+    @ObservedObject var viewModel : CreateFixedTimeAuctionViewModel
+    
+    init( viewModel: CreateFixedTimeAuctionViewModel) {
+        self.viewModel = viewModel
+    }
     
     var body: some View {
         NavigationView {
@@ -95,7 +99,6 @@ struct CreateFixedTimeAuctionView: View {
                 Section(header: Text("Enter all missing data to continue")) {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                        //TODO: AGGIUSTA QUESTA CHIAMATA
                         viewModel.createFixedTimeAuction()
                         isAuctionCreated.toggle()
                     }) {
@@ -116,12 +119,5 @@ struct CreateFixedTimeAuctionView: View {
                 )
             }
         }
-    }
-}
-
-
-struct CreateFixedTimeAuctionView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateFixedTimeAuctionView()
     }
 }

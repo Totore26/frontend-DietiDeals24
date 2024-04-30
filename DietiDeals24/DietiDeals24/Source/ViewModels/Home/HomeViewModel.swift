@@ -5,8 +5,12 @@
 //  Created by Salvatore Tortora on 24/01/24.
 //
 
+
+
+
 import Foundation
 import Amplify
+
 
 class HomeViewModel: ObservableObject {
     
@@ -33,6 +37,8 @@ class HomeViewModel: ObservableObject {
             case .success(let auctions):
                 DispatchQueue.main.async { [weak self] in
                     self?.auctions = auctions
+                    self?.selectedCategory = "All"
+                    self?.selectedPriceRange = "All"
                 }
             case .failure(let error):
                 print("Errore nel recupero delle aste attive: \(error)")
@@ -97,5 +103,6 @@ class HomeViewModel: ObservableObject {
     func fetchPhoto(key: String) {
         // Implementa la logica per scaricare le foto da S3
     }
+    
 }
 

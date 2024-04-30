@@ -20,10 +20,15 @@ class CreateFixedTimeAuctionViewModel: ObservableObject {
     @Published var secretThreshold: Float = 0.0
     @Published var auctionImage: Image? = nil
     
+    var user : String
+    
+    init(user : String){
+        self.user = user
+    }
+    
+    
 
     
-    
-    // Implementa qui la logica per creare l'asta
     func createFixedTimeAuction() {}
 
 }

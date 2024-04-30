@@ -6,6 +6,6 @@
 //
 import Foundation
 
-struct Seller: Decodable {
+struct Seller: Decodable, Encodable {
     let email: String
 }
