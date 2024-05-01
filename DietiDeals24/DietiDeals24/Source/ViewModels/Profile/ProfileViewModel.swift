@@ -14,12 +14,11 @@ class ProfileViewModel: ObservableObject {
     
     let user: AuthUser
     let api = AccountRequest()
-    
     @Published var imageProfile: UIImage?
     @Published var account: Account?
     @Published var showProfileSavedBanner: Bool = false
-
-    init(user: AuthUser) {
+    
+    init(user: AuthUser, isSellerSession : Bool) {
         self.user = user
         getInfoBuyerAccount(username: user.username)
     }
@@ -44,6 +43,28 @@ class ProfileViewModel: ObservableObject {
         }, username: username)
     }
     
+    
+    func getInfoSellerAccount(username: String) {
+        api.getInfoSellerAccountAPI(completion: { result in
+            switch result {
+            case .success(let account):
+                DispatchQueue.main.async {
+                    self.account = account
+                    print("GET INFO SELLER SUCCESS")
+                    
+                    // Stampiamo l'account ottenuto
+                    if let encodedData = try? JSONEncoder().encode(account),
+                       let jsonString = String(data: encodedData, encoding: .utf8) {
+                        print("Account Details: \(jsonString)")
+                    }
+                }
+            case .failure(let error):
+                print("Failed to get buyer account info: \(error)")
+            }
+        }, username: username)
+    }
+    
+    
     func callPhoneNumber() {
         if let phoneNumber = account?.telephoneNumber, let phoneURL = URL(string: "tel://\(phoneNumber)") {
             UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
@@ -67,7 +88,7 @@ class ProfileViewModel: ObservableObject {
         return user.username == account?.email
     }
     
-    func saveChanges() {
+    func saveChanges(isSellerSession: Bool) {
         guard let updatedAccount = self.account else {
             print("\n\nError: Account is nil\n\n")
             return
@@ -77,16 +98,27 @@ class ProfileViewModel: ObservableObject {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(updatedAccount)
             
-            api.modifyAccountAttributeAPI(json: jsonData) { success in
-                if success {
-                    DispatchQueue.main.async {
-                        self.showProfileSavedBanner = true
-                        self.getInfoBuyerAccount(username: self.user.username)
+            if isSellerSession {
+                api.modifySellerAccountAttributeAPI(json: jsonData) { success in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.showProfileSavedBanner = true
+                            self.getInfoSellerAccount(username: self.user.username)
+                        }
+                    }
+                }
+            } else {
+                api.modifyBuyerAccountAttributeAPI(json: jsonData) { success in
+                    if success {
+                        DispatchQueue.main.async {
+                            self.showProfileSavedBanner = true
+                            self.getInfoBuyerAccount(username: self.user.username)
+                        }
                     }
                 }
             }
         } catch {
             print("Error encoding account to JSON: \(error)")
         }
-    }   
+    }
 }

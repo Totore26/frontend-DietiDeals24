@@ -51,12 +51,9 @@ class AccountRequest: AccountAPI {
     
     
     
-    func modifyAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void) {
-        if(SessionManager().isSellerSession){
-            self.accountType = "seller"
-        }
+    func modifyBuyerAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void) {
         
-        let url = baseURL.append(path: "account/\(accountType)/modifyAccount")
+        let url = baseURL.append(path: "account/buyer/modifyAccount")
         
         var request = URLRequest(url: URL(string: url)!)
         request.httpMethod = "PUT"
@@ -75,6 +72,45 @@ class AccountRequest: AccountAPI {
                 }
             }
     }
-
     
+    
+    func modifySellerAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void) {
+        
+        let url = baseURL.append(path: "account/seller/modifyAccount")
+        
+        var request = URLRequest(url: URL(string: url)!)
+        request.httpMethod = "PUT"
+        request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = json
+        
+        AF.request(request)
+            .validate()
+            .response { response in
+                switch response.result {
+                case .success:
+                    completion(true)
+                case .failure:
+                    completion(false)
+                }
+            }
+    }
+    
+    
+    func upgradeAccountToSellerAPI(email: String, completion: @escaping (Bool) -> Void) {
+        let upgradeURL = baseURL.append(path: "account/premiumSeller/\(email)")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        
+        AF.request(upgradeURL, method: .post, headers: headers).validate().response { response in
+            switch response.result {
+            case .success:
+                completion(true)
+            case .failure:
+                completion(false)
+            }
+        }
+    }
 }

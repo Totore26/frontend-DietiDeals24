@@ -10,6 +10,7 @@ import SwiftUI
 struct NotificationView: View {
     @ObservedObject var notificationViewModel: NotificationViewModel
     @State private var isRefreshing = false
+    @EnvironmentObject var sessionManager : SessionManager
 
     var body: some View {
         NavigationView {
@@ -40,7 +41,12 @@ struct NotificationView: View {
             }
             .refreshable {
                 isRefreshing = true
-                notificationViewModel.fetchNotifications()
+                if(!sessionManager.isSellerSession){
+                    notificationViewModel.fetchBuyerNotifications()
+                }
+                else {
+                    notificationViewModel.fetchSellerNotifications()
+                }
                 isRefreshing = false
             }
         }

@@ -57,7 +57,6 @@ struct SettingsView: View {
                     .cornerRadius(10)
                     
                     VStack {
-                        // Toggle per passare all'account venditore
                         //TODO: cambiare prove con sessionManager.isBuyerSession
                         Toggle(isOn: $sessionManager.isSellerSession) {
                             Text("Switch to Seller Account")
@@ -65,8 +64,13 @@ struct SettingsView: View {
                                 .foregroundColor(.black)
                                 .padding()
                         }
-                        .toggleStyle(SwitchToggleStyle(tint: Color.blue)) // Esempio di stile di toggle personalizzato
-                        .padding(.horizontal, 30) // Regola lo spaziamento orizzontale
+                        .toggleStyle(SwitchToggleStyle(tint: Color.blue))
+                        .padding(.horizontal, 30)
+                        .onChange(of: sessionManager.isSellerSession) { newValue in
+                            if newValue {
+                                viewModel.upgradeAccount(email: viewModel.user.username)
+                            }
+                        }
                         
                         // Spiegazione per passare all'account venditore
                         Text("Activate the Seller Premium Account to access exclusive features and enhance your selling experience.")

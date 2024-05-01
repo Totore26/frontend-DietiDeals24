@@ -96,6 +96,7 @@ class AuctionRequest: AuctionAPI {
         
     }
     
+    
     func getMyAuctionSellerAPI(completion : @escaping (Result<[AuctionData], Error>) -> Void, username : String) {
         let url = baseURL.append(path: "auction/\(username)/seller/myAuction")
   
@@ -114,19 +115,6 @@ class AuctionRequest: AuctionAPI {
         
     }
     
-    
-    
-    
-    
-    
-    
-    func getMyAuctionBuyer(){
-        
-    }
-    
-    func getMyAuctionSeller(){
-        
-    }
     
     func filterAuctions(
         searchText: String?,

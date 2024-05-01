@@ -12,13 +12,9 @@ class NotificationRequest: NotificationAPI {
     var accountType : String = "buyer"
     
 
-    func fetchNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void) {
+    func fetchBuyerNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void) {
         
-        if(SessionManager().isSellerSession){
-            self.accountType = "seller"
-        }
-        
-        let url = baseURL.append(path: "notification/\(username)/\(accountType)")
+        let url = baseURL.append(path: "notification/buyer/\(accountType)")
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(authToken)"
@@ -33,6 +29,31 @@ class NotificationRequest: NotificationAPI {
             }
         }
     }
+    
+    func fetchSellerNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void) {
+        
+        let url = baseURL.append(path: "notification/seller/\(accountType)")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)"
+        ]
+        
+        AF.request(url, headers: headers).responseDecodable(of: [NotificationData].self) { response in
+            switch response.result {
+            case .success(let notifications):
+                completion(notifications, nil)
+            case .failure(let error):
+                completion(nil, error)
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     func getNotificationById(notificationId: String) -> NotificationData? {
         return nil

@@ -11,7 +11,7 @@ struct ProfileView: View {
     
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject var sessionManager: SessionManager
-
+    @State private var isRefreshing = false
     @State private var isEditProfileSheetPresented = false
 
     var body: some View {
@@ -55,10 +55,19 @@ struct ProfileView: View {
                         .padding(.leading, 60)
                 }
             }
+            .refreshable {
+                isRefreshing = true
+                if(!sessionManager.isSellerSession){
+                    viewModel.getInfoBuyerAccount(username: viewModel.user.username)
+                }
+                else{
+                    viewModel.getInfoSellerAccount(username: viewModel.user.username)
+                }
+            }
         }
     }
 }
-
+ 
 
 
 struct ProfileStructure: View {
@@ -212,12 +221,4 @@ struct LinksProfile: View {
         }
     }
 }
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = ProfileViewModel(user : DummyUser())
-        return ProfileView(viewModel: viewModel)
-    }
-}
-
 

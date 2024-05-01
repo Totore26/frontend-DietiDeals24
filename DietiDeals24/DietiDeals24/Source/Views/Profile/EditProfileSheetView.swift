@@ -108,7 +108,7 @@ struct EditProfileSheetView: View {
             }
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
-                viewModel.saveChanges()
+                viewModel.saveChanges(isSellerSession: sessionManager.isSellerSession)
             })
             .alert(isPresented: $viewModel.showProfileSavedBanner) {
                 Alert(title: Text("Profile Saved"), message: Text("Changes to your profile have been saved successfully."), dismissButton: .default(Text("OK")))

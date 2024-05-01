@@ -7,11 +7,13 @@
 
 protocol NotificationAPI {
     
-    func fetchNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void)
+    func fetchBuyerNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void)
     
     func getNotificationById(notificationId: String) -> NotificationData?
     
     func updateAllNotifications(updateFunction: (inout NotificationData) -> Void)
+    
+    func fetchSellerNotifications(username: String, completion: @escaping ([NotificationData]?, Error?) -> Void)
     
 }
 

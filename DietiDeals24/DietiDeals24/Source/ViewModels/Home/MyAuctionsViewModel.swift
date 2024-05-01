@@ -29,9 +29,25 @@ class MyAuctionsViewModel: ObservableObject {
                 DispatchQueue.main.async { [weak self] in
                     self?.myAuctions = auctions
                 }
-                print("\n\nAste buyer recuperate con successo:")
+                print("\nmy auctions buyer recuperate con successo:")
             case .failure(let error):
-                print("Errore nel recupero delle mie aste buyer : \(error)")
+                print("Errore nel recupero di my auyctions buyer : \(error)")
+            }
+        }, username: username)
+    }
+    
+    
+    
+    func getMyAuctionSeller(username: String) {
+        api.getMyAuctionSellerAPI(completion: { result in
+            switch result {
+            case .success(let auctions):
+                DispatchQueue.main.async { [weak self] in
+                    self?.myAuctions = auctions
+                }
+                print("\nmy auctions seller recuperate con successo:")
+            case .failure(let error):
+                print("Errore nel recupero di my auctions seller : \(error)")
             }
         }, username: username)
     }

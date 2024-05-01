@@ -67,7 +67,7 @@ struct MyAuctionsView: View {
                 myAuctionViewModel.getMyAuctionBuyer(username: myAuctionViewModel.user.username)
             }
             else{
-                //myAuctionViewModel.getMyAuctionSeller()
+                myAuctionViewModel.getMyAuctionSeller(username: myAuctionViewModel.user.username)
             }
             isRefreshing = false
         }

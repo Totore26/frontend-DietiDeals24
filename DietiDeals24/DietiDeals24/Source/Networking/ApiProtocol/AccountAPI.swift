@@ -14,8 +14,10 @@ protocol AccountAPI {
     
     func getInfoSellerAccountAPI(completion: @escaping (Result<Account, Error>) -> Void, username : String)
      
-    func modifyAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void)
+    func modifyBuyerAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void)
     
+    func modifySellerAccountAttributeAPI(json: Data, completion: @escaping (Bool) -> Void)
     
+    func upgradeAccountToSellerAPI(email: String, completion: @escaping (Bool) -> Void)
 }
 

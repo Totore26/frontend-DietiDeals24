@@ -17,12 +17,12 @@ class NotificationViewModel: ObservableObject {
     
     init(user: AuthUser) {
         self.user = user
-        fetchNotifications()
+        fetchBuyerNotifications()
     }
     
-    func fetchNotifications() {
+    func fetchBuyerNotifications() {
         let username = user.username // Ottieni l'username dell'utente
-        api.fetchNotifications(username: username) { [weak self] (notifications, error) in
+        api.fetchBuyerNotifications(username: username) { [weak self] (notifications, error) in
             if let notifications = notifications {
                 DispatchQueue.main.async {
                     self?.notifications = notifications
@@ -32,4 +32,18 @@ class NotificationViewModel: ObservableObject {
             }
         }
     }
+    
+    func fetchSellerNotifications() {
+        let username = user.username // Ottieni l'username dell'utente
+        api.fetchSellerNotifications(username: username) { [weak self] (notifications, error) in
+            if let notifications = notifications {
+                DispatchQueue.main.async {
+                    self?.notifications = notifications
+                }
+            } else if let error = error {
+                print("Errore nel recupero delle notifiche: \(error)")
+            }
+        }
+    }
+    
 }
