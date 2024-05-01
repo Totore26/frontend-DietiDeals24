@@ -26,10 +26,8 @@ struct MyAuctionsView: View {
                             .italic()
                             .padding()
                     }
-                    
-                    
                     LazyVStack{
-                        ForEach(myAuctionViewModel.myAuctions.prefix(8), id: \.id) { myAuction in
+                        ForEach(myAuctionViewModel.myAuctions.prefix(100), id: \.id) { myAuction in
                             NavigationLink(destination: AuctionView(
                                 viewModel: AuctionViewModel(user: myAuctionViewModel.user.username , auction: myAuction)
                             )) {

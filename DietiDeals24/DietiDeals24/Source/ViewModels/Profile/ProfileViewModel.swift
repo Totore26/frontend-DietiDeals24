@@ -12,15 +12,22 @@ import Combine
 
 class ProfileViewModel: ObservableObject {
     
-    let user: AuthUser
+    let user: String
     let api = AccountRequest()
     @Published var imageProfile: UIImage?
     @Published var account: Account?
     @Published var showProfileSavedBanner: Bool = false
+    var modifyAccount : Bool
     
-    init(user: AuthUser, isSellerSession : Bool) {
+    init(user: String, isSellerSession : Bool, modifyAccount : Bool) {
+        self.modifyAccount = modifyAccount
         self.user = user
-        getInfoBuyerAccount(username: user.username)
+        if(modifyAccount){
+            getInfoBuyerAccount(username: user)
+        }
+        else {
+            getInfoSellerAccount(username: user)
+        }
     }
     
     func getInfoBuyerAccount(username: String) {
@@ -85,7 +92,7 @@ class ProfileViewModel: ObservableObject {
     }
     
     func isPersonalProfile() -> Bool {
-        return user.username == account?.email
+        return modifyAccount
     }
     
     func saveChanges(isSellerSession: Bool) {
@@ -103,7 +110,7 @@ class ProfileViewModel: ObservableObject {
                     if success {
                         DispatchQueue.main.async {
                             self.showProfileSavedBanner = true
-                            self.getInfoSellerAccount(username: self.user.username)
+                            self.getInfoSellerAccount(username: self.user)
                         }
                     }
                 }
@@ -112,7 +119,7 @@ class ProfileViewModel: ObservableObject {
                     if success {
                         DispatchQueue.main.async {
                             self.showProfileSavedBanner = true
-                            self.getInfoBuyerAccount(username: self.user.username)
+                            self.getInfoBuyerAccount(username: self.user)
                         }
                     }
                 }

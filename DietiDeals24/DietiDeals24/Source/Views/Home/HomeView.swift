@@ -48,7 +48,7 @@ struct HomeView: View {
                         }
                     }
                     LazyVStack{
-                        ForEach(homeViewModel.auctions.prefix(8), id: \.id) { auction in // Utilizza i dati delle aste ricevuti dal modello
+                        ForEach(homeViewModel.auctions.prefix(100), id: \.id) { auction in // Utilizza i dati delle aste ricevuti dal modello
                             NavigationLink(destination: AuctionView(viewModel : AuctionViewModel(user: homeViewModel.user.username, auction: auction))
                                 .environmentObject(sessionManager)) {
                                     AuctionsStructures (auction: auction)

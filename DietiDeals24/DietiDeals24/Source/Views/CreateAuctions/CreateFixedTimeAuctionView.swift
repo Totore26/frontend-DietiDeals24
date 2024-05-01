@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CreateFixedTimeAuctionView: View {
     
-    @EnvironmentObject var sessionManager : SessionManager
+    @EnvironmentObject var sessionManager: SessionManager
     @Environment(\.presentationMode) var presentationMode
     @State private var isImagePickerPresented = false
     @State private var isAuctionCreated = false
-    @ObservedObject var viewModel : CreateFixedTimeAuctionViewModel
+    @ObservedObject var viewModel: CreateFixedTimeAuctionViewModel
     
-    init( viewModel: CreateFixedTimeAuctionViewModel) {
+    init(viewModel: CreateFixedTimeAuctionViewModel) {
         self.viewModel = viewModel
     }
     
@@ -25,7 +25,7 @@ struct CreateFixedTimeAuctionView: View {
                 Section(header: Text("Image")) {
                     VStack {
                         if let auctionImage = viewModel.auctionImage {
-                            auctionImage
+                            Image(uiImage: auctionImage)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 100, height: 100)
@@ -57,7 +57,7 @@ struct CreateFixedTimeAuctionView: View {
                     .padding(.leading, 90)
                 }
                 
-                Section(header: Text("auction details")) {
+                Section(header: Text("Auction Details")) {
                     TextField("Insert Title", text: $viewModel.title)
                     TextField("Insert Location", text: $viewModel.location)
                     Picker("Category", selection: $viewModel.selectedCategory) {
@@ -72,23 +72,23 @@ struct CreateFixedTimeAuctionView: View {
                         .frame(minHeight: 100)
                 }
                 
-                Section(header: Text("End of Auctions")) {
-                    DisclosureGroup("Data ") {
-                        DatePicker("", selection: $viewModel.endOfAuction, displayedComponents: [.date, .hourAndMinute])
+                Section(header: Text("End of Auction")) {
+                    DisclosureGroup("Date ") {
+                        DatePicker("", selection: $viewModel.endOfAuction, displayedComponents: [.date])
                             .datePickerStyle(CompactDatePickerStyle())
                     }
                     .foregroundColor(.primary)
                     .font(.headline)
                 }
                 
-                Section(header: Text("Minimum secret threshold")) {
+                Section(header: Text("Minimum Secret Threshold")) {
                     HStack {
                         Text("€")
                         TextField("Enter amount", text: Binding(
-                            get: { String(format: "%.2f", viewModel.secretThreshold) },
+                            get: { String(format: "%.2f", Double(truncating: viewModel.secretThreshold as NSNumber)) },
                             set: {
-                                if let newValue = NumberFormatter().number(from: $0)?.floatValue {
-                                    viewModel.secretThreshold = max(0.0, newValue)
+                                if let newValue = NumberFormatter().number(from: $0)?.decimalValue {
+                                    viewModel.secretThreshold = max(Decimal(0.0), newValue)
                                 }
                             }
                         ))
@@ -114,7 +114,7 @@ struct CreateFixedTimeAuctionView: View {
                     title: Text("Auction Created"),
                     message: Text("Your auction has been successfully created."),
                     dismissButton: .default(Text("OK")) {
-                        // Aggiungi qui la logica aggiuntiva dopo la creazione dell'asta
+                        // Add any additional logic here after the auction is created
                     }
                 )
             }

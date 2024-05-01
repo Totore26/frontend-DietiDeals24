@@ -54,6 +54,41 @@ class AuctionRequest: AuctionAPI {
     }
     
     
+    func createFixedTimeAuctionAPI(auction: AuctionData, completion: @escaping (Bool, Error?) -> Void) {
+        let url = baseURL.append(path: "auction/createAuction/fixedTime")
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(authToken)",
+            "Content-Type": "application/json"
+        ]
+        
+        do {
+            let jsonData = try JSONEncoder().encode(auction)
+            print("Il JSON generato è il seguente: \(String(data: jsonData, encoding: .utf8) ?? "Errore nella codifica JSON")")
+            
+            var request = URLRequest(url: URL(string: url)!)
+            request.httpMethod = "PUT"
+            request.headers = headers
+            request.httpBody = jsonData
+            
+            AF.request(request)
+                .validate()
+                .response { response in
+                    switch response.result {
+                    case .success:
+                        completion(true, nil)
+                    case .failure(let error):
+                        // Passa l'errore alla chiusura di completamento
+                        completion(false, error)
+                    }
+                }
+        } catch {
+            // Se si verifica un errore durante la codifica dei dati, passalo alla chiusura di completamento
+            completion(false, error)
+        }
+    }
+    
+    
     func updateAuction(auction: AuctionData) {
         
     }
@@ -107,6 +142,9 @@ class AuctionRequest: AuctionAPI {
         AF.request(url, method: .get, headers: headers).validate().responseDecodable(of: [AuctionData].self) { response in
             switch response.result {
             case .success(let auctions):
+                auctions.forEach {auction in
+                    print("id asta recuperata : \(auction.id)")
+                }
                 completion(.success(auctions))
             case .failure(let error):
                 completion(.failure(error))

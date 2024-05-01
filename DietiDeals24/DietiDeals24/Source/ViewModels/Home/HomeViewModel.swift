@@ -12,6 +12,17 @@ import Foundation
 import Amplify
 
 
+
+
+// Funzione per rimuovere la "Z" finale dalla stringa della data
+func removeZFromDateString(_ dateString: String) -> String {
+    var dateStringWithoutZ = dateString
+    if dateString.hasSuffix("Z") {
+        dateStringWithoutZ = String(dateString.dropLast())
+    }
+    return dateStringWithoutZ
+}
+
 class HomeViewModel: ObservableObject {
     
     let api = AuctionRequest()
@@ -34,7 +45,15 @@ class HomeViewModel: ObservableObject {
     func getAllAuctions() {
         api.getAllActiveAuctionsAPI { result in
             switch result {
-            case .success(let auctions):
+            case .success(var auctions):
+                // Rimuovi la "Z" finale da tutte le date nelle aste
+                auctions.forEach { auction in
+                    if let dateString = auction.endOfAuction {
+                        print("asta recuperata id : \(auction.id)\n")
+                        auction.endOfAuction = removeZFromDateString(dateString)
+                    }
+                }
+                
                 DispatchQueue.main.async { [weak self] in
                     self?.auctions = auctions
                     self?.selectedCategory = "All"
@@ -45,6 +64,7 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+
     
     func filterAuctions() {
         api.filterAuctions(

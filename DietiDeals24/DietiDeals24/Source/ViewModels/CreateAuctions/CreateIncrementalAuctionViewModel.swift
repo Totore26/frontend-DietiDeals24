@@ -11,7 +11,6 @@ import SwiftUI
 class CreateIncrementalAuctionViewModel: ObservableObject {
     
     let api = AuctionRequest()
-    var id = "ID-140"
     @Published var title: String = ""
     @Published var location: String = ""
     @Published var description: String = ""
@@ -38,7 +37,8 @@ class CreateIncrementalAuctionViewModel: ObservableObject {
             category: self.selectedCategory,
             location: self.location,
             startingPrice: self.startingPrice,
-            raisingThreshold: self.raisingThreshold
+            raisingThreshold: self.raisingThreshold,
+            timer: self.timer
         )
         
         // Effettua la chiamata API per creare l'asta incrementale utilizzando l'oggetto AuctionData

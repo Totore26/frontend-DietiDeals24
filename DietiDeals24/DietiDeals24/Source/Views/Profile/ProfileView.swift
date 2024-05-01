@@ -41,7 +41,7 @@ struct ProfileView: View {
                         .sheet(isPresented: $isEditProfileSheetPresented) {
                             EditProfileSheetView(viewModel: viewModel).environmentObject(sessionManager)
                                 .onDisappear {
-                                    viewModel.getInfoBuyerAccount(username: viewModel.user.username)
+                                    viewModel.getInfoBuyerAccount(username: viewModel.user)
                                 }
                         }                    }
                 }
@@ -58,10 +58,10 @@ struct ProfileView: View {
             .refreshable {
                 isRefreshing = true
                 if(!sessionManager.isSellerSession){
-                    viewModel.getInfoBuyerAccount(username: viewModel.user.username)
+                    viewModel.getInfoBuyerAccount(username: viewModel.user)
                 }
                 else{
-                    viewModel.getInfoSellerAccount(username: viewModel.user.username)
+                    viewModel.getInfoSellerAccount(username: viewModel.user)
                 }
             }
         }
@@ -130,6 +130,7 @@ struct DescriptionsProfile: View {
                 .font(Font.custom("SF Compact", size: 16))
                 .foregroundColor(Color(red: 0.25, green: 0.25, blue: 0.25))
                 .frame(width: 393)
+                .padding(.leading, 10)
         }
         .padding(.bottom, 30)
     }

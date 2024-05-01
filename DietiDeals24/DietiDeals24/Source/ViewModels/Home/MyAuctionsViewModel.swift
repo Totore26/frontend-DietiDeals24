@@ -12,7 +12,7 @@ class MyAuctionsViewModel: ObservableObject {
     
     let api = AuctionRequest()
     
-    var myAuctions = [AuctionData]()
+    @Published var myAuctions = [AuctionData]()
     let user: AuthUser
     
     init(user: AuthUser) {
@@ -26,6 +26,13 @@ class MyAuctionsViewModel: ObservableObject {
         api.getMyAuctionBuyerAPI(completion: { result in
             switch result {
             case .success(let auctions):
+                
+                auctions.forEach { auction in
+                    if let dateString = auction.endOfAuction {
+                        print("asta recuperata id : \(auction.id)\n")
+                        auction.endOfAuction = removeZFromDateString(dateString)
+                    }
+                }
                 DispatchQueue.main.async { [weak self] in
                     self?.myAuctions = auctions
                 }

@@ -36,7 +36,7 @@ struct TabBarHomeView: View {
                 }
                 .environmentObject(sessionManager)
                 
-            ProfileView(viewModel: ProfileViewModel(user: user, isSellerSession: sessionManager.isSellerSession))
+            ProfileView(viewModel: ProfileViewModel(user: user.username, isSellerSession: sessionManager.isSellerSession, modifyAccount: true))
                 .tabItem{
                     Image(systemName: "person")
                     Text("PROFILE")

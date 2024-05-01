@@ -40,7 +40,7 @@ struct AuctionView: View {
                         .fontWeight(.bold)
                     
                     //MARK: IMMAGINE
-                    Image(viewModel.auction.imageAuction ?? "png-defaultImage")
+                    Image("png-defaultImage")
                         .resizable()
                         .onTapGesture {
                             withAnimation {
@@ -116,22 +116,21 @@ struct AuctionView: View {
                             VStack {
                                 Text("Seller:")
                                     .bold()
-                                    .padding(.trailing,280)
-                                    
+                                    .padding(.trailing, 280)
                                 
                                 if viewModel.sellerIsYou() {
                                     Text("YOU")
                                         .bold()
-                                        .padding(.trailing,290)
+                                        .padding(.trailing, 290)
                                         .foregroundColor(.black.opacity(0.5))
-                                }
-                                else {
-                                    Button(action: {
-                                        // Action per visualizzare il profilo del venditore
-                                    }) {
-                                        Text(viewModel.auction.creator.email ?? "Seller Name")
+                                } else {
+                                    // MARK: - DA METTERE IL PROFILO DEL SELLER!!!!
+                                    NavigationLink(destination: ProfileView(viewModel: ProfileViewModel(user: viewModel.auction.creator.email ,
+                                                                            isSellerSession: sessionManager.isSellerSession,
+                                                                                                        modifyAccount: false)).environmentObject(sessionManager)){
+                                        Text(viewModel.auction.creator.email)
                                             .bold()
-                                            .padding(.trailing,160)
+                                            .padding(.trailing, 160)
                                             .foregroundColor(.black.opacity(0.5))
                                             .underline()
                                             .fixedSize()
