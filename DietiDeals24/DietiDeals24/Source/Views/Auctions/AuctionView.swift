@@ -67,7 +67,7 @@ struct AuctionView: View {
                     
                     if sessionManager.isSellerSession {
                         if viewModel.sellerIsYou() {
-                            if let minimumSecretThreshold = viewModel.auction.minimumSecretThreshold {
+                            if viewModel.auction.minimumSecretThreshold != nil {
                                 Text("SPECIFIED MINIMUM TRESHOLD:")
                                     .bold()
                                     .foregroundColor(Color(red: 195/255, green: 0/255, blue: 0/255))
@@ -77,24 +77,19 @@ struct AuctionView: View {
                             }
                         }
                     } else {
-                        if let bool = viewModel.auction.endOfAuction {
+                        if viewModel.auction.endOfAuction != nil {
                             OfferMoreButton(title: "Offer more", fontSize: 18, action: {
                                 viewModel.isShowedOfferSheetView.toggle()
                             })
                             .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
-                                CofirmFixedTimeOfferView(offerAmount: $viewModel.offerAmount,
-                                                         isShowedOfferSheetView: $viewModel.isShowedOfferSheetView
-                                )
+                                CofirmFixedTimeOfferView(viewModel: viewModel)
                             }
                         } else {
-                            OfferMoreButton(title: "Offer +\(viewModel.raisingThreshold)€", fontSize: 18, action: {
+                            OfferMoreButton(title: "Offer +\(String(describing: viewModel.auction.raisingThreshold))€", fontSize: 18, action: {
                                 viewModel.isShowedOfferSheetView.toggle()
                             })
                             .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
-                                ConfirmIncrementalOfferView(raisingThreshold: $viewModel.raisingThreshold,
-                                                            currentOffer: $viewModel.currentOffer,
-                                                            isShowedOfferSheetView: $viewModel.isShowedOfferSheetView
-                                )
+                                ConfirmIncrementalOfferView(viewModel: viewModel)
                             }
                         }
                     }
@@ -180,51 +175,67 @@ struct FullScreenImageView: View {
 }
 
 struct CofirmFixedTimeOfferView: View {
-    @Binding var offerAmount: String
-    @Binding var isShowedOfferSheetView: Bool
+    @ObservedObject var viewModel: AuctionViewModel
 
     var body: some View {
         VStack {
-            TextField("Enter your offer", text: $offerAmount)
+            TextField("Enter your offer", text: $viewModel.offerAmount)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.decimalPad)
                 .padding()
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
-                isShowedOfferSheetView.toggle()
+                guard let offerAmount = Decimal(string: viewModel.offerAmount) else { return }
+                viewModel.makeBet(totalOffer: offerAmount) { success in
+                    if success {
+                        viewModel.isShowedOfferSheetView.toggle()
+                    } else {
+                        // Handle failure if needed
+                    }
+                }
             })
 
             Spacer().frame(height: 5)
 
             CancelButton(title: "Cancel", fontSize: 16, action: {
-                isShowedOfferSheetView.toggle()
+                viewModel.isShowedOfferSheetView.toggle()
             })
         }
     }
 }
 
 struct ConfirmIncrementalOfferView: View {
-    @Binding var raisingThreshold: Float
-    @Binding var currentOffer: Float
-    @Binding var isShowedOfferSheetView: Bool
+
+    @ObservedObject var viewModel: AuctionViewModel
 
     var body: some View {
         VStack {
             HStack {
-                Text("\(raisingThreshold+currentOffer, specifier: "%.2f") €")
-                    .font(.title)
-                    .padding()
+                if let raisingThreshold = viewModel.auction.raisingThreshold, let currentPrice = viewModel.auction.currentPrice {
+                    var total = NSDecimalNumber(decimal: raisingThreshold + currentPrice).doubleValue
+                    Text("\(total, specifier: "%.2f") €")
+                        .font(.title)
+                        .padding()
+                } else {
+                    Text("N/A")
+                        .font(.title)
+                        .padding()
+                }
             }
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
-                //MARK: chiama la funzione del viewModel corrispondente.
-                isShowedOfferSheetView.toggle()
+                // Chiama la funzione del viewModel corrispondente.
+                viewModel.makeBet(totalOffer: (viewModel.auction.raisingThreshold!+viewModel.auction.currentPrice!)) { success in
+                    if success {
+                        viewModel.isShowedOfferSheetView.toggle()
+                    }
+                }
             })
 
             Spacer().frame(height: 5)
 
             CancelButton(title: "Cancel", fontSize: 16, action: {
-                isShowedOfferSheetView.toggle()
+                viewModel.isShowedOfferSheetView.toggle()
             })
         }
     }
@@ -236,7 +247,7 @@ struct AuctionDataSection: View {
     
     var body: some View {
         VStack {
-            if let endOfAuction = viewModel.auction.endOfAuction { // Asta fixed
+            if viewModel.auction.endOfAuction != nil { // Asta fixed
                 HStack {
                     Text("End :")
                         .bold()
@@ -265,7 +276,7 @@ struct AuctionDataSection: View {
                 Spacer() // Spinge verso sinistra
             }.padding(.leading)
             
-            if let bool = viewModel.auction.endOfAuction { // Attributo dell'asta
+            if viewModel.auction.endOfAuction != nil { // Attributo dell'asta
                 HStack {
                     Text("Type of Auction:")
                         .bold()

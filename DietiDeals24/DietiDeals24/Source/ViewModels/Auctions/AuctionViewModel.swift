@@ -10,12 +10,14 @@ import Amplify
 
 class AuctionViewModel: ObservableObject {
     // Proprietà del view model
+    
+    let api = BetRequest()
     @Published var auction: AuctionData
     @Published var isFullScreen = false
     @Published var isShowedOfferSheetView = false
     @Published var offerAmount: String = ""
-    @Published var raisingThreshold: Float = 10
-    @Published var currentOffer: Float = 100
+    
+    @Published var currentOffer : Float = 0.0
     
     let user: String
     
@@ -29,18 +31,11 @@ class AuctionViewModel: ObservableObject {
         return user == auction.creator.email
     }
     
-    
-    // Funzione per confermare un'offerta fissa
-    func confirmFixedTimeOffer() {
-        // Implementa qui la logica per confermare l'offerta fissa
-        // Ad esempio, puoi aggiornare i dati dell'offerta nel modello o inviare una richiesta al server
-        isShowedOfferSheetView = false
+
+    func makeBet(totalOffer: Decimal, completion: @escaping (Bool) -> Void) {
+        api.betAPI(emailBuyer: user, idAuction: auction.id!, betValue: totalOffer) { success in
+            completion(success)
+        }
     }
     
-    // Funzione per confermare un'offerta incrementale
-    func confirmIncrementalOffer() {
-        // Implementa qui la logica per confermare l'offerta incrementale
-        // Ad esempio, puoi aggiornare i dati dell'offerta nel modello o inviare una richiesta al server
-        isShowedOfferSheetView = false
-    }
 }
