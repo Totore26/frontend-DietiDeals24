@@ -17,6 +17,7 @@ struct HomeView: View {
     
     init(homeViewModel: HomeViewModel) {
         self.homeViewModel = homeViewModel
+        
     }
     
     let priceRanges = ["All", "5-10 €", "10-20 €", "20-50 €","50-100 €", "100-250 €", "250-500 €", "500-1000 €", "1000-2000 €","2000+ €"]
@@ -157,6 +158,7 @@ struct HomeView: View {
             .refreshable {
                 isRefreshing = true
                 homeViewModel.getAllAuctions()
+                await updateAllAuctionsPhotos(auctionList: homeViewModel.auctions)
                 isRefreshing = false
             }
             
@@ -197,12 +199,22 @@ struct AuctionsStructures: View {
             }
             */
             
-            Image("png-defaultImage")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .cornerRadius(10)
-                .padding(.trailing, 10)
+            
+            if let photo = photoMap[auction.id!] {
+                Image(uiImage: photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+            } else {
+                Image("png-defaultImage")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 60, height: 60)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+            }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(auction.title ?? "N/A")")

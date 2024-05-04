@@ -35,11 +35,16 @@ class HomeViewModel: ObservableObject {
     @Published var isSeller = true
     @Published var auctions = [AuctionData]()
     
+    
     let user: AuthUser
     
     init(user: AuthUser) {
         self.user = user
         getAllAuctions()
+        
+        Task{
+            await loadAllAuctionsPhotos(auctionList: auctions)
+        }
     }
     
     func getAllAuctions() {
@@ -118,11 +123,10 @@ class HomeViewModel: ObservableObject {
         default: return nil
         }
     }
+
     
-    // Fa la richiesta ad S3 per scaricare tutte le foto (gli passo la lista di idAste)
-    func fetchPhoto(key: String) {
-        // Implementa la logica per scaricare le foto da S3
-    }
+    
+    
     
 }
 

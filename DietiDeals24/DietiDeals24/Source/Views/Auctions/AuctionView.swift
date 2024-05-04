@@ -40,17 +40,32 @@ struct AuctionView: View {
                         .fontWeight(.bold)
                     
                     //MARK: IMMAGINE
-                    Image("png-defaultImage")
-                        .resizable()
-                        .onTapGesture {
-                            withAnimation {
-                                self.viewModel.isFullScreen.toggle()
+                    if let photo = photoMap[viewModel.auction.id!] {
+                        Image(uiImage: photo)
+                            .resizable()
+                            .onTapGesture {
+                                withAnimation {
+                                    self.viewModel.isFullScreen.toggle()
+                                }
                             }
-                        }
-                        .frame(width: viewModel.isFullScreen ? UIScreen.main.bounds.width : 350,
-                               height: viewModel.isFullScreen ? UIScreen.main.bounds.height : 220)
-                        .clipped()
-                        .cornerRadius(10)
+                            .frame(width: viewModel.isFullScreen ? UIScreen.main.bounds.width : 350,
+                                   height: viewModel.isFullScreen ? UIScreen.main.bounds.height : 220)
+                            .clipped()
+                            .cornerRadius(10)
+                    } else {
+                        Image("png-defaultImage")
+                            .resizable()
+                            .onTapGesture {
+                                withAnimation {
+                                    self.viewModel.isFullScreen.toggle()
+                                }
+                            }
+                            .frame(width: viewModel.isFullScreen ? UIScreen.main.bounds.width : 350,
+                                   height: viewModel.isFullScreen ? UIScreen.main.bounds.height : 220)
+                            .clipped()
+                            .cornerRadius(10)
+                    }
+                    
                     
                     Rectangle()
                         .fill(Color.clear)

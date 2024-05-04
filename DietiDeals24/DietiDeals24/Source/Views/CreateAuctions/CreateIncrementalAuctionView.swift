@@ -137,15 +137,19 @@ struct CreateIncrementalAuctionView: View {
                         }
                         
                         // Effettua la chiamata alla funzione per creare l'asta incrementale nel view model
+                        
                         viewModel.createIncrementalAuction { success, error in
                             if let error = error {
                                 // Se si verifica un errore durante la chiamata API, stampalo
                                 print("Error creating auction:", error.localizedDescription)
                             } else {
                                 // Imposta il flag per mostrare l'alert in base al risultato della chiamata
+                                uploadImage(imageData: imageData, auctionId: nextID())
                                 isAuctionCreated = success
+                                
                             }
                         }
+                        
                     }) {
                         Text("CREATE AUCTION")
                             .padding(.leading, 85)

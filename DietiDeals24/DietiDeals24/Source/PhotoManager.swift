@@ -10,11 +10,16 @@ import SwiftUI
 import Amplify
 import UIKit
 
-
 //per le aste utilizzo l id dell asta come nome dell immagine, cosi posso recuperarla facilmente
 //per l'account invece ho pensato di utilizzare sempre l'id/mail e aggiungere una lettera finale per capire se ci riferiamo a buyer o seller (visto che nel dabatase sono 2 profili diversi)
 //key = "user/\(userId)" + "b.jpg" per i compratori
 //key = "user/\(userId)" + "s.jpg" per i venditori
+
+
+
+
+var photoMap:[String: UIImage] = [:]
+
 
 public func uploadImage(imageData: Data, auctionId: String) {
     let key = "auction/\(auctionId).jpg"
@@ -26,6 +31,7 @@ public func uploadImage(imageData: Data, auctionId: String) {
     
 }
 
+//MEGLIO QUELLA SU CREDO
 public func uploadData(imageData: Data, auctionId: String) async {
     
     do {
@@ -66,6 +72,55 @@ public func fetchAuctionPhoto(auctionID: String) async throws -> UIImage {
         print("Error fetching data: \(error)")
         throw error
     }
+}
+
+func loadAllAuctionsPhotos(auctionList: [AuctionData]) async {
+    for index in 0..<auctionList.count {
+        let auctionID = auctionList[index].id ?? ""
+        print( "\n\n\nLoading photo for auction with ID \(auctionID)\n\n\n\n")
+
+        do {
+            let photo = try await fetchAuctionPhoto(auctionID: auctionID)
+            photoMap[auctionID] = photo
+        } catch {
+            print("Error loading photo for auction with ID \(auctionID): \(error)")
+        }
+    }
+}
+
+func updateAllAuctionsPhotos(auctionList: [AuctionData]) async {
+    for index in 0..<auctionList.count {
+        let currentID = auctionList[index].id ?? ""
+        if photoMap[currentID] == nil {
+            do {
+                let photo = try await fetchAuctionPhoto(auctionID: currentID)
+                photoMap[currentID] = photo
+            }
+            catch {
+                print("Error update photo for auction with ID \(currentID): \(error)")
+            }
+        }
+    }
+}
+
+
+func nextID() -> String {
+    var largestNumericValue = 0
+    
+    // Trova il valore numerico più grande nelle chiavi della mappa photoMap
+    for key in photoMap.keys {
+        if let numericValue = Int(key.components(separatedBy: "-").last ?? "") {
+            largestNumericValue = max(largestNumericValue, numericValue)
+        }
+    }
+    
+    // Calcola il prossimo valore numerico aggiungendo uno al più grande
+    let nextNumericValue = largestNumericValue + 1
+    
+    // Costruisci l'ID con tre cifre zero-padded
+    let nextID = String(format: "ID-%03d", nextNumericValue)
+    
+    return nextID
 }
 
 
