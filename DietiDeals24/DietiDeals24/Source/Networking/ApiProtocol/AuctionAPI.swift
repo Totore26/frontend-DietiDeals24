@@ -7,7 +7,7 @@
 
 protocol AuctionAPI {
     
-    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void)
+    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void) async
     
     func getMyAuctionBuyerAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void, username: String)
     

@@ -144,7 +144,7 @@ struct CreateIncrementalAuctionView: View {
                                 print("Error creating auction:", error.localizedDescription)
                             } else {
                                 // Imposta il flag per mostrare l'alert in base al risultato della chiamata
-                                uploadImage(imageData: imageData, auctionId: nextID())
+                                uploadImage(imageData: imageData, path: "auction/\(nextID()).jpg")
                                 isAuctionCreated = success
                                 
                             }

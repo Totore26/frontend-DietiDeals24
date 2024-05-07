@@ -23,8 +23,9 @@ struct EditProfileSheetView: View {
             Form {
                 Section(header: Text("Profile Photo")) {
                     VStack(alignment: .center) {
-                        if let profileImage = viewModel.imageProfile {
-                            Image(uiImage: profileImage)
+                        //Prova a visualizzare la foto appena caricata se c e
+                        if let ImageProfile = viewModel.imageProfile {
+                            Image(uiImage: ImageProfile)
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: 100, height: 100)
@@ -33,6 +34,19 @@ struct EditProfileSheetView: View {
                                 .onTapGesture {
                                     isImagePickerPresented.toggle()
                                 }
+                        }
+                        //prova ad assegnare la foto salvata in memoria se c e
+                        else if let ImageProfile = photoMap["\(viewModel.account?.email ?? "")"] {
+                            Image(uiImage: ImageProfile)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: 100)
+                                .clipShape(Circle())
+                                .overlay(Circle().stroke(Color.white, lineWidth: 2))
+                                .onTapGesture {
+                                    isImagePickerPresented.toggle()
+                                }
+                            //altrimenti assegna quella di default
                         } else {
                             Image(systemName: "person.crop.circle.fill")
                                 .resizable()
@@ -109,6 +123,13 @@ struct EditProfileSheetView: View {
             .navigationBarTitle("Edit Profile", displayMode: .inline)
             .navigationBarItems(trailing: Button("Save") {
                 viewModel.saveChanges(isSellerSession: sessionManager.isSellerSession)
+                guard let profileImage = viewModel.imageProfile else {
+                    return
+                }
+                guard let imageData = profileImage.jpegData(compressionQuality: 0.2) else {
+                    return
+                }
+                uploadImage(imageData: imageData, path: "profile/\(viewModel.account?.email ?? "").jpg")
             })
             .alert(isPresented: $viewModel.showProfileSavedBanner) {
                 Alert(title: Text("Profile Saved"), message: Text("Changes to your profile have been saved successfully."), dismissButton: .default(Text("OK")))

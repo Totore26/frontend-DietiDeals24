@@ -15,73 +15,64 @@ import UIKit
 //key = "user/\(userId)" + "b.jpg" per i compratori
 //key = "user/\(userId)" + "s.jpg" per i venditori
 
-
-
-
 var photoMap:[String: UIImage] = [:]
 
-
-public func uploadImage(imageData: Data, auctionId: String) {
-    let key = "auction/\(auctionId).jpg"
-    
+public func uploadImage(imageData: Data, path: String) {
     Amplify.Storage.uploadData(
-        key: key,
+        key: path,
         data: imageData
     )
-    
 }
 
-//MEGLIO QUELLA SU CREDO
-public func uploadData(imageData: Data, auctionId: String) async {
-    
-    do {
-        let uploadTask = Amplify.Storage.uploadData(
-            key: "auction/\(auctionId).jpg",
-            data: imageData
-        )
-
-        for await progress in await uploadTask.progress {
-            print("Progress: \(progress)")
+public func fetchAuctionPhoto(auctionID: String) throws {
+    let downloadTask = Amplify.Storage.downloadData(key: "auction/\(auctionID).jpg")
+    Task {
+        do {
+            let data = try await downloadTask.value
+            print("Completed: foto asta!")
+            
+            guard let image = UIImage(data: data) else {
+                throw NSError(domain: "fetchData", code: 0, userInfo: [NSLocalizedDescriptionKey: "data conversion error"])
+            }
+            photoMap[auctionID] = image
+        } catch {
+            print("Error downloading data: \(error)")
+            throw error
         }
-
-        let value = try await uploadTask.value
-        print("Completed: \(value)")
-
-    } catch {
-        print("Error uploading data: \(error)")
     }
 }
 
-public func fetchAuctionPhoto(auctionID: String) async throws -> UIImage {
-    do {
-        let downloadTask = Amplify.Storage.downloadData(key: "auction/\(auctionID).jpg")
-        
-        for await progress in await downloadTask.progress {
-            print("Progress: \(progress)")
+public func fetchProfilePhoto(email: String) throws {
+    print("\n\nSONO DENTRO CAZZO\n\n")
+    let downloadTask = Amplify.Storage.downloadData(key: "profile/\(email).jpg")
+    Task {
+        do {
+            let data = try await downloadTask.value
+            print("\n\n\nCompleted: download foto profilo!\n\n\n")
+            
+            guard let image = UIImage(data: data) else {
+                throw NSError(domain: "fetchData", code: 0, userInfo: [NSLocalizedDescriptionKey: "data conversion error"])
+            }
+            photoMap["\(email)"] = image
+        } catch {
+            print("Error downloading data: \(error)")
+            throw error
         }
-        
-        let data = try await downloadTask.value
-        print("Completed: \(data)")
-        
-        guard let image = UIImage(data: data) else {
-            throw NSError(domain: "fetchData", code: 0, userInfo: [NSLocalizedDescriptionKey: "Impossibile convertire i dati in un'immagine."])
-        }
-        
-        return image
-    } catch {
-        print("Error fetching data: \(error)")
-        throw error
     }
 }
+
+/*
 
 func loadAllAuctionsPhotos(auctionList: [AuctionData]) async {
+    print("DENTOR LA FUNZIONE LOAD ALL AUCTION PHOTOS")
     for index in 0..<auctionList.count {
         let auctionID = auctionList[index].id ?? ""
         print( "\n\n\nLoading photo for auction with ID \(auctionID)\n\n\n\n")
 
         do {
-            let photo = try await fetchAuctionPhoto(auctionID: auctionID)
-            photoMap[auctionID] = photo
+            //let photo =
+            try fetchAuctionPhoto(auctionID: auctionID)
+            //photoMap[auctionID] = photo
         } catch {
             print("Error loading photo for auction with ID \(auctionID): \(error)")
         }
@@ -93,8 +84,9 @@ func updateAllAuctionsPhotos(auctionList: [AuctionData]) async {
         let currentID = auctionList[index].id ?? ""
         if photoMap[currentID] == nil {
             do {
-                let photo = try await fetchAuctionPhoto(auctionID: currentID)
-                photoMap[currentID] = photo
+                //let photo =
+                try fetchAuctionPhoto(auctionID: currentID)
+                //photoMap[currentID] = photo
             }
             catch {
                 print("Error update photo for auction with ID \(currentID): \(error)")
@@ -102,9 +94,10 @@ func updateAllAuctionsPhotos(auctionList: [AuctionData]) async {
         }
     }
 }
+ */
 
 
-func nextID() -> String {
+public func nextID() -> String {
     var largestNumericValue = 0
     
     // Trova il valore numerico più grande nelle chiavi della mappa photoMap
@@ -122,5 +115,3 @@ func nextID() -> String {
     
     return nextID
 }
-
-

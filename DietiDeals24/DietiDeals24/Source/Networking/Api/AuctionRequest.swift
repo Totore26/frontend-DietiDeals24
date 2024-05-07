@@ -96,7 +96,7 @@ class AuctionRequest: AuctionAPI {
     
     
 
-    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void) {
+    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void) async {
         let url = baseURL.append(path: "auction/home")
         
         let headers: HTTPHeaders = [
@@ -143,7 +143,7 @@ class AuctionRequest: AuctionAPI {
             switch response.result {
             case .success(let auctions):
                 auctions.forEach {auction in
-                    print("id asta recuperata : \(auction.id)")
+                    print("id asta recuperata : \(auction.id ?? "vuoto")")
                 }
                 completion(.success(auctions))
             case .failure(let error):

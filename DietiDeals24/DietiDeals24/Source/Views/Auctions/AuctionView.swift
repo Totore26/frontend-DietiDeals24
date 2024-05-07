@@ -14,6 +14,13 @@ struct AuctionView: View {
     
     init(viewModel: AuctionViewModel) {
         self.viewModel = viewModel
+        
+        Task {
+            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
+            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
+            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
+            //try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
+        }
     }
     
     var body: some View {
@@ -65,7 +72,6 @@ struct AuctionView: View {
                             .clipped()
                             .cornerRadius(10)
                     }
-                    
                     
                     Rectangle()
                         .fill(Color.clear)
@@ -136,8 +142,7 @@ struct AuctionView: View {
                                 } else {
                                     // MARK: - DA METTERE IL PROFILO DEL SELLER!!!!
                                     NavigationLink(destination: ProfileView(viewModel: ProfileViewModel(user: viewModel.auction.creator.email ,
-                                                                            isSellerSession: sessionManager.isSellerSession,
-                                                                                                        modifyAccount: false)).environmentObject(sessionManager)){
+                                        isSellerSession: sessionManager.isSellerSession, modifyAccount: false)).environmentObject(sessionManager)){
                                         Text(viewModel.auction.creator.email)
                                             .bold()
                                             .padding(.trailing, 160)
@@ -227,7 +232,7 @@ struct ConfirmIncrementalOfferView: View {
         VStack {
             HStack {
                 if let raisingThreshold = viewModel.auction.raisingThreshold, let currentPrice = viewModel.auction.currentPrice {
-                    var total = NSDecimalNumber(decimal: raisingThreshold + currentPrice).doubleValue
+                    let total = NSDecimalNumber(decimal: raisingThreshold + currentPrice).doubleValue
                     Text("\(total, specifier: "%.2f") €")
                         .font(.title)
                         .padding()

@@ -29,7 +29,7 @@ class MyAuctionsViewModel: ObservableObject {
                 
                 auctions.forEach { auction in
                     if let dateString = auction.endOfAuction {
-                        print("asta recuperata id : \(auction.id)\n")
+                        print("asta recuperata id : \(auction.id ?? "vuoto")\n")
                         auction.endOfAuction = removeZFromDateString(dateString)
                     }
                 }

@@ -40,21 +40,19 @@ class HomeViewModel: ObservableObject {
     
     init(user: AuthUser) {
         self.user = user
-        getAllAuctions()
-        
-        Task{
-            await loadAllAuctionsPhotos(auctionList: auctions)
+        Task {
+            await getAllAuctions()
         }
     }
     
-    func getAllAuctions() {
-        api.getAllActiveAuctionsAPI { result in
+    func getAllAuctions() async {
+        await api.getAllActiveAuctionsAPI { result in
             switch result {
-            case .success(var auctions):
+            case .success(let auctions):
                 // Rimuovi la "Z" finale da tutte le date nelle aste
                 auctions.forEach { auction in
                     if let dateString = auction.endOfAuction {
-                        print("asta recuperata id : \(auction.id)\n")
+                        print("asta recuperata id : \(auction.id ?? "vuoto") \n")
                         auction.endOfAuction = removeZFromDateString(dateString)
                     }
                 }

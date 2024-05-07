@@ -17,7 +17,6 @@ struct HomeView: View {
     
     init(homeViewModel: HomeViewModel) {
         self.homeViewModel = homeViewModel
-        
     }
     
     let priceRanges = ["All", "5-10 €", "10-20 €", "20-50 €","50-100 €", "100-250 €", "250-500 €", "500-1000 €", "1000-2000 €","2000+ €"]
@@ -49,7 +48,7 @@ struct HomeView: View {
                         }
                     }
                     LazyVStack{
-                        ForEach(homeViewModel.auctions.prefix(100), id: \.id) { auction in // Utilizza i dati delle aste ricevuti dal modello
+                        ForEach(homeViewModel.auctions.prefix(100), id: \.id) { auction in
                             NavigationLink(destination: AuctionView(viewModel : AuctionViewModel(user: homeViewModel.user.username, auction: auction))
                                 .environmentObject(sessionManager)) {
                                     AuctionsStructures (auction: auction)
@@ -157,8 +156,7 @@ struct HomeView: View {
             }
             .refreshable {
                 isRefreshing = true
-                homeViewModel.getAllAuctions()
-                await updateAllAuctionsPhotos(auctionList: homeViewModel.auctions)
+                await homeViewModel.getAllAuctions()
                 isRefreshing = false
             }
             
@@ -178,44 +176,9 @@ struct HomeView: View {
 
 struct AuctionsStructures: View {
     let auction: AuctionData
-
+    
     var body: some View {
         HStack {
-           /* if let image = auction.imageAuction {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-            } else {
-                // Immagine predefinita quando imageName è nil
-                Image("png-defaultImage")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-            }
-            */
-            
-            
-            if let photo = photoMap[auction.id!] {
-                Image(uiImage: photo)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-            } else {
-                Image("png-defaultImage")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 60, height: 60)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-            }
-            
             VStack(alignment: .leading, spacing: 4) {
                 Text("\(auction.title ?? "N/A")")
                     .font(.headline)
@@ -232,14 +195,14 @@ struct AuctionsStructures: View {
                         .foregroundColor(.red)
                         .bold()
                 }
-            
+                
                 Text("\(auction.currentPrice ?? 0)€")
                     .font(.subheadline)
                     .foregroundColor(.green)
                     .bold()
             }
             Spacer()
-
+            
             Image(systemName: "chevron.right")
                 .foregroundColor(.gray)
         }
@@ -250,6 +213,7 @@ struct AuctionsStructures: View {
         .padding(.horizontal, 10)
     }
 }
+
 
 struct SearchView: View {
     let priceRanges: [String]

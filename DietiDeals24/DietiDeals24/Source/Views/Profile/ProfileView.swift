@@ -13,6 +13,15 @@ struct ProfileView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @State private var isRefreshing = false
     @State private var isEditProfileSheetPresented = false
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        do {
+            try fetchProfilePhoto(email: viewModel.user)
+        } catch {
+            print("\n\nErrore nel download della foto profilo\n\n")
+        }
+    }
 
     var body: some View {
         NavigationView {
@@ -89,12 +98,22 @@ struct FullnamePhotoNazionalityProfile: View {
     
     var body: some View {
         HStack(alignment: .center) {
-            Image(systemName: "person.crop.circle.fill")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .foregroundColor(.black)
-                .padding()
+            
+            if let photo = photoMap["\(viewModel.account?.email ?? "vuoto")"] {
+                Image(uiImage: photo)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.black)
+                    .padding()
+            } else {
+                Image(systemName: "person.crop.circle.fill")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 100, height: 100)
+                    .foregroundColor(.black)
+                    .padding()
+            }
             
             VStack(alignment: .center) {
                 Text(viewModel.account?.fullName ?? "")
