@@ -156,7 +156,7 @@ struct HomeView: View {
             }
             .refreshable {
                 isRefreshing = true
-                await homeViewModel.getAllAuctions()
+                homeViewModel.getAllAuctions()
                 isRefreshing = false
             }
             

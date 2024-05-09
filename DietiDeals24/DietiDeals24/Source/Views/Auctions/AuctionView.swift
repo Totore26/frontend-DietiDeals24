@@ -19,7 +19,7 @@ struct AuctionView: View {
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
-            //try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
+            try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
         }
     }
     
@@ -168,7 +168,7 @@ struct AuctionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .fullScreenCover(isPresented: $viewModel.isFullScreen) {
                 // Contenuto a schermo intero
-                FullScreenImageView(imageName: viewModel.auction.imageAuction ?? "png-defaultImage", isFullScreen: $viewModel.isFullScreen)
+                FullScreenImageView(auctionID: viewModel.auction.id!, isFullScreen: $viewModel.isFullScreen)
             }
         }
     }
@@ -176,23 +176,43 @@ struct AuctionView: View {
 
 
 struct FullScreenImageView: View {
-    let imageName: String
+    let auctionID: String
     @Binding var isFullScreen: Bool
-
+    
     var body: some View {
-        Image(imageName)
-            .resizable()
-            .scaledToFit()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black)
-            .edgesIgnoringSafeArea(.all)
-            .onTapGesture {
-                withAnimation {
-                    self.isFullScreen.toggle()
+        if let image = photoMap[auctionID] {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation {
+                        self.isFullScreen.toggle()
+                    }
                 }
-            }
+        } else {
+            Image("png-defaultImage")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black)
+                .edgesIgnoringSafeArea(.all)
+                .onTapGesture {
+                    withAnimation {
+                        self.isFullScreen.toggle()
+                    }
+                }
+        }
+    }
+    
+    init(auctionID: String, isFullScreen: Binding<Bool>) {
+        self.auctionID = auctionID
+        self._isFullScreen = isFullScreen
     }
 }
+
 
 struct CofirmFixedTimeOfferView: View {
     @ObservedObject var viewModel: AuctionViewModel

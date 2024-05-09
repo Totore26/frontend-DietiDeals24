@@ -12,11 +12,11 @@ import Combine
 
 class ProfileViewModel: ObservableObject {
     
-    let user: String
-    let api = AccountRequest()
     @Published var imageProfile: UIImage?
     @Published var account: Account?
     @Published var showProfileSavedBanner: Bool = false
+    let api = AccountRequest()
+    let user: String
     var modifyAccount : Bool
     
     init(user: String, isSellerSession : Bool, modifyAccount : Bool) {
@@ -29,6 +29,15 @@ class ProfileViewModel: ObservableObject {
             getInfoSellerAccount(username: user)
         }
     }
+    
+    func getProfilePhoto() {
+        do {
+            try fetchProfilePhoto(email: user)
+        } catch {
+            print("\n\nErrore nel download della foto profilo\n\n")
+        }
+    }
+
     
     func getInfoBuyerAccount(username: String) {
         api.getInfoBuyerAccountAPI(completion: { result in

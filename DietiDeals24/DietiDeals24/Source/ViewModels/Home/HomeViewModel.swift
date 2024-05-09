@@ -4,15 +4,8 @@
 //
 //  Created by Salvatore Tortora on 24/01/24.
 //
-
-
-
-
 import Foundation
 import Amplify
-
-
-
 
 // Funzione per rimuovere la "Z" finale dalla stringa della data
 func removeZFromDateString(_ dateString: String) -> String {
@@ -26,7 +19,7 @@ func removeZFromDateString(_ dateString: String) -> String {
 class HomeViewModel: ObservableObject {
     
     let api = AuctionRequest()
-    
+    let user: AuthUser
     @Published var searchText = ""
     @Published var selectedPriceRange: String? = "All"
     @Published var selectedCategory: String? = "All"
@@ -35,18 +28,15 @@ class HomeViewModel: ObservableObject {
     @Published var isSeller = true
     @Published var auctions = [AuctionData]()
     
-    
-    let user: AuthUser
-    
     init(user: AuthUser) {
         self.user = user
         Task {
-            await getAllAuctions()
+            getAllAuctions()
         }
     }
     
-    func getAllAuctions() async {
-        await api.getAllActiveAuctionsAPI { result in
+    func getAllAuctions() {
+        api.getAllActiveAuctionsAPI { result in
             switch result {
             case .success(let auctions):
                 // Rimuovi la "Z" finale da tutte le date nelle aste

@@ -16,11 +16,7 @@ struct ProfileView: View {
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
-        do {
-            try fetchProfilePhoto(email: viewModel.user)
-        } catch {
-            print("\n\nErrore nel download della foto profilo\n\n")
-        }
+        viewModel.getProfilePhoto()
     }
 
     var body: some View {
@@ -104,7 +100,8 @@ struct FullnamePhotoNazionalityProfile: View {
                     .resizable()
                     .scaledToFill()
                     .frame(width: 100, height: 100)
-                    .foregroundColor(.black)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color.white, lineWidth: 2))
                     .padding()
             } else {
                 Image(systemName: "person.crop.circle.fill")
@@ -152,6 +149,7 @@ struct DescriptionsProfile: View {
                 .padding(.leading, 10)
         }
         .padding(.bottom, 30)
+        .padding(.horizontal, 20)
     }
 }
 
@@ -161,10 +159,18 @@ struct ContactsButtons: View {
     var body: some View {
         HStack(spacing: 30) {
             Button(action: {
-                if let phoneNumber = viewModel.account?.telephoneNumber,
-                   let phoneURL = URL(string: "tel://\(phoneNumber)") {
-                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
+                if let phoneNumber = viewModel.account?.telephoneNumber {
+                    let phoneURLString = "tel://\(phoneNumber)"
+                    print("Phone URL:", phoneURLString)
+                    if let phoneURL = URL(string: phoneURLString) {
+                        UIApplication.shared.open(phoneURL, options: [:]) { success in
+                            if !success {
+                                print("Failed to open phone URL:", phoneURL)
+                            }
+                        }
+                    }
                 }
+
             }) {
                 ZStack {
                     Image(systemName: "phone.fill")
@@ -182,6 +188,7 @@ struct ContactsButtons: View {
                     if UIApplication.shared.canOpenURL(emailURL) {
                         UIApplication.shared.open(emailURL, options: [:], completionHandler: nil)
                     }
+                    else {print("Errore nell apertura di posta elettronica")}
                 }
             }) {
                 ZStack {
@@ -241,4 +248,5 @@ struct LinksProfile: View {
         }
     }
 }
+
 

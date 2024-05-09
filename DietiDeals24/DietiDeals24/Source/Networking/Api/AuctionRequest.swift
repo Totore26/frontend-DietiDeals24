@@ -96,7 +96,7 @@ class AuctionRequest: AuctionAPI {
     
     
 
-    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void) async {
+    func getAllActiveAuctionsAPI(completion: @escaping (Result<[AuctionData], Error>) -> Void) {
         let url = baseURL.append(path: "auction/home")
         
         let headers: HTTPHeaders = [

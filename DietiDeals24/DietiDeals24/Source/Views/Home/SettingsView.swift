@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @StateObject var viewModel: SettingsViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var sessionManager: SessionManager
     @State private var prove = false
 
@@ -24,18 +25,15 @@ struct SettingsView: View {
                     List {
                         Section {
                             SettingsItem(systemName: "pencil.and.outline", title: "Edit Your Profile")
-                                .onTapGesture {
-                                    viewModel.isEditProfileSheetPresented.toggle()
-                                }
+                                .onTapGesture { viewModel.isEditProfileSheetPresented.toggle() }
                                 .listRowBackground(Color.white)
                                 .sheet(isPresented: $viewModel.isEditProfileSheetPresented) {
+                                    EditProfileSheetView(viewModel: profileViewModel)
                                 }
                         }
                         Section {
                             SettingsItem(systemName: "i.circle", title: "Info Auctions")
-                                .onTapGesture {
-                                    viewModel.isInfoAuctionsSheetPresented.toggle()
-                                }
+                                .onTapGesture { viewModel.isInfoAuctionsSheetPresented.toggle() }
                                 .listRowBackground(Color.white)
                                 .sheet(isPresented: $viewModel.isInfoAuctionsSheetPresented) {
                                     InfoAuctionsView()
