@@ -159,16 +159,8 @@ struct ContactsButtons: View {
     var body: some View {
         HStack(spacing: 30) {
             Button(action: {
-                if let phoneNumber = viewModel.account?.telephoneNumber {
-                    let phoneURLString = "tel://\(phoneNumber)"
-                    print("Phone URL:", phoneURLString)
-                    if let phoneURL = URL(string: phoneURLString) {
-                        UIApplication.shared.open(phoneURL, options: [:]) { success in
-                            if !success {
-                                print("Failed to open phone URL:", phoneURL)
-                            }
-                        }
-                    }
+                if let phoneURL = URL(string: "tel://\(String(describing: viewModel.account?.telephoneNumber))") {
+                    UIApplication.shared.open(phoneURL, options: [:], completionHandler: nil)
                 }
 
             }) {
@@ -248,5 +240,4 @@ struct LinksProfile: View {
         }
     }
 }
-
 
