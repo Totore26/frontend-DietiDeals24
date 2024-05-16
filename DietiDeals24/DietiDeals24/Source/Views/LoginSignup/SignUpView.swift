@@ -44,6 +44,11 @@ struct SignUpView: View {
                                 .foregroundColor(.red)
                                 .font(.caption)
                         }
+                        if !viewModel.checkEmailAndPassword() {
+                            Text("please check email and password (8-16 characters)")
+                                .foregroundColor(.red)
+                                .font(.caption)
+                        }
                     }
                     
                     Button(action: signUp) {

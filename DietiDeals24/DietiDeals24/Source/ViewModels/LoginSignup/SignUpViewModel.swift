@@ -36,10 +36,14 @@ class SignUpViewModel: ObservableObject {
         }
     }
     
-
-    
-    
-    
-    
+    func checkEmailAndPassword() -> Bool {
+        let emailRegex = #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"#
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        let isEmailValid = emailPredicate.evaluate(with: email)
+        let isPasswordValid = (password.count >= 8 && password.count <= 16)
+        
+        return isEmailValid && isPasswordValid
+    }
     
 }
