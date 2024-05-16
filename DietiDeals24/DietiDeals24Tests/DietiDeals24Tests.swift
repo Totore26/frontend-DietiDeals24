@@ -35,9 +35,7 @@ final class DietiDeals24Tests: XCTestCase {
     
     /*-----------------------------------------------------------------------------------------------------
     MARK:   TEST DEL METODO checkEmailAndPassword()                                        BLACK BOX (SECT)
-    -----------------------------------------------------------------------------------------------------*/
-    
-    /*
+    -------------------------------------------------------------------------------------------------------
         Con BLACK BOX testo senza preoccuparmi di come è implementato il metodo
         il metodo si trova in SignUpViewModel utilizzato nella vista
      1) i requisiti sono due stringhe, che devono rispettare delle condizioni: per l email una regex mentre per la password
@@ -46,10 +44,12 @@ final class DietiDeals24Tests: XCTestCase {
      3) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
      
      4) classi di equivalenza:
-        
+     
+        (Partizione 1)
         CE1) email = regex              valida
         CE2) email = regex              non valida
      
+        (Partizione 2)
         CE3) password = {8...16}        valida
         CE4) password = {MinInt...8}    non valida
         CE5) password = {16...MaxInt}   non valida
@@ -146,8 +146,173 @@ final class DietiDeals24Tests: XCTestCase {
     }
 
     
+    /*-----------------------------------------------------------------------------------------------------
+    MARK:   TEST DEL METODO changePassword()                                               BLACK BOX (WECT)
+    -------------------------------------------------------------------------------------------------------
+     
+        Con BLACK BOX testo senza preoccuparmi di come è implementato il metodo
+        il metodo si trova in SessionManager utilizzato nella vista di editing del profilo
+     1) i requisiti sono due stringhe, che devono rispettare delle condizioni: la vecchia password e la nuova password, che devono essere diverse
+     2) i parametri utilizzati sono: oldPassword e newPassword, entrambi sono di tipo String
+     3) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
+     
+     4) classi di equivalenza:
+     
+        (Partizione 1)
+        CE1) oldPassword = {8...16}         valido
+        CE2) oldPassword = {17...MaxInt}    non valido
+        CE3) oldPassword = {MinInt...7}     non valido
+     
+        (Partizione 2)
+        CE4) newPassword = {8...16}         valido
+        CE5) newPassword = {17...MaxInt}    non valido
+        CE6) newPassword = {MinInt...7}     non valido
+     
+        (Partizione 3)
+        CE7) oldPassword != newPassword      valido
+        CE8) oldPassword = newPassword       non valido
+     
+        per metodologia SECT (Strong) bisogna scrivere un numero di test pari al prodotto cartesiano dei casi: 3*3*2 = 18 test
+        nel test non consideriamo possibili errori di reti che vengono gestiti tramite cattura delle eccezioni
+     
+     5) casi di test:
+     
+    CT1) changePassword(oldPassword: password1, newPassword: password2 ) COPRE CE1,CE4,CE7
+    CT2) changePassword(oldPassword: password1, newPassword: password1 ) COPRE CE1,CE4,CE8
+    CT3) changePassword(oldPassword: passwordIsTooLong293, newPassword: goodPassword ) COPRE CE2,CE4,CE7
+    CT4) changePassword(oldPassword: shortp , newPassword: goodPassword) COPRE CE3,CE4,CE7
+    CT5) changePassword(oldPassword: goodPassword , newPassword: passwordIsTooLong293) COPRE CE1,CE5,CE7
+    CT6) changePassword(oldPassword: goodPassword , newPassword: shortp) COPRE CE1,CE6,CE7
+        
+     */
+
+    func testCT1_ChangePassword_DifferentPasswords() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "password1"
+        let newPassword = "password2"
+        
+        //Act + Assert
+        XCTAssertNoThrow(Task {try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)})
+    }
     
+    func testCT2_ChangePassword_SamePasswords() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "password1"
+        let newPassword = "password1"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                XCTFail("Expected ValidationError.passwordsNotValid error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is ValidationError)
+                XCTAssertEqual(error as? ValidationError, ValidationError.passwordsNotValid)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+
+    func testCT3_ChangePassword_OldPasswordTooLong() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "passwordIsTooLong293"
+        let newPassword = "goodPassword"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                XCTFail("Expected ValidationError.passwordsNotValid error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is ValidationError)
+                XCTAssertEqual(error as? ValidationError, ValidationError.passwordsNotValid)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT4_ChangePassword_OldPasswordTooShort() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "shortp"
+        let newPassword = "goodPassword"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                XCTFail("Expected ValidationError.passwordsNotValid error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is ValidationError)
+                XCTAssertEqual(error as? ValidationError, ValidationError.passwordsNotValid)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT5_ChangePassword_NewPasswordTooLong() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "goodPassword"
+        let newPassword = "passwordIsTooLong293"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                XCTFail("Expected ValidationError.passwordsNotValid error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is ValidationError)
+                XCTAssertEqual(error as? ValidationError, ValidationError.passwordsNotValid)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT6_ChangePassword_NewPasswordTooShort() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let oldPassword = "goodPassword"
+        let newPassword = "shortp"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.changePassword(oldPassword: oldPassword, newPassword: newPassword)
+                XCTFail("Expected ValidationError.passwordsNotValid error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is ValidationError)
+                XCTAssertEqual(error as? ValidationError, ValidationError.passwordsNotValid)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
     
     
     
 }
+
+// il testing WHITE BOX è utile quando nella funzione ho un metodo che possiede un parametro che all interno del corpo puo cambiare e quindi è importante discretizzare tutti i rami e testarli

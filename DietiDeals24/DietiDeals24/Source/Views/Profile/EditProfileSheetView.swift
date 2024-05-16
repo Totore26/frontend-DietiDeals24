@@ -115,7 +115,7 @@ struct EditProfileSheetView: View {
                 }
 
                 Section(header: Text("Edit Password")) {
-                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $viewModel.showProfileSavedBanner)) {
+                    NavigationLink(destination: EditPasswordView(showPasswordSavedBanner: $viewModel.showProfileSavedBanner, showPasswordErrorBanner: $viewModel.showPasswordErrorBanner)) {
                         Text("Change Password")
                     }
                 }
@@ -146,6 +146,7 @@ struct EditPasswordView: View {
     @State private var newPassword = ""
     @State private var confirmPassword = ""
     @Binding var showPasswordSavedBanner: Bool
+    @Binding var showPasswordErrorBanner: Bool
 
     var body: some View {
         Form {
@@ -169,9 +170,14 @@ struct EditPasswordView: View {
             
             Button("Save") {
                 Task {
-                    await sessionManager.changePassword(oldPassword: currentPassword, newPassword: confirmPassword)
+                    do{
+                        try await sessionManager.changePassword(oldPassword: currentPassword, newPassword: confirmPassword)
+                        showPasswordSavedBanner = true
+                    } catch {
+                        print(error.localizedDescription)
+                        showPasswordErrorBanner = true
+                    }
                 }
-                showPasswordSavedBanner = true
             }
             .disabled(newPassword.isEmpty || confirmPassword.isEmpty || newPassword != confirmPassword)
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -194,5 +200,8 @@ struct EditPasswordView: View {
         .alert(isPresented: $showPasswordSavedBanner) {
             Alert(title: Text("Password Saved"), message: Text("Your password has been changed successfully."), dismissButton: .default(Text("OK")))
         }
+        .alert(isPresented: $showPasswordErrorBanner) {
+                    Alert(title: Text("Password not saved"), message: Text("An error occurred, check if old password and new password is correct (8-16 characters)"), dismissButton: .default(Text("OK")))
+                }
     }
 }

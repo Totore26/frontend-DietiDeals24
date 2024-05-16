@@ -172,16 +172,30 @@ class SessionManager : ObservableObject {
         }
     }
     
-    func changePassword(oldPassword: String, newPassword: String) async {
-        do {
-            try await Amplify.Auth.update(oldPassword: oldPassword, to: newPassword)
-            print("Password changed successfully")
-        } catch let error as AuthError {
-            print("Password change failed \(error)")
-        } catch {
-            print("Unexpected error: \(error)")
+    func changePassword(oldPassword: String, newPassword: String) async throws {
+        if passwordIsValid(oldPassword: oldPassword, newPassword: newPassword) {
+            do {
+                try await Amplify.Auth.update(oldPassword: oldPassword, to: newPassword)
+                print("Password changed successfully")
+            } catch let error as AuthError {
+                print("Password change failed: \(self.errorMessage(for: error))")
+                throw error
+            } catch {
+                print("Password change failed: \(error)")
+                throw error
+            }
+        } else {
+            throw ValidationError.passwordsNotValid
         }
     }
+    
+    func passwordIsValid(oldPassword: String, newPassword: String) -> Bool {
+        let isPasswordValid1 = (oldPassword.count >= 8 && oldPassword.count <= 16)
+        let isPasswordValid2 = (newPassword.count >= 8 && newPassword.count <= 16)
+        
+        return isPasswordValid1 && isPasswordValid2 && (oldPassword != newPassword)
+    }
+    
     
     private func errorMessage(for error: AuthError) -> String {
         switch error {
@@ -204,3 +218,8 @@ class SessionManager : ObservableObject {
         }
     }
 }
+
+public enum ValidationError: Error {
+    case passwordsNotValid
+}
+

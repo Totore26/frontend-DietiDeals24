@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     @Published var imageProfile: UIImage?
     @Published var account: Account?
     @Published var showProfileSavedBanner: Bool = false
+    @Published var showPasswordErrorBanner: Bool = false
     let api = AccountRequest()
     let user: String
     var modifyAccount : Bool
