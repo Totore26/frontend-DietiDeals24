@@ -1,4 +1,5 @@
 import SwiftUI
+import Amplify
 
 struct SignUpView: View {
     
@@ -110,13 +111,18 @@ struct SignUpView: View {
     
     private func signUp() {
         Task(priority: .userInitiated) {
-                await sessionManager.signUp(
+            do {
+                try await sessionManager.signUp(
                 username: viewModel.email,
                 password: viewModel.password,
-                email: viewModel.email,
                 fullName: viewModel.fullName,
-                phoneNumber: viewModel.telephoneNumber
+                phoneNumber: "+39" + viewModel.telephoneNumber
             )
+            } catch let error as AuthError {
+                print("An error occurred while registering a user")
+            } catch {
+                print("Unexpected error: \(error)")
+            }
         }
         viewModel.isConfirmationAlertPresented = true
     }

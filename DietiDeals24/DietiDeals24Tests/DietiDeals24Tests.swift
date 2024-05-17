@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Amplify
 @testable import DietiDeals24
 
 final class DietiDeals24Tests: XCTestCase {
@@ -38,12 +39,10 @@ final class DietiDeals24Tests: XCTestCase {
     -------------------------------------------------------------------------------------------------------
         Con BLACK BOX testo senza preoccuparmi di come è implementato il metodo
         il metodo si trova in SignUpViewModel utilizzato nella vista
-     1) i requisiti sono due stringhe, che devono rispettare delle condizioni: per l email una regex mentre per la password
-        che sia compresa tra 8 e 16 caratteri
-     2) i parametri utilizzati sono: email e password, entrambi sono di tipo String
-     3) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
+     1) i parametri sono due stringhe, che devono rispettare delle condizioni: per l email una regex mentre per la password che sia compresa tra 8 e 16 caratteri
+     2) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
      
-     4) classi di equivalenza:
+     3) classi di equivalenza:
      
         (Partizione 1)
         CE1) email = regex              valida
@@ -51,12 +50,12 @@ final class DietiDeals24Tests: XCTestCase {
      
         (Partizione 2)
         CE3) password = {8...16}        valida
-        CE4) password = {MinInt...8}    non valida
-        CE5) password = {16...MaxInt}   non valida
+        CE4) password = {MinInt...7}    non valida
+        CE5) password = {17...MaxInt}   non valida
      
         per metodologia SECT (Strong) bisogna scrivere un numero di test pari al prodotto cartesiano dei casi, e cioe 2*3 = 6 test
      
-     5) casi di test:
+     4) casi di test:
          
         CT1) checkEmailAndPassword(email: "prova@ciao.it", password: "12345678")
         CT2) checkEmailAndPassword(email: "prova@ciao.it", password: "1234567")
@@ -149,14 +148,12 @@ final class DietiDeals24Tests: XCTestCase {
     /*-----------------------------------------------------------------------------------------------------
     MARK:   TEST DEL METODO changePassword()                                               BLACK BOX (WECT)
     -------------------------------------------------------------------------------------------------------
-     
-        Con BLACK BOX testo senza preoccuparmi di come è implementato il metodo
         il metodo si trova in SessionManager utilizzato nella vista di editing del profilo
-     1) i requisiti sono due stringhe, che devono rispettare delle condizioni: la vecchia password e la nuova password, che devono essere diverse
-     2) i parametri utilizzati sono: oldPassword e newPassword, entrambi sono di tipo String
-     3) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
      
-     4) classi di equivalenza:
+     1) i parametri sono due stringhe, che devono rispettare delle condizioni: la vecchia password e la nuova password, che devono essere diverse
+     2) il metodo restituisce un valore booleano: true se email e password sono validi, false altrimenti
+     
+     3) classi di equivalenza:
      
         (Partizione 1)
         CE1) oldPassword = {8...16}         valido
@@ -175,7 +172,7 @@ final class DietiDeals24Tests: XCTestCase {
         per metodologia SECT (Strong) bisogna scrivere un numero di test pari al prodotto cartesiano dei casi: 3*3*2 = 18 test
         nel test non consideriamo possibili errori di reti che vengono gestiti tramite cattura delle eccezioni
      
-     5) casi di test:
+     4) casi di test:
      
     CT1) changePassword(oldPassword: password1, newPassword: password2 ) COPRE CE1,CE4,CE7
     CT2) changePassword(oldPassword: password1, newPassword: password1 ) COPRE CE1,CE4,CE8
@@ -311,8 +308,212 @@ final class DietiDeals24Tests: XCTestCase {
         }
     }
     
+    /*-----------------------------------------------------------------------------------------------------
+     MARK:   TEST DEL METODO SignUp()                                               BLACK BOX (WECT)
+    -------------------------------------------------------------------------------------------------------
+        il metodo si trova in SessionManager() e utilizzato in SignUpView()
+     
+        1) i parametri sono quattro stringhe, che devono rispettare delle condizioni: per il campo username viene utilizzata la mail, che deve rispettare una regex, la password deve essere compresa tra 8 e 16 caratteri, fullName da 3 a 16 caratteri, phoneNumber sono precisamente 10 cifre
+        2) il metodo lancia un eccezione se qualocsa non va
+
+        3) classi di equivalenza:
+        
+        (Partizione 1)
+        CE1) email regex                                    valido
+        CE2) email non regex                                non valido
+     
+        (Partizione 2)
+        CE3) password = {8...16}                            valido
+        CE4) password = {17...MaxInt}                       non valido
+        CE5) password = {MinInt...7}                        non valido
+
+        (Partizione 3)
+        CE6) fullname = {1...MaxInt}                        valido
+        CE7) fullname = {MinInt...0}                        non valido
+
+        (Partizione 4)
+        CE8) phoneNumber = {10}                             valido
+        CE9) phoneNumber = {MinInt...9}                     non valido
+        CE10) phoneNumber = {11...MaxInt}                   non valido
+
+        per metodologia SECT (Strong) bisogna scrivere un numero di test pari al prodotto cartesiano dei casi: 3*2*2*2 = 24 test
+
+        4) casi di test:
+
+        CT1) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 3456543567) copre CE1,CE3,CE6,CE8
+        CT2) signUp(username: badMail@prova, password: 12345678, fullName: goodName secName, phoneNumber: 3456543567) copre CE2
+        CT3) signUp(username: goodMail@prova.it, password: passwordIsTooLong, fullName: goodName secName, phoneNumber: 3456543567) copre CE4
+        CT4) signUp(username: goodMail@prova.it, password: shortp, fullName: goodName secName, phoneNumber: 3456543567) copre CE5
+        CT5) signUp(username: goodMail@prova.it, password: 12345678, fullName: "", phoneNumber: 3456543567) copre CE7
+        CT6) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 75776) copre CE9
+        CT7) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 34565435635227) copre CE10
+
+     */
+    
+    func testCT1_SignUp_ValidParameter() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodPassword"
+        let password = "12345678"
+        let fullName = "GoodName"
+        let phoneNumber = "1234567899"
+        
+        //Act + Assert
+        XCTAssertNoThrow(Task {try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)})
+    }
+    
+    func testCT2_SignUp_InvalidEmail() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodPassword"
+        let password = "12345678"
+        let fullName = "GoodName"
+        let phoneNumber = "1234567899"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT3_SignUp_passwordTooLong() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodMail@prova.it"
+        let password = "passwordIsTooLong"
+        let fullName = "goodName secName"
+        let phoneNumber = "3456543567"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT4_SignUp_passwordTooShort() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodMail@prova.it"
+        let password = "shortp"
+        let fullName = "goodName secName"
+        let phoneNumber = "3456543567"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT5_SignUp_EmptyFullname() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodPassword"
+        let password = "12345678"
+        let fullName = ""
+        let phoneNumber = "1234567899"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT6_SignUp_EmptyFullname() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodPassword"
+        let password = "12345678"
+        let fullName = "goodName secName"
+        let phoneNumber = "123"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
+    
+    func testCT7_SignUp_EmptyFullname() {
+        //Arrange
+        let sessionManager = SessionManager()
+        let username = "goodPassword"
+        let password = "12345678"
+        let fullName = "goodName secName"
+        let phoneNumber = "12345678999999"
+        
+        //Act
+        let task = Task {
+            do {
+                try await sessionManager.signUp(username:username,password:password,fullName:fullName,phoneNumber:phoneNumber)
+                XCTFail("Expected AuthError error to be thrown.")
+            } catch {
+                XCTAssertTrue(error is AuthError)
+            }
+        }
+        
+        // Assert
+        Task { @MainActor in
+            await task.value
+        }
+    }
     
     
 }
 
 // il testing WHITE BOX è utile quando nella funzione ho un metodo che possiede un parametro che all interno del corpo puo cambiare e quindi è importante discretizzare tutti i rami e testarli
+
+
+
+
+
+
+

@@ -49,15 +49,14 @@ class SessionManager : ObservableObject {
     }
     
     
-    func signUp(username: String, password: String, email: String, fullName: String, phoneNumber: String) async {
+    func signUp(username: String, password: String, fullName: String, phoneNumber: String) async throws {
         let userAttributes = [
-            AuthUserAttribute(.email, value: email),
+            AuthUserAttribute(.email, value: username),
             AuthUserAttribute(.name, value: fullName),
             AuthUserAttribute(.phoneNumber, value: phoneNumber),
         ]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
 
-        do {
             let signUpResult = try await Amplify.Auth.signUp(
                 username: username,
                 password: password,
@@ -69,16 +68,7 @@ class SessionManager : ObservableObject {
             } else {
                 print("SignUp Complete")
             }
-
-        } catch let error as AuthError {
-            print("An error occurred while registering a user: \(self.errorMessage(for: error))")
-            DispatchQueue.main.async {
-                self.errorBanner = self.errorMessage(for: error)
-            }
-        } catch {
-            print("Unexpected error: \(error)")
-        }
-    }
+    }   
 
     func login(email: String, password: String) async {
         do {
