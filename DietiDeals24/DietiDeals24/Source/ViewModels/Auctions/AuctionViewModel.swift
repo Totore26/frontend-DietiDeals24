@@ -31,11 +31,26 @@ class AuctionViewModel: ObservableObject {
         return user == auction.creator.email
     }
     
-
-    func makeBet(totalOffer: Decimal, completion: @escaping (Bool) -> Void) {
-        api.betAPI(emailBuyer: user, idAuction: auction.id!, betValue: totalOffer) { success in
-            completion(success)
+    func isOfferValid(buyerOffer: Decimal, currentOffer : Float) -> Bool {
+        let currentOfferDecimal = NSDecimalNumber(value: currentOffer).decimalValue
+        return buyerOffer > currentOfferDecimal
+    }
+    
+    func isOfferValid(buyer: Decimal) -> Bool {
+        isOfferValid(buyerOffer: buyer, currentOffer: currentOffer)
+    }
+    
+    func makeBet(finalOffer: Decimal, completion: @escaping (Bool) -> Void) {
+        
+        if isOfferValid(buyer: finalOffer) {
+            api.betAPI(emailBuyer: user, idAuction: auction.id!, betValue: finalOffer) { success in
+                completion(success)
+            }
+        } else {
+            completion(false)
+            return
         }
+        
     }
     
 }

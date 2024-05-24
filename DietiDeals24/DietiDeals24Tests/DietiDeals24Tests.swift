@@ -309,7 +309,7 @@ final class DietiDeals24Tests: XCTestCase {
     }
     
     /*-----------------------------------------------------------------------------------------------------
-     MARK:   TEST DEL METODO SignUp()                                               BLACK BOX (WECT)
+     MARK:   TEST DEL METODO SignUp()                                               BLACK BOX (Robust-WECT)
     -------------------------------------------------------------------------------------------------------
         il metodo si trova in SessionManager() e utilizzato in SignUpView()
      
@@ -336,8 +336,6 @@ final class DietiDeals24Tests: XCTestCase {
         CE9) phoneNumber = {MinInt...9}                     non valido
         CE10) phoneNumber = {11...MaxInt}                   non valido
 
-        per metodologia SECT (Strong) bisogna scrivere un numero di test pari al prodotto cartesiano dei casi: 3*2*2*2 = 24 test
-
         4) casi di test:
 
         CT1) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 3456543567) copre CE1,CE3,CE6,CE8
@@ -347,7 +345,7 @@ final class DietiDeals24Tests: XCTestCase {
         CT5) signUp(username: goodMail@prova.it, password: 12345678, fullName: "", phoneNumber: 3456543567) copre CE7
         CT6) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 75776) copre CE9
         CT7) signUp(username: goodMail@prova.it, password: 12345678, fullName: goodName secName, phoneNumber: 34565435635227) copre CE10
-
+     
      */
     
     func testCT1_SignUp_ValidParameter() {
@@ -506,10 +504,71 @@ final class DietiDeals24Tests: XCTestCase {
         }
     }
     
+    /*-----------------------------------------------------------------------------------------------------
+     MARK:   TEST DEL METODO isOfferValid()                                               BLACK BOX (WECT)
+    -------------------------------------------------------------------------------------------------------
+     
+        il metodo si trova in AuctionViewModel() dove viene anche utilizzato
+     
+        1) i parametri sono currentOffer di tipo Float e di buyerOffer di tipo Decimal
+        2) ritorna un booleano: se buyerOffer > currentOffer viene ritornato true, altrimenti false
+
+        3) classi di equivalenza:
+     
+        (Partizione 1)
+        CE1) buyerOffer = }currentOffer...MaxDecimal}   valido
+        CE2) buyerOffer = {MinDecimal...currentOffer}   non valido
+     
+     buyerOffer > currentOffer
+        
+        4) Casi di test:
+     
+        CT1) isOfferValid(buyerOffer: 89.45, currentOffer: 64.6) -> true   copre CE1
+        CT2) isOfferValid(buyerOffer: 50.22, currentOffer: 100.3) -> false copre CE2
+        CT3) isOfferValid(buyerOffer: 50.3, currentOffer: 50.3) -> false   copre valore limite =
+     */
+    
+    func testCT1_isOfferValid_ValidInput() {
+        //Arrange
+        let auctionViewModel = AuctionViewModel(user: "", auction: AuctionData())
+        let buyerOffer: Decimal = 89.45
+        let currentOffer: Float = 64.6
+        
+        //Act
+        let result = auctionViewModel.isOfferValid(buyerOffer: buyerOffer, currentOffer: currentOffer)
+        
+        //Assert
+        XCTAssertTrue(result)
+    }
+    
+    func testCT2_isOfferValid_InvalidInput() {
+        //Arrange
+        let auctionViewModel = AuctionViewModel(user: "", auction: AuctionData())
+        let buyerOffer: Decimal = 50.22
+        let currentOffer: Float = 100.3
+        
+        //Act
+        let result = auctionViewModel.isOfferValid(buyerOffer: buyerOffer,currentOffer: currentOffer)
+        
+        //Assert
+        XCTAssertFalse(result)
+    }
+    
+    func testCT3_isOfferValid_LimitCase() {
+        //Arrange
+        let auctionViewModel = AuctionViewModel(user: "", auction: AuctionData())
+        let buyerOffer: Decimal = 50.3
+        let currentOffer: Float = 50
+        
+        //Act
+        let result = auctionViewModel.isOfferValid(buyerOffer: buyerOffer, currentOffer: currentOffer)
+        
+        //Assert
+        XCTAssertFalse(result)
+    }
     
 }
 
-// il testing WHITE BOX è utile quando nella funzione ho un metodo che possiede un parametro che all interno del corpo puo cambiare e quindi è importante discretizzare tutti i rami e testarli
 
 
 

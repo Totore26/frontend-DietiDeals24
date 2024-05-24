@@ -226,7 +226,7 @@ struct CofirmFixedTimeOfferView: View {
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
                 guard let offerAmount = Decimal(string: viewModel.offerAmount) else { return }
-                viewModel.makeBet(totalOffer: offerAmount) { success in
+                viewModel.makeBet(finalOffer: offerAmount) { success in
                     if success {
                         viewModel.isShowedOfferSheetView.toggle()
                     } else {
@@ -265,7 +265,7 @@ struct ConfirmIncrementalOfferView: View {
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
                 // Chiama la funzione del viewModel corrispondente.
-                viewModel.makeBet(totalOffer: (viewModel.auction.raisingThreshold!+viewModel.auction.currentPrice!)) { success in
+                viewModel.makeBet(finalOffer: (viewModel.auction.raisingThreshold!+viewModel.auction.currentPrice!)) { success in
                     if success {
                         viewModel.isShowedOfferSheetView.toggle()
                     }
