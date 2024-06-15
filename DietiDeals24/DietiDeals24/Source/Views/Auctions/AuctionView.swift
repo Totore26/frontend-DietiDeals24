@@ -230,7 +230,7 @@ struct CofirmFixedTimeOfferView: View {
                     if success {
                         viewModel.isShowedOfferSheetView.toggle()
                     } else {
-                        // Handle failure if needed
+                        // qui si dovrebbe attivare la variabile per mostrare un banner...
                     }
                 }
             })
@@ -268,6 +268,8 @@ struct ConfirmIncrementalOfferView: View {
                 viewModel.makeBet(finalOffer: (viewModel.auction.raisingThreshold!+viewModel.auction.currentPrice!)) { success in
                     if success {
                         viewModel.isShowedOfferSheetView.toggle()
+                    } else {
+                        // qui si dovrebbe attivare la variabile per mostrare un banner di errore di inserimento...
                     }
                 }
             })
