@@ -149,6 +149,7 @@
 		2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsViewModel.swift; sourceTree = "<group>"; };
 		2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		2624AE9B2B6F3DF000EBDB88 /* AccountRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRequest.swift; sourceTree = "<group>"; };
+		262713972C35B5E000E40D6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		263BA78C2B9627C700DE0B68 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		2652882D2B30972C001A4AB9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		265976612B5AF4F500A6745A /* PersonalizedSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedSheetView.swift; sourceTree = "<group>"; };
@@ -444,6 +445,7 @@
 		266BFA5E2B2275840063C68B /* DietiDeals24 */ = {
 			isa = PBXGroup;
 			children = (
+				262713972C35B5E000E40D6D /* Info.plist */,
 				2624AE9A2B6F35BE00EBDB88 /* Source */,
 				266BFA652B2275850063C68B /* Preview Content */,
 			);
@@ -848,6 +850,7 @@
 				DEVELOPMENT_TEAM = N6VGMQT332;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DietiDeals24/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -881,6 +884,7 @@
 				DEVELOPMENT_TEAM = N6VGMQT332;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DietiDeals24/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

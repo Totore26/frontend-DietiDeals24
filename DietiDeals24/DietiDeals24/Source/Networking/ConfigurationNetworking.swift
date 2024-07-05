@@ -11,7 +11,7 @@ import Alamofire
 var authToken: String = ""
 
 struct baseURL {
-    static let baseURL = "http://localhost:8080/"
+    static let baseURL = "http://3.254.58.212/"
     
     static func append(path: String) -> String {
         return baseURL + path

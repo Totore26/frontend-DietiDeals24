@@ -118,6 +118,9 @@ struct CreateFixedTimeAuctionView: View {
                     }
                 )
             }
+            .sheet(isPresented: $isImagePickerPresented) {
+                ImagePicker(image: $viewModel.auctionImage)
+            }
         }
     }
 }

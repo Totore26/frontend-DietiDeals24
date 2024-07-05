@@ -19,7 +19,7 @@ struct AuctionView: View {
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
             //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
-            try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
+            //try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
         }
     }
     
@@ -106,7 +106,7 @@ struct AuctionView: View {
                                 CofirmFixedTimeOfferView(viewModel: viewModel)
                             }
                         } else {
-                            OfferMoreButton(title: "Offer +\(String(describing: viewModel.auction.raisingThreshold))€", fontSize: 18, action: {
+                            OfferMoreButton(title: "Offer +\(viewModel.auction.raisingThreshold ?? 0)€", fontSize: 18, action: {
                                 viewModel.isShowedOfferSheetView.toggle()
                             })
                             .adaptiveSheet(isPresented: $viewModel.isShowedOfferSheetView, detents: [.medium()], smallestUndimmedDetentIdentifier: .large){
@@ -247,13 +247,14 @@ struct CofirmFixedTimeOfferView: View {
 struct ConfirmIncrementalOfferView: View {
 
     @ObservedObject var viewModel: AuctionViewModel
-
+    
     var body: some View {
         VStack {
             HStack {
-                if let raisingThreshold = viewModel.auction.raisingThreshold, let currentPrice = viewModel.auction.currentPrice {
-                    let total = NSDecimalNumber(decimal: raisingThreshold + currentPrice).doubleValue
-                    Text("\(total, specifier: "%.2f") €")
+                if let raisingThreshold = viewModel.auction.raisingThreshold {
+                    let currentPrice = viewModel.auction.currentPrice ?? Decimal(0.0)
+                    let total = raisingThreshold + currentPrice
+                    Text("\(NSDecimalNumber(decimal: total).doubleValue, specifier: "%.2f") €")
                         .font(.title)
                         .padding()
                 } else {
@@ -264,12 +265,17 @@ struct ConfirmIncrementalOfferView: View {
             }
 
             OfferMoreButton(title: "Confirm", fontSize: 18, action: {
+                // Ottieni i valori di raisingThreshold e currentPrice come Decimal.
+                let raisingThreshold = viewModel.auction.raisingThreshold ?? Decimal(0.0)
+                let currentPrice = viewModel.auction.currentPrice ?? Decimal(0.0)
+                
+                // Calcola finalOffer come NSDecimalNumber.
+                let finalOffer = NSDecimalNumber(decimal: raisingThreshold + currentPrice)
+                
                 // Chiama la funzione del viewModel corrispondente.
-                viewModel.makeBet(finalOffer: (viewModel.auction.raisingThreshold!+viewModel.auction.currentPrice!)) { success in
+                viewModel.makeBet(finalOffer: finalOffer as Decimal) { success in
                     if success {
                         viewModel.isShowedOfferSheetView.toggle()
-                    } else {
-                        // qui si dovrebbe attivare la variabile per mostrare un banner di errore di inserimento...
                     }
                 }
             })
@@ -282,6 +288,8 @@ struct ConfirmIncrementalOfferView: View {
         }
     }
 }
+
+
 
 
 struct AuctionDataSection: View {

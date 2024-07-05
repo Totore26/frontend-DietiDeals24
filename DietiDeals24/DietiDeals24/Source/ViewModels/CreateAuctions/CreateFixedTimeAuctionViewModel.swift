@@ -18,7 +18,7 @@ class CreateFixedTimeAuctionViewModel: ObservableObject {
     @Published var endOfAuction = Date()
     @Published var secretThreshold: Decimal = 0.0
     @Published var selectedCategory: String = "All"
-    @Published var auctionImage: UIImage? = nil
+    @Published var auctionImage: UIImage? = UIImage(systemName: "questionmark.circle")
     var user: String
     
     init(user: String) {

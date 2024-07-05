@@ -18,7 +18,7 @@ class CreateIncrementalAuctionViewModel: ObservableObject {
     @Published var raisingThreshold: Decimal = 10.0
     @Published var timer: Int = 1
     @Published var selectedCategory: String = "All"
-    @Published var auctionImage: UIImage? = nil
+    @Published var auctionImage: UIImage? = UIImage(systemName: "questionmark.circle")
     var user : String
     
     init(user : String){
