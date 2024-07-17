@@ -9,12 +9,16 @@ import SwiftUI
 import Amplify
 import AWSCognitoAuthPlugin
 import AWSS3StoragePlugin
+import Firebase
 
 @main
 struct DietiDeals24: App {
     @ObservedObject var sessionManager = SessionManager()
     
     init() {
+        FirebaseApp.configure()
+        Analytics.setAnalyticsCollectionEnabled(true)
+        print("Firebase Configured!")
         configureAmplify()
     }
 
