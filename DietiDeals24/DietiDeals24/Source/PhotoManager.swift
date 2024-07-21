@@ -61,41 +61,6 @@ public func fetchProfilePhoto(email: String) throws {
     }
 }
 
-/*
-
-func loadAllAuctionsPhotos(auctionList: [AuctionData]) async {
-    print("DENTOR LA FUNZIONE LOAD ALL AUCTION PHOTOS")
-    for index in 0..<auctionList.count {
-        let auctionID = auctionList[index].id ?? ""
-        print( "\n\n\nLoading photo for auction with ID \(auctionID)\n\n\n\n")
-
-        do {
-            //let photo =
-            try fetchAuctionPhoto(auctionID: auctionID)
-            //photoMap[auctionID] = photo
-        } catch {
-            print("Error loading photo for auction with ID \(auctionID): \(error)")
-        }
-    }
-}
-
-func updateAllAuctionsPhotos(auctionList: [AuctionData]) async {
-    for index in 0..<auctionList.count {
-        let currentID = auctionList[index].id ?? ""
-        if photoMap[currentID] == nil {
-            do {
-                //let photo =
-                try fetchAuctionPhoto(auctionID: currentID)
-                //photoMap[currentID] = photo
-            }
-            catch {
-                print("Error update photo for auction with ID \(currentID): \(error)")
-            }
-        }
-    }
-}
- */
-
 
 public func nextID() -> String {
     var largestNumericValue = 0

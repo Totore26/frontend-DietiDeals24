@@ -16,10 +16,7 @@ struct AuctionView: View {
         self.viewModel = viewModel
         
         Task {
-            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
-            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
-            //MARK: ATTIVA LA RIGA PER INIZIARE A SCARICARE LE FOTO DELLE ASTE
-            //try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
+            try fetchAuctionPhoto(auctionID: viewModel.auction.id!)
         }
     }
     

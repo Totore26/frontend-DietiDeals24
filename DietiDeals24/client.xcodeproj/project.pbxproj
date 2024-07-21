@@ -57,7 +57,6 @@
 		2620C0242B61832300B9DC44 /* AuctionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0232B61832300B9DC44 /* AuctionViewModel.swift */; };
 		2620C0262B61839C00B9DC44 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0252B61839C00B9DC44 /* NotificationViewModel.swift */; };
 		2620C0282B6183B100B9DC44 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0272B6183B100B9DC44 /* ProfileViewModel.swift */; };
-		2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C0292B6183C300B9DC44 /* EditProfileViewModel.swift */; };
 		2620C02C2B6183D500B9DC44 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02B2B6183D500B9DC44 /* HomeViewModel.swift */; };
 		2620C02E2B6183EC00B9DC44 /* MyAuctionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */; };
 		2620C0302B6183FD00B9DC44 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */; };
@@ -149,7 +148,6 @@
 		2620C0232B61832300B9DC44 /* AuctionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuctionViewModel.swift; sourceTree = "<group>"; };
 		2620C0252B61839C00B9DC44 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		2620C0272B6183B100B9DC44 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		2620C0292B6183C300B9DC44 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
 		2620C02B2B6183D500B9DC44 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		2620C02D2B6183EC00B9DC44 /* MyAuctionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAuctionsViewModel.swift; sourceTree = "<group>"; };
 		2620C02F2B6183FD00B9DC44 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -364,7 +362,6 @@
 			isa = PBXGroup;
 			children = (
 				2620C0272B6183B100B9DC44 /* ProfileViewModel.swift */,
-				2620C0292B6183C300B9DC44 /* EditProfileViewModel.swift */,
 				03ED6CA72BDBACEC00658BC9 /* ComunicationProtocol.swift */,
 			);
 			path = Profile;
@@ -697,7 +694,6 @@
 				03ED6CA82BDBACEC00658BC9 /* ComunicationProtocol.swift in Sources */,
 				03A6EE832B235DBB00163DB6 /* SocialLogin.swift in Sources */,
 				035872D92B616D7200C3AEFC /* Bet.swift in Sources */,
-				2620C02A2B6183C300B9DC44 /* EditProfileViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,7 +858,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietiDeals24/Info.plist;
@@ -896,7 +892,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DietiDeals24/Preview Content\"";
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietiDeals24/Info.plist;
@@ -928,7 +924,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -948,7 +944,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -968,7 +964,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DietiDeals24Teams.DietiDeals24XUITests;
@@ -989,7 +985,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6VGMQT332;
+				DEVELOPMENT_TEAM = S4BQYWPVVW;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DietiDeals24Teams.DietiDeals24XUITests;
