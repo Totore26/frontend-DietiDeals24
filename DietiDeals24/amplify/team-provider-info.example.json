@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "<REDACTED>",  // Nome del ruolo protetto
+      "UnauthRoleArn": "<REDACTED>",  // ARN del ruolo non autenticato
+      "AuthRoleArn": "<REDACTED>",  // ARN del ruolo autenticato
+      "Region": "eu-west-1",  // Regione AWS
+      "DeploymentBucketName": "<REDACTED>",  // Nome del bucket di distribuzione
+      "UnauthRoleName": "<REDACTED>",  // Nome del ruolo non autenticato
+      "StackName": "<REDACTED>",  // Nome dello stack CloudFormation
+      "StackId": "<REDACTED>",  // ID dello stack CloudFormation
+      "AmplifyAppId": "<REDACTED>",  // ID dell'app Amplify
+      "AuthTriggerTemplateURL": "<REDACTED>"  // URL del template di trigger di autenticazione
+    },
+    "categories": {
+      "auth": {
+        "dietideals24f4eace64": {}
+      },
+      "function": {
+        "dietideals24f4eace64CustomMessage": {
+          "REDIRECTURL": "<REDACTED>",  // URL di reindirizzamento (se applicabile)
+          "EMAILSUBJECT": "<REDACTED>",  // Oggetto email (se applicabile)
+          "EMAILMESSAGE": "<REDACTED>",  // Messaggio email (se applicabile)
+          "deploymentBucketName": "<REDACTED>",  // Nome del bucket di distribuzione
+          "s3Key": "<REDACTED>"  // Chiave S3 per il file zip
+        }
+      },
+      "storage": {
+        "s3dd24": {}
+      }
+    }
+  }
+}

@@ -96,11 +96,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-# Ignora i file Amplify
-.amplify/
-DietiDeals24/amplify/
-DietiDeals24/amplifyconfiguration.json
-DietiDeals24/awsconfiguration.json
+
 
 
 
